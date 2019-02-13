@@ -1,0 +1,96 @@
+# Vlan
+- name: Ensure VLAN is {{ vlan_id }} exists the device
+  nxos_vlan:
+    vlan_id: "{{ vlan_id }}"
+    name: "{{ vlan_name }}"
+    state: present
+
+- name: Ensure VLAN is {{ vlan_id }} is up and active
+  nxos_vlan:
+    vlan_id: "{{ vlan_id }}"
+    name: "{{ vlan_name }}"
+    admin_state: up
+    vlan_state: active
+
+# Switch Ports
+- name: Ensure ports are configured for access vlan "{{ vlan_id }}"
+  nxos_l2_interface:
+    interface: "{{ item }}"
+    mode: access
+    access_vlan: "{{ vlan_id }}"
+  loop: "{{ port_list }}"
+
+# BGP
+- name: Ensure BGP router
+  nxos_bgp:
+      asn: "{{ bgp_asn }}"
+      router_id: "{{ router_id }}"
+      vrf: internal
+      state: present
+
+# configure a simple address-family
+- name: Configure BGP address family
+  nxos_bgp_af:
+    asn: "{{ bgp_asn }}"
+    vrf: internal
+    afi: ipv4
+    safi: unicast
+    # For some crazy reason that gets deleted when it is present and added when it is not (every other run or check)
+    # Maybe related with https://github.com/ansible/ansible/issues/42136
+    networks: "{{ network }}"
+    maximum_paths_ibgp: 10
+    distance_ebgp: 230
+    distance_ibgp: 20
+    distance_local: 220
+    additional_paths_send: yes
+    additional_paths_receive: yes
+    state: present
+
+# k8s bgp neighbors
+- name: configure kube ibgp clients
+  nxos_bgp_neighbor:
+    asn: "{{ bgp_asn }}"
+    vrf: internal
+    neighbor: "{{ item }}"
+    remote_as: "{{ bgp_asn }}"
+    state: present
+  loop: "{{ kube_ibgp_neighbors }}"
+
+- name: configure kube ibgp clients afi-safis
+  nxos_bgp_neighbor_af:
+    asn: "{{ bgp_asn }}"
+    vrf: internal
+    neighbor: "{{ item }}"
+    afi: ipv4
+    safi: unicast
+    additional_paths_send: enable
+    additional_paths_receive: enable
+    state: present
+  loop: "{{ kube_ibgp_neighbors }}"
+
+# Set up prefix list to export
+- name: set additional config items
+  nxos_config:
+    lines: "{{ additional_config }}"
+
+# eBGP peer to advertise internal network
+- name: configure eBGP peer to advertise on-prem network
+  nxos_bgp_neighbor:
+    asn: "{{ bgp_asn }}"
+    vrf: internal
+    neighbor: "{{ ebgp_peer_ip }}"
+    remote_as: "{{ ebgp_peer_remote_as }}"
+    pwd: "{{ ebgp_peer_password }}"
+    pwd_type: 3des
+    state: present
+  diff: no
+
+- name: configure eBGP peer's afi-safi
+  nxos_bgp_neighbor_af:
+    asn: "{{ bgp_asn }}"
+    vrf: internal
+    neighbor: "{{ ebgp_peer_ip }}"
+    afi: ipv4
+    safi: unicast
+    prefix_list_out: "{{ prefix_list_out }}"
+    state: present

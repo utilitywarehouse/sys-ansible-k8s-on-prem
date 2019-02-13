@@ -1,0 +1,8 @@
+[nxos-dev-switches]
+10.91.2.19
+
+[nxos-dev:children]
+nxos-dev-switches
+
+[nxos-dev:vars]
+ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q jumpbox.dev.uw.systems"'
