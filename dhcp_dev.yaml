@@ -1,0 +1,7 @@
+- hosts: dhcp-pi-servers
+  user: root
+  connection: ssh 
+  roles:
+    - common
+    - dhcp
+

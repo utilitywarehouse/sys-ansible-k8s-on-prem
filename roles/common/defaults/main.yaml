@@ -1,0 +1,12 @@
+# sshd config
+sshd_permit_root_login: 'No'
+sshd_port: 50620
+sshd_allow_users: 'core'
+
+# ssh-key-agent
+ssh_agent_user: 'core'
+ssh_agent_user_group: 'core'
+ssh_agent_user_home: '/home/core'
+ssh_agent_uri: 'https://s3-eu-west-1.amazonaws.com/authorized-keys-cache/authmap'
+ssh_agent_groups: 'ssh-kube@utilitywarehouse.co.uk'
+ssh_agent_version: '1.0.4'
