@@ -1,0 +1,5 @@
+- name: Setup sshd service
+  import_tasks: sshd.yaml
+
+- name: Setup ssh-key-agent service
+  import_tasks: ssh-key-agent.yaml

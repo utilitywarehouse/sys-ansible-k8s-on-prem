@@ -1,0 +1,13 @@
+# sshd config
+sshd_permit_root_login: 'Yes'
+sshd_port: 22
+sshd_allow_users: 'root'
+
+# ssh-key-agent
+ssh_agent_user: 'root'
+ssh_agent_user_group: 'root'
+ssh_agent_user_home: '/root'
+ssh_agent_version: 'master-arm'
+
+# dnsmasq
+dnsmasq_image: 'dnsmasq'

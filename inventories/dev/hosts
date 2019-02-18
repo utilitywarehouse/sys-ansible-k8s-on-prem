@@ -1,8 +1,17 @@
 [nxos-dev-switches]
 10.91.2.19
 
+[dhcp-pi-servers]
+10.88.0.2
+
 [nxos-dev:children]
 nxos-dev-switches
 
+[dhcp-dev:children]
+dhcp-pi-servers
+
 [nxos-dev:vars]
+ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q jumpbox.dev.uw.systems"'
+
+[dhcp-dev:vars]
 ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q jumpbox.dev.uw.systems"'
