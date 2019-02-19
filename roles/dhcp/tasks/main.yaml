@@ -7,11 +7,28 @@
   when:
     - ansible_facts['distribution'] == "Debian"
 
+- name: Create /etc/dnsmasq
+  file:
+    path: /etc/dnsmasq
+    state: directory
+  tags: dhcp
+
+- name: Create /etc/dnsmasq/tftpboot
+  file:
+    path: /etc/dnsmasq/tftpboot
+    state: directory
+  tags: dhcp
+
+- name: Create /etc/dnsmasq/tftpboot/pxelinux.cfg
+  file:
+    path: /etc/dnsmasq/tftpboot/pxelinux.cfg
+    state: directory
+  tags: dhcp
+
 - name: Copy dhcp configuration
   template:
     src:  dnsmasq.conf.tmpl
     dest: /etc/dnsmasq/dnsmasq.conf
-  become: yes
   tags: dhcp
 
 - name: Copy pxe linux default configuration

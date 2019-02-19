@@ -10,4 +10,4 @@ ssh_agent_user_home: '/root'
 ssh_agent_version: 'master-arm'
 
 # dnsmasq
-dnsmasq_image: 'dnsmasq'
+dnsmasq_image: 'quay.io/utilitywarehouse/sys-dnsmasq:arm'
