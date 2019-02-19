@@ -29,13 +29,16 @@
   template:
     src:  dnsmasq.conf.tmpl
     dest: /etc/dnsmasq/dnsmasq.conf
+  notify:
+    - restart dnsmasq-dhcp
   tags: dhcp
 
 - name: Copy pxe linux default configuration
   template:
     src:  pxelinux.cfg.default.tmpl
     dest: /etc/dnsmasq/tftpboot/pxelinux.cfg/default
-  become: yes
+  notify:
+    - restart dnsmasq-dhcp
   tags: dhcp
 
 - name: Copy undionly.kpxe binary
@@ -44,7 +47,8 @@
     dest: /etc/dnsmasq/tftpboot/undionly.kpxe
     decrypt: yes
     mode: 0644
-  become: yes
+  notify:
+    - restart dnsmasq-dhcp
   tags: dhcp
 
 - name: Copy dnsmasq-dhcp system unit file
