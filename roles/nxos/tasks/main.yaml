@@ -37,7 +37,7 @@
     safi: unicast
     # For some crazy reason that gets deleted when it is present and added when it is not (every other run or check)
     # Maybe related with https://github.com/ansible/ansible/issues/42136
-    networks: "{{ network }}"
+    networks: "{{ networks }}"
     maximum_paths_ibgp: 10
     distance_ebgp: 230
     distance_ibgp: 20

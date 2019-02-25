@@ -17,7 +17,8 @@ port_list:
 bgp_asn: 64512
 router_id: 10.88.0.1
 # network to advertise
-network: 10.88.0.0/16
+networks:
+  - ['10.88.0.0/16']
 # kubernetes neighbors addresses
 kube_ibgp_neighbors:
   - 10.88.0.128
