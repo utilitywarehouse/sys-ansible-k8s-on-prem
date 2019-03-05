@@ -14,6 +14,7 @@ dhcp_static_hosts: |-
   dhcp-host=64:00:6A:8D:5F:2F,10.88.0.65  # master-2
   dhcp-host=94:C6:91:86:FE:4D,10.88.0.128 # worker-1
   dhcp-host=6C:4B:90:6A:71:40,10.88.0.129 # worker-2
+  dhcp-host=18:66:DA:2D:C9:4F,10.88.0.130 # worker-3
 
 # dhcp options
 dhcp_options: |-

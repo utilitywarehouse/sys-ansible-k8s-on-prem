@@ -9,6 +9,7 @@ port_list:
   - Eth101/1/4
   - Eth101/1/5
   - Eth101/1/6
+  - Eth101/1/7
   - Eth101/1/11
   - Eth101/1/47
   - Eth101/1/48
@@ -23,6 +24,7 @@ networks:
 kube_ibgp_neighbors:
   - 10.88.0.128
   - 10.88.0.129
+  - 10.88.0.130
 # static eBGP neighbor to the world
 ebgp_peer_ip: 172.30.88.1
 ebgp_peer_password: "{{ vault_ebgp_peer_password }}"
