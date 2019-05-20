@@ -51,6 +51,16 @@
     - restart dnsmasq-dhcp
   tags: dhcp
 
+- name: Download ipxe.efi
+  get_url:
+    url: http://boot.salstar.sk/ipxe/ipxe.efi
+    dest: /etc/dnsmasq/tftpboot/ipxe.efi
+    mode: 0644
+    checksum: sha256:2b2c830214ac4202adf05c625ee71e2a20fa2450e7ba52e0d3abb2f7ff1049e2
+  notify:
+    - restart dnsmasq-dhcp
+  tags: dhcp
+
 - name: Copy dnsmasq-dhcp system unit file
   template:
     src:  dnsmasq-dhcp.service.tmpl
