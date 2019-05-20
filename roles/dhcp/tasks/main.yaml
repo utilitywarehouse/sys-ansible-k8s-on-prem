@@ -41,12 +41,12 @@
     - restart dnsmasq-dhcp
   tags: dhcp
 
-- name: Copy undionly.kpxe binary
-  copy:
-    src:  undionly.kpxe
+- name: Download undionly.kpxe
+  get_url:
+    url: http://boot.salstar.sk/ipxe/undionly.kpxe
     dest: /etc/dnsmasq/tftpboot/undionly.kpxe
-    decrypt: yes
     mode: 0644
+    checksum: sha256:5666c3359b33278a5f75562a89239a861987d595bf351aff40cbcc1e1830a322
   notify:
     - restart dnsmasq-dhcp
   tags: dhcp
