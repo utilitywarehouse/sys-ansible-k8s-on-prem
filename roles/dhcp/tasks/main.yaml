@@ -41,11 +41,21 @@
     - restart dnsmasq-dhcp
   tags: dhcp
 
-- name: Copy undionly.kpxe binary
-  copy:
-    src:  undionly.kpxe
+- name: Download undionly.kpxe
+  get_url:
+    url: https://storage.googleapis.com/sys-ipxe/undionly.kpxe
     dest: /etc/dnsmasq/tftpboot/undionly.kpxe
-    decrypt: yes
+    checksum: sha256:ff6da5f6080135ef9197923e5abe12e9f11c914857a667a0479f4d950660246e
+    mode: 0644
+  notify:
+    - restart dnsmasq-dhcp
+  tags: dhcp
+
+- name: Download ipxe.efi
+  get_url:
+    url: https://storage.googleapis.com/sys-ipxe/ipxe.efi
+    dest: /etc/dnsmasq/tftpboot/ipxe.efi
+    checksum: sha256:9693772f880cf76cd4eb5a0ae737f0a3a18a8e5cca916ac047c0d60e10bc4f03
     mode: 0644
   notify:
     - restart dnsmasq-dhcp
