@@ -8,5 +8,5 @@ Assumes:
 Example for configuring nxos switch for dev/lab environment
 
 ```
-ansible-playbook -i inventories/dev/hosts nxos_dev.yml
+ansible-playbook -i inventories/dev/hosts nxos_dev.yaml
 ```
