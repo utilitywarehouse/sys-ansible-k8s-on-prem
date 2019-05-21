@@ -45,7 +45,7 @@
   get_url:
     url: https://storage.googleapis.com/sys-ipxe/undionly.kpxe
     dest: /etc/dnsmasq/tftpboot/undionly.kpxe
-    checksum: sha256:ff6da5f6080135ef9197923e5abe12e9f11c914857a667a0479f4d950660246e
+    checksum: sha256:37bc3f26ee8d5258c6641f4991a180d4e9eeb7e9c535071757cb29ef0a5ba28e
     mode: 0644
   notify:
     - restart dnsmasq-dhcp
