@@ -27,6 +27,8 @@ kube_ibgp_neighbors:
   - 10.88.0.128
   - 10.88.0.129
   - 10.88.0.130
+  - 10.88.0.131
+  - 10.88.0.132
 # static eBGP neighbor to the world
 ebgp_peer_ip: 172.30.88.1
 ebgp_peer_password: "{{ vault_ebgp_peer_password }}"
