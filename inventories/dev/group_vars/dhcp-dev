@@ -9,17 +9,18 @@ dhcp_ranges: |-
 # dhcp static hosts
 dhcp_static_hosts: |-
   dhcp-host=94:C6:91:86:FE:88,10.88.0.8   # cfssl
-  dhcp-host=94:C6:91:86:FE:9A,10.88.0.32  # etcd
-  dhcp-host=94:C6:91:86:D3:B1,10.88.0.64  # master-1
-  dhcp-host=64:00:6A:8D:5F:2F,10.88.0.65  # master-2
-  dhcp-host=94:C6:91:86:FE:4D,10.88.0.128 # worker-0
-  dhcp-host=6C:4B:90:6A:71:40,10.88.0.129 # worker-1
-  dhcp-host=18:66:DA:2D:C9:4F,10.88.0.130 # worker-2
-  dhcp-host=94:18:82:88:bc:30,10.88.0.131 # worker-3
-  dhcp-host=94:18:82:80:87:78,10.88.0.132 # worker-4
-  dhcp-host=60:45:cb:9d:a9:13,10.88.0.133 # worker-5
-  dhcp-host=60:45:cb:9d:a7:12,10.88.0.134 # worker-6
-  dhcp-host=60:45:cb:9b:bf:8c,10.88.0.135 # worker-7
+  dhcp-host=94:C6:91:86:FE:9A,10.88.0.32  # etcd-0
+  dhcp-host=94:C6:91:86:FE:4D,10.88.0.33  # etcd-1
+  dhcp-host=6C:4B:90:6A:71:40,10.88.0.34  # etcd-2
+  dhcp-host=94:18:82:88:bc:30,10.88.0.64  # master-0
+  dhcp-host=94:18:82:80:87:78,10.88.0.65  # master-1
+  dhcp-host=60:45:cb:9d:a9:13,10.88.0.128 # worker-0
+  dhcp-host=60:45:cb:9d:a7:12,10.88.0.129 # worker-1
+  dhcp-host=60:45:cb:9b:bf:8c,10.88.0.130 # worker-2
+  dhcp-host=94:C6:91:86:D3:B1,10.88.0.131 # worker-3
+  dhcp-host=64:00:6A:8D:5F:2F,10.88.0.132 # worker-4
+  dhcp-host=18:66:DA:2D:C9:4F,10.88.0.133 # worker-5
+
 
 # dhcp options
 dhcp_options: |-
