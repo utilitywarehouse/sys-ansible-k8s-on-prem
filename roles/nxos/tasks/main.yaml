@@ -117,6 +117,22 @@
     mode: trunk
     trunk_allowed_vlans: "{{ vlan_172_id }},{{ vlan_192_id }}"
 
+# Set our null route for the whole public range to be advertised as routes smaller than /24
+# will be dropped by external providers
+- name: Set null0 public route
+  nxos_static_route:
+    prefix: "85.91.50.0/24"
+    next_hop: "Null0"
+    vrf: internal
+
+# Set our default route via the public gw
+#- name: Set default route via public gateway
+#  nxos_static_route:
+#    prefix: "0.0.0.0/0"
+#    next_hop: "192.168.88.2"
+#    route_name: default
+#    vrf: internal
+
 # BGP
 - name: Ensure BGP router
   nxos_bgp:

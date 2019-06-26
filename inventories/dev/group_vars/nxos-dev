@@ -42,6 +42,7 @@ router_id: 10.88.0.1
 # network to advertise
 networks:
   - ['10.88.0.0/16']
+  - ['85.91.50.0/24']
 # kubernetes neighbors addresses
 kube_ibgp_neighbors:
   - 10.88.0.64
