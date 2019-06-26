@@ -28,10 +28,10 @@ vlan_172_ip_address: 172.30.88.2
 vlan_172_ip_netmask: 30
 
 # public bgp connection vlan
-vlan_85_id: 288
-vlan_85_name: VLAN0288
-vlan_85_ip_address: 85.91.49.138
-vlan_85_ip_netmask: 30
+vlan_192_id: 288
+vlan_192_name: VLAN0288
+vlan_192_ip_address: 192.168.88.2
+vlan_192_ip_netmask: 30
 
 # Interface shared by the 2 above networks for bgp connection
 vlan_shared_trunk_iface: Ethernet2/1
