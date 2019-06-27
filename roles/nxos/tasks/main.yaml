@@ -214,9 +214,9 @@
   nxos_bgp_neighbor:
     asn: "{{ bgp_asn }}"
     vrf: internal
-    neighbor: "{{ ebgp_peer_85_ip }}"
-    remote_as: "{{ ebgp_peer_85_remote_as }}"
-    pwd: "{{ ebgp_peer_85_password }}"
+    neighbor: "{{ ebgp_peer_192_ip }}"
+    remote_as: "{{ ebgp_peer_192_remote_as }}"
+    pwd: "{{ ebgp_peer_192_password }}"
     pwd_type: 3des
     state: present
   diff: no
@@ -225,7 +225,7 @@
   nxos_bgp_neighbor_af:
     asn: "{{ bgp_asn }}"
     vrf: internal
-    neighbor: "{{ ebgp_peer_85_ip }}"
+    neighbor: "{{ ebgp_peer_192_ip }}"
     afi: ipv4
     safi: unicast
     prefix_list_out: "{{ public_prefix_list_out }}"

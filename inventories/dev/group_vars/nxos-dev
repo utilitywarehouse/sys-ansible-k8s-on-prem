@@ -59,9 +59,9 @@ ebgp_peer_172_ip: 172.30.88.1
 ebgp_peer_172_password: "{{ vault_ebgp_peer_password }}"
 ebgp_peer_172_remote_as: 51553
 # static eBGP neighbor to the public networks
-ebgp_peer_85_ip: 85.91.49.137
-ebgp_peer_85_password: "{{ vault_ebgp_peer_password }}"
-ebgp_peer_85_remote_as: 51553
+ebgp_peer_192_ip: 192.168.88.1
+ebgp_peer_192_password: "{{ vault_ebgp_peer_password }}"
+ebgp_peer_192_remote_as: 51553
 
 # additional ip range configs for bgp
 additional_config:
