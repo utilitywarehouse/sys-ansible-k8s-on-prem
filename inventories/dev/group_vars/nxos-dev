@@ -51,8 +51,6 @@ kube_ibgp_neighbors:
   - 10.88.0.129
   - 10.88.0.130
   - 10.88.0.131
-  - 10.88.0.132
-  - 10.88.0.133
 
 # static eBGP neighbor to the internal networks
 ebgp_peer_172_ip: 172.30.88.1
