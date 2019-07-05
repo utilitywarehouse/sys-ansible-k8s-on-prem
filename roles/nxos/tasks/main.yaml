@@ -57,13 +57,33 @@
       - route-map pbr-gw-pivate permit 10
   when: not ansible_check_mode
 
-- name: Enable proxy arp needed by calico to route packets between pods on different nodes and add acl
+- name: Enable proxy arp needed by calico to route packets between pods on different nodes
   nxos_config:
     lines:
       - ip proxy-arp
       - ip local-proxy-arp
+    parents: interface vlan{{kube_vlan_id}}
+  when: not ansible_check_mode
+
+- name: Add route-map for internal addresses on vlan {{ kube_vlan_id }}
+  nxos_config:
+    lines:
       - ip policy route-map pbr-gw-pivate
     parents: interface vlan{{kube_vlan_id}}
+  register: ret
+  ignore_errors: yes
+  when: not ansible_check_mode
+
+- fail:
+    msg: "{{ ret['msg'] }"
+  when:
+    - ret['failed']
+    - ('PBR is already active on the interface' not in ret['msg'])
+
+- name: Enable statistics on the route map
+  nxos_config:
+    lines:
+      - route-map pbr-gw-pivate pbr-statistics
   when: not ansible_check_mode
 
  # Private bgp connection vlan
