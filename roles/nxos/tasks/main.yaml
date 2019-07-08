@@ -47,6 +47,9 @@
     dest: any
     state: present
 
+# A route map is needed in order to route outgoing traffic via the internal
+# network to get it nat-ed. For incoming traffic we just allow responses to
+# go back directly via the public sw.
 - name: Create route map for outgoing traffic initiated from kubernetes nodes
   nxos_config:
     lines:
@@ -57,6 +60,8 @@
       - route-map pbr-gw-pivate permit 10
   when: not ansible_check_mode
 
+# The following 2 blocks are plain commands as ansible resources are not availbale and
+# will appear as "changed" on every run.
 - name: Enable proxy arp needed by calico to route packets between pods on different nodes
   nxos_config:
     lines:
@@ -74,9 +79,12 @@
   ignore_errors: yes
   when: not ansible_check_mode
 
+# The above command will fail if route-map pbr-gw-pivate is already attached on the
+# interface, so we need to catch that error and fail accordingly.
 - fail:
     msg: "{{ ret['msg'] }"
   when:
+    - not ansible_check_mode
     - ret['failed']
     - ('PBR is already active on the interface' not in ret['msg'])
 
@@ -166,7 +174,8 @@
     next_hop: "Null0"
     vrf: internal
 
-# Remove default route to other sws if any
+# Remove default route to other sws if any. We will be routing outgoing traffic via the route
+# map defined above and for w/e is not covered by that we rely on bgp advertisements.
 - name: Make sure no default route goes via public gateway
   nxos_static_route:
     prefix: "0.0.0.0/0"
