@@ -1,24 +1,196 @@
-# Vlan
-- name: Ensure VLAN is {{ vlan_id }} exists the device
+# Kubernetes Vlan
+- name: Ensure VLAN is {{ kube_vlan_id }} exists the device
   nxos_vlan:
-    vlan_id: "{{ vlan_id }}"
-    name: "{{ vlan_name }}"
+    vlan_id: "{{ kube_vlan_id }}"
+    name: "{{ kube_vlan_name }}"
     state: present
 
-- name: Ensure VLAN is {{ vlan_id }} is up and active
+- name: Ensure VLAN is {{ kube_vlan_id }} is up and active
   nxos_vlan:
-    vlan_id: "{{ vlan_id }}"
-    name: "{{ vlan_name }}"
+    vlan_id: "{{ kube_vlan_id }}"
+    name: "{{ kube_vlan_name }}"
     admin_state: up
     vlan_state: active
 
-# Switch Ports
-- name: Ensure ports are configured for access vlan "{{ vlan_id }}"
+- name: Ensure ports are configured for access vlan "{{ kube_vlan_id }}"
   nxos_l2_interface:
     interface: "{{ item }}"
     mode: access
-    access_vlan: "{{ vlan_id }}"
-  loop: "{{ port_list }}"
+    access_vlan: "{{ kube_vlan_id }}"
+  loop: "{{ iport_list }}"
+
+- name: Create interface SVI {{ kube_vlan_id }}
+  nxos_interface:
+    name: "vlan{{ kube_vlan_id }}"
+    admin_state: up
+    state: present
+
+- name: Ensure vlan {{kube_vlan_id}} exist on vrf internal
+  nxos_vrf_interface:
+    vrf: internal
+    interface: "vlan{{ kube_vlan_id }}"
+    state: present
+
+- name: Set interface IPv4 address for SVI "{{ kube_vlan_id }}"
+  nxos_l3_interface:
+    name: "vlan{{ kube_vlan_id }}"
+    ipv4: "{{ kube_vlan_ip_address}}/{{ kube_vlan_ip_netmask }}"
+    state: present
+
+- name: Create an acl for the kubernetes private network
+  nxos_acl:
+    name: pbr-gw-private
+    seq: 10
+    action: permit
+    proto: ip
+    src: "{{ kube_vlan_ip_address }}/{{ kube_vlan_ip_netmask }}"
+    dest: any
+    state: present
+
+# A route map is needed in order to route outgoing traffic via the internal
+# network to get it nat-ed. For incoming traffic we just allow responses to
+# go back directly via the public sw.
+- name: Create route map for outgoing traffic initiated from kubernetes nodes
+  nxos_config:
+    lines:
+      - match ip address pbr-gw-private
+      - set ip next-hop {{ ebgp_peer_172_ip }}
+    parents:
+      - interface vlan{{kube_vlan_id}}
+      - route-map pbr-gw-pivate permit 10
+  when: not ansible_check_mode
+
+# The following 2 blocks are plain commands as ansible resources are not availbale and
+# will appear as "changed" on every run.
+- name: Enable proxy arp needed by calico to route packets between pods on different nodes
+  nxos_config:
+    lines:
+      - ip proxy-arp
+      - ip local-proxy-arp
+    parents: interface vlan{{kube_vlan_id}}
+  when: not ansible_check_mode
+
+- name: Add route-map for internal addresses on vlan {{ kube_vlan_id }}
+  nxos_config:
+    lines:
+      - ip policy route-map pbr-gw-pivate
+    parents: interface vlan{{kube_vlan_id}}
+  register: ret
+  ignore_errors: yes
+  when: not ansible_check_mode
+
+# The above command will fail if route-map pbr-gw-pivate is already attached on the
+# interface, so we need to catch that error and fail accordingly.
+- fail:
+    msg: "{{ ret['msg'] }"
+  when:
+    - not ansible_check_mode
+    - ret['failed']
+    - ('PBR is already active on the interface' not in ret['msg'])
+
+- name: Enable statistics on the route map
+  nxos_config:
+    lines:
+      - route-map pbr-gw-pivate pbr-statistics
+  when: not ansible_check_mode
+
+ # Private bgp connection vlan
+- name: Ensure VLAN is {{ vlan_172_id }} exists on the device
+  nxos_vlan:
+    vlan_id: "{{ vlan_172_id }}"
+    name: "{{ vlan_172_name }}"
+    state: present
+
+- name: Ensure VLAN is {{ vlan_172_id }} is up and active
+  nxos_vlan:
+    vlan_id: "{{ vlan_172_id }}"
+    name: "{{ vlan_172_name }}"
+    admin_state: up
+    vlan_state: active
+
+- name: Create interface SVI {{ vlan_172_id }}
+  nxos_interface:
+    name: "vlan{{ vlan_172_id }}"
+    admin_state: up
+    state: present
+
+- name: Ensure vlan {{vlan_172_id}} exist on vrf internal
+  nxos_vrf_interface:
+    vrf: internal
+    interface: "vlan{{ vlan_172_id }}"
+    state: present
+
+- name: Set interface IPv4 address for svi "{{ vlan_172_id }}"
+  nxos_l3_interface:
+    name: "vlan{{ vlan_172_id }}"
+    ipv4: "{{ vlan_172_ip_address}}/{{ vlan_172_ip_netmask }}"
+    state: present
+
+# Public bgp connection vlan
+- name: Ensure VLAN is {{ vlan_192_id }} exists on the device
+  nxos_vlan:
+    vlan_id: "{{ vlan_192_id }}"
+    name: "{{ vlan_192_name }}"
+    state: present
+
+- name: Ensure VLAN is {{ vlan_192_id }} is up and active
+  nxos_vlan:
+    vlan_id: "{{ vlan_192_id }}"
+    name: "{{ vlan_192_name }}"
+    admin_state: up
+    vlan_state: active
+
+- name: Create interface SVI {{ vlan_192_id }}
+  nxos_interface:
+    name: "vlan{{ vlan_192_id }}"
+    admin_state: up
+    state: present
+
+- name: Ensure vlan {{vlan_192_id}} exist on vrf internal
+  nxos_vrf_interface:
+    vrf: internal
+    interface: "vlan{{ vlan_192_id }}"
+    state: present
+
+- name: Set interface IPv4 address for svi "{{ vlan_192_id }}"
+  nxos_l3_interface:
+    name: "vlan{{ vlan_192_id }}"
+    ipv4: "{{ vlan_192_ip_address}}/{{ vlan_192_ip_netmask }}"
+    state: present
+
+# Since private and public bgp sessions will go via the same physical interface we need to allow
+# both vlans on trunk mode
+- name: Ensure vlan {{ vlan_192_id }} is being allowed on the trunk for {{ vlan_shared_trunk_iface }}
+  nxos_l2_interface:
+    name: "{{ vlan_shared_trunk_iface }}"
+    mode: trunk
+    trunk_allowed_vlans: "{{ vlan_172_id }},{{ vlan_192_id }}"
+
+# Set our null route for the whole public range to be advertised as routes smaller than /24
+# will be dropped by external providers
+- name: Set null0 public route
+  nxos_static_route:
+    prefix: "85.91.50.0/24"
+    next_hop: "Null0"
+    vrf: internal
+
+# Remove default route to other sws if any. We will be routing outgoing traffic via the route
+# map defined above and for w/e is not covered by that we rely on bgp advertisements.
+- name: Make sure no default route goes via public gateway
+  nxos_static_route:
+    prefix: "0.0.0.0/0"
+    next_hop: "{{ ebgp_peer_192_ip }}"
+    route_name: default
+    vrf: internal
+    state: absent
+
+- name: Make sure no default route goes via private gateway
+  nxos_static_route:
+    prefix: "0.0.0.0/0"
+    next_hop: "{{ ebgp_peer_172_ip }}"
+    route_name: default
+    vrf: internal
+    state: absent
 
 # BGP
 - name: Ensure BGP router
@@ -72,25 +244,48 @@
 - name: set additional config items
   nxos_config:
     lines: "{{ additional_config }}"
+  when: not ansible_check_mode
 
 # eBGP peer to advertise internal network
 - name: configure eBGP peer to advertise on-prem network
   nxos_bgp_neighbor:
     asn: "{{ bgp_asn }}"
     vrf: internal
-    neighbor: "{{ ebgp_peer_ip }}"
-    remote_as: "{{ ebgp_peer_remote_as }}"
-    pwd: "{{ ebgp_peer_password }}"
+    neighbor: "{{ ebgp_peer_172_ip }}"
+    remote_as: "{{ ebgp_peer_172_remote_as }}"
+    pwd: "{{ ebgp_peer_172_password }}"
     pwd_type: 3des
     state: present
   diff: no
 
-- name: configure eBGP peer's afi-safi
+- name: configure eBGP peer's afi-safi for private network
   nxos_bgp_neighbor_af:
     asn: "{{ bgp_asn }}"
     vrf: internal
-    neighbor: "{{ ebgp_peer_ip }}"
+    neighbor: "{{ ebgp_peer_172_ip }}"
     afi: ipv4
     safi: unicast
-    prefix_list_out: "{{ prefix_list_out }}"
+    prefix_list_out: "{{ internal_prefix_list_out }}"
+    state: present
+
+# eBGP peer to advertise public network
+- name: configure eBGP peer to advertise public network
+  nxos_bgp_neighbor:
+    asn: "{{ bgp_asn }}"
+    vrf: internal
+    neighbor: "{{ ebgp_peer_192_ip }}"
+    remote_as: "{{ ebgp_peer_192_remote_as }}"
+    pwd: "{{ ebgp_peer_192_password }}"
+    pwd_type: 3des
+    state: present
+  diff: no
+
+- name: configure eBGP peer's afi-safi for public network
+  nxos_bgp_neighbor_af:
+    asn: "{{ bgp_asn }}"
+    vrf: internal
+    neighbor: "{{ ebgp_peer_192_ip }}"
+    afi: ipv4
+    safi: unicast
+    prefix_list_out: "{{ public_prefix_list_out }}"
     state: present
