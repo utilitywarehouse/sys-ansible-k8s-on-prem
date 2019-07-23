@@ -17,10 +17,10 @@ dhcp_static_hosts: |-
   dhcp-host=60:45:cb:9d:a9:13,10.88.0.128 # worker-0
   dhcp-host=60:45:cb:9d:a7:12,10.88.0.129 # worker-1
   dhcp-host=60:45:cb:9b:bf:8c,10.88.0.130 # worker-2
-  dhcp-host=94:C6:91:86:D3:B1,10.88.0.131 # worker-3
-  dhcp-host=64:00:6A:8D:5F:2F,10.88.0.132 # worker-4
-  dhcp-host=18:66:DA:2D:C9:4F,10.88.0.133 # worker-5
-
+  dhcp-host=60:45:cb:9d:a6:e8,10.88.0.131 # worker-3
+  dhcp-host=94:C6:91:86:D3:B1,10.88.0.192 # storage-node-0
+  dhcp-host=64:00:6A:8D:5F:2F,10.88.0.193 # storage-node-1
+  dhcp-host=18:66:DA:2D:C9:4F,10.88.0.194 # storage-node-2
 
 # dhcp options
 dhcp_options: |-
