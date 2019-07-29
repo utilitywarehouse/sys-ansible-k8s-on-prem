@@ -19,6 +19,21 @@
     access_vlan: "{{ kube_vlan_id }}"
   loop: "{{ iport_list }}"
 
+- name: Ensure ports interfaces are up
+  nxos_interface:
+    name: "{{ item }}"
+    admin_state: up
+  loop: "{{ iport_list }}"
+
+- name: Configure spanning-tree port type to edge for all port interfaces
+  nxos_config:
+    lines:
+      - "spanning-tree port type edge"
+    parents:
+      - "interface {{ item }}"
+  loop: "{{ iport_list }}"
+  when: not ansible_check_mode
+
 - name: Create interface SVI {{ kube_vlan_id }}
   nxos_interface:
     name: "vlan{{ kube_vlan_id }}"
