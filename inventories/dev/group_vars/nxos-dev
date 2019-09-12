@@ -15,6 +15,9 @@ iport_list:
   - Eth101/1/6
   - Eth101/1/7
   - Eth101/1/11
+  - Eth101/1/13
+  - Eth101/1/14
+  - Eth101/1/15
   - Eth101/1/47
   - Eth101/1/48
   - Ethernet1/1
