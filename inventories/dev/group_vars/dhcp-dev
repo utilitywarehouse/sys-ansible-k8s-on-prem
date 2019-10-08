@@ -31,4 +31,4 @@ dhcp_options: |-
   dhcp-option=tag:k8s,6,8.8.8.8
 
 # matchbox address
-dhcp_matchbox: 'http://matchbox.exp-1.gcp.uw.systems:80/boot.ipxe'
+dhcp_matchbox: 'http://matchbox.dev.gcp.uw.systems:80/boot.ipxe'
