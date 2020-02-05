@@ -8,13 +8,13 @@ dhcp_ranges: |-
 
 # dhcp static hosts
 dhcp_static_hosts: |-
-  dhcp-host=94:C6:91:86:FE:88,10.88.0.8   # cfssl
+  dhcp-host=6C:4B:90:66:C1:17,10.88.0.8   # cfssl
   dhcp-host=6C:4B:90:65:4C:13,10.88.0.12  # gobgp-0
   dhcp-host=6C:4B:90:66:B8:1D,10.88.0.13  # gobgp-1
   dhcp-host=6C:4B:90:66:C0:C9,10.88.0.14  # gobgp-2
-  dhcp-host=94:C6:91:86:FE:9A,10.88.0.32  # etcd-0
-  dhcp-host=94:C6:91:86:FE:4D,10.88.0.33  # etcd-1
-  dhcp-host=6C:4B:90:6A:71:40,10.88.0.34  # etcd-2
+  dhcp-host=6C:4B:90:66:1E:23,10.88.0.32  # etcd-0
+  dhcp-host=6C:4B:90:66:C0:9A,10.88.0.33  # etcd-1
+  dhcp-host=6C:4B:90:66:1E:66,10.88.0.34  # etcd-2
   dhcp-host=94:18:82:88:bc:30,10.88.0.64  # master-0
   dhcp-host=94:18:82:80:87:78,10.88.0.65  # master-1
   dhcp-host=00:1b:21:bf:0a:60,10.88.0.128 # worker-0
