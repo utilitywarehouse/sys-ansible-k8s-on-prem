@@ -8,22 +8,20 @@ dhcp_ranges: |-
 
 # dhcp static hosts
 dhcp_static_hosts: |-
-  dhcp-host=6C:4B:90:66:C1:17,10.88.0.8   # cfssl
-  dhcp-host=6C:4B:90:65:4C:13,10.88.0.12  # gobgp-0
-  dhcp-host=6C:4B:90:66:B8:1D,10.88.0.13  # gobgp-1
-  dhcp-host=6C:4B:90:66:C0:C9,10.88.0.14  # gobgp-2
-  dhcp-host=6C:4B:90:66:1E:23,10.88.0.32  # etcd-0
-  dhcp-host=6C:4B:90:66:C0:9A,10.88.0.33  # etcd-1
-  dhcp-host=6C:4B:90:66:1E:66,10.88.0.34  # etcd-2
-  dhcp-host=94:18:82:88:bc:30,10.88.0.64  # master-0
-  dhcp-host=94:18:82:80:87:78,10.88.0.65  # master-1
-  dhcp-host=00:1b:21:bf:0a:60,10.88.0.128 # worker-0
-  dhcp-host=00:1b:21:bf:0b:e2,10.88.0.129 # worker-1
-  dhcp-host=00:1b:21:bf:0b:0e,10.88.0.130 # worker-2
-  dhcp-host=00:1b:21:bf:09:70,10.88.0.131 # worker-3
-  dhcp-host=94:C6:91:86:D3:B1,10.88.0.192 # storage-node-0
-  dhcp-host=64:00:6A:8D:5F:2F,10.88.0.193 # storage-node-1
-  dhcp-host=18:66:DA:2D:C9:4F,10.88.0.194 # storage-node-2
+  dhcp-host=6C:4B:90:66:C1:17,10.88.0.8   # cfssl @ fex port 2
+  dhcp-host=6C:4B:90:65:4C:13,10.88.0.12  # gobgp-0 @ fex port 6
+  dhcp-host=6C:4B:90:66:B8:1D,10.88.0.13  # gobgp-1 @ fex port 7
+  dhcp-host=6C:4B:90:66:C0:C9,10.88.0.14  # gobgp-2 @ fex port 8
+  dhcp-host=6C:4B:90:66:1E:23,10.88.0.32  # etcd-0 @ fex port 3
+  dhcp-host=6C:4B:90:66:C0:9A,10.88.0.33  # etcd-1 @ fex port 4
+  dhcp-host=6C:4B:90:66:1E:66,10.88.0.34  # etcd-2 @ fex port 5
+  dhcp-host=94:18:82:88:bc:30,10.88.0.64  # master-0 - hp @fex 101 port 11
+  dhcp-host=94:18:82:80:87:78,10.88.0.65  # master-1 - hp @ fex 101 port 13
+  dhcp-host=78:45:C4:82:45:5F,10.88.0.128 # worker-0 - dell M630 @ chassis slot 13
+  dhcp-host=78:45:C4:82:45:6C,10.88.0.129 # worker-1 - dell M630 @ chassis slot 14
+  dhcp-host=78:45:C4:82:45:79,10.88.0.130 # worker-2 - dell M630 @ chassis slot 15
+  dhcp-host=78:45:C4:82:45:86,10.88.0.192 # storage-node-0 - dell M630 @ chassis slot 16
+  dhcp-host=a0:36:9f:9d:a8:9a,10.88.0.193 # storage-node-1 - dell R620 @ port 33
 
 # dhcp options
 dhcp_options: |-

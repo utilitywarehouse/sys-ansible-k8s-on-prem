@@ -14,16 +14,14 @@ iport_list:
   - Eth101/1/5
   - Eth101/1/6
   - Eth101/1/7
+  - Eth101/1/8
   - Eth101/1/11
   - Eth101/1/13
-  - Eth101/1/14
-  - Eth101/1/15
-  - Eth101/1/47
-  - Eth101/1/48
-  - Ethernet1/1
-  - Ethernet1/3
-  - Ethernet1/4
-  - Ethernet1/44
+  - Eth198/1/13
+  - Eth198/1/14
+  - Eth198/1/15
+  - Eth198/1/16
+  - Ethernet1/33
 
 # private bgp connection vlan
 vlan_172_id: 88
@@ -54,7 +52,6 @@ kube_ibgp_neighbors:
   - 10.88.0.128
   - 10.88.0.129
   - 10.88.0.130
-  - 10.88.0.131
 
 # static eBGP neighbor to the internal networks
 ebgp_peer_172_ip: 172.30.88.1
@@ -71,4 +68,3 @@ additional_config:
   - ip prefix-list Public-K8S-On-Prem-DEV_OUT seq 5 permit 85.91.50.0/24
 internal_prefix_list_out: K8S-On-Prem-DEV_OUT
 public_prefix_list_out: Public-K8S-On-Prem-DEV_OUT
-
