@@ -1,12 +1,15 @@
 #ansible_user: ""
 ansible_connection: local
 
+# environment vrf name
+env_vrf: internal
+
 # k8s network vlan
 kube_vlan_id: 188
 kube_vlan_name: VLAN0188
 kube_vlan_ip_address: 10.88.0.1
 kube_vlan_ip_netmask: 24
-iport_list:
+kube_iport_list:
   - Eth101/1/1
   - Eth101/1/2
   - Eth101/1/3
@@ -22,6 +25,9 @@ iport_list:
   - Eth198/1/15
   - Eth198/1/16
   - Ethernet1/33
+
+# Name used when creating an acl for k8s private network
+kube_private_net_acl_name: pbr-gw-private
 
 # private bgp connection vlan
 vlan_172_id: 88

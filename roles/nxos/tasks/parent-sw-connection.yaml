@@ -1,0 +1,95 @@
+# Private bgp connection to parent switch vlan
+- name: Ensure VLAN is {{ vlan_172_id }} exists on the device
+  nxos_vlan:
+    vlan_id: "{{ vlan_172_id }}"
+    name: "{{ vlan_172_name }}"
+    state: present
+  tags:
+  - parent-switch
+
+- name: Ensure VLAN is {{ vlan_172_id }} is up and active
+  nxos_vlan:
+    vlan_id: "{{ vlan_172_id }}"
+    name: "{{ vlan_172_name }}"
+    admin_state: up
+    vlan_state: active
+  tags:
+  - parent-switch
+
+- name: Create interface SVI {{ vlan_172_id }}
+  nxos_interface:
+    name: "vlan{{ vlan_172_id }}"
+    interface_type: svi
+    admin_state: up
+    state: present
+  tags:
+  - parent-switch
+
+- name: Ensure vlan {{vlan_172_id}} exist on vrf internal
+  nxos_vrf_interface:
+    vrf: "{{ env_vrf }}"
+    interface: "vlan{{ vlan_172_id }}"
+    state: present
+  tags:
+  - parent-switch
+
+- name: Set interface IPv4 address for svi "{{ vlan_172_id }}"
+  nxos_l3_interface:
+    name: "vlan{{ vlan_172_id }}"
+    ipv4: "{{ vlan_172_ip_address}}/{{ vlan_172_ip_netmask }}"
+    state: present
+  tags:
+  - parent-switch
+
+# Public bgp connection to parent switch vlan
+- name: Ensure VLAN is {{ vlan_192_id }} exists on the device
+  nxos_vlan:
+    vlan_id: "{{ vlan_192_id }}"
+    name: "{{ vlan_192_name }}"
+    state: present
+  tags:
+  - parent-switch
+
+- name: Ensure VLAN is {{ vlan_192_id }} is up and active
+  nxos_vlan:
+    vlan_id: "{{ vlan_192_id }}"
+    name: "{{ vlan_192_name }}"
+    admin_state: up
+    vlan_state: active
+  tags:
+  - parent-switch
+
+- name: Create interface SVI {{ vlan_192_id }}
+  nxos_interface:
+    name: "vlan{{ vlan_192_id }}"
+    interface_type: svi
+    admin_state: up
+    state: present
+  tags:
+  - parent-switch
+
+- name: Ensure vlan {{vlan_192_id}} exist on vrf internal
+  nxos_vrf_interface:
+    vrf: "{{ env_vrf }}"
+    interface: "vlan{{ vlan_192_id }}"
+    state: present
+  tags:
+  - parent-switch
+
+- name: Set interface IPv4 address for svi "{{ vlan_192_id }}"
+  nxos_l3_interface:
+    name: "vlan{{ vlan_192_id }}"
+    ipv4: "{{ vlan_192_ip_address}}/{{ vlan_192_ip_netmask }}"
+    state: present
+  tags:
+  - parent-switch
+
+# Since private and public bgp sessions will go via the same physical interface we need to allow
+# both vlans on trunk mode
+- name: Ensure vlans {{ vlan_172_id }} and {{ vlan_192_id }} are being allowed on the trunk for {{ vlan_shared_trunk_iface }}
+  nxos_l2_interface:
+    name: "{{ vlan_shared_trunk_iface }}"
+    mode: trunk
+    trunk_allowed_vlans: "{{ vlan_172_id }},{{ vlan_192_id }}"
+  tags:
+  - parent-switch
