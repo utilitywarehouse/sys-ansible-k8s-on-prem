@@ -47,7 +47,6 @@
 - name: Create interface SVI {{ kube_vlan_id }}
   nxos_interface:
     name: "vlan{{ kube_vlan_id }}"
-    interface_type: svi
     admin_state: up
     state: present
   tags:

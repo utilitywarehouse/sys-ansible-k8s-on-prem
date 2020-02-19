@@ -24,7 +24,7 @@ kube_iport_list:
   - Eth198/1/14
   - Eth198/1/15
   - Eth198/1/16
-  - Ethernet1/33
+  #- Ethernet1/33
 
 # Name used when creating an acl for k8s private network
 kube_private_net_acl_name: pbr-gw-private

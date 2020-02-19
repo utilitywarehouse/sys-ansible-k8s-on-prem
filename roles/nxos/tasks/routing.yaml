@@ -83,7 +83,7 @@
 # will be dropped by external providers
 - name: Set next hop for networks to null0 so that the switch advertises the whole range
   nxos_static_route:
-    prefix: "{{ item }}
+    prefix: "{{ item[0] }}"
     next_hop: "Null0"
     vrf: "{{ env_vrf }}"
   loop: "{{ networks }}"
