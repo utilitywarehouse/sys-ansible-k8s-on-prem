@@ -3,8 +3,14 @@ SHELL := /bin/bash
 version-check:
 	ansible --version | head -n 1 | awk '$$2<2.7 {print "ansible version < 2.7"; exit 1}'
 
-nxos-dev: version-check
+nxos-dev-all: version-check
 	ansible-playbook -i inventories/dev/hosts nxos_dev.yaml --diff
+
+nxos-dev-kubernetes: version-check
+	ansible-playbook -i inventories/dev/hosts nxos_dev.yaml --diff --tags "kubernetes"
+
+nxos-dev-routing: version-check
+	ansible-playbook -i inventories/dev/hosts nxos_dev.yaml --diff --tags "routing"
 
 check-nxos-dev: version-check
 	# Beware that not every command under nxos network module support check
