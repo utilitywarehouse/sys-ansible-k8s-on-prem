@@ -12,6 +12,9 @@ nxos-dev-kubernetes: version-check
 nxos-dev-routing: version-check
 	ansible-playbook -i inventories/dev/hosts nxos_dev.yaml --diff --tags "routing"
 
+nxos-dev-netapp: version-check
+	ansible-playbook -i inventories/dev/hosts nxos_dev.yaml --diff --tags "netapp"
+
 check-nxos-dev: version-check
 	# Beware that not every command under nxos network module support check
 	# mode so running this could actually make changes to the target boxes.
