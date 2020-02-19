@@ -9,3 +9,6 @@
 
 - name: Configure routing rules
   include: routing.yaml
+
+- name: Configure connection with netapp
+  include: netapp.yaml

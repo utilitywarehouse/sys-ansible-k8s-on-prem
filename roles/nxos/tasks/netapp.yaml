@@ -35,7 +35,7 @@
 - name: Set interface IPv4 address for "{{ vlan_netapp_id }}"
   nxos_l3_interface:
     name: "{{ vlan_netapp_name }}"
-    ipv4: "{{ vlan_netapp_name_ipv4 }}"
+    ipv4: "{{ vlan_netapp_ipv4 }}"
     state: present
   tags:
   - netapp

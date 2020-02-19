@@ -83,4 +83,4 @@ netapp_port_list:
   - Eth1/3
   - Eth1/43
 
-vlan_netapp_name_ipv4: XXXX
+vlan_netapp_ipv4: XXXX
