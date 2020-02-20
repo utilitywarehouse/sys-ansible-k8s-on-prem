@@ -1,0 +1,58 @@
+- name: Ensure netapp interfaces are Layer 2 ports and set the proper description
+  nxos_interface:
+    name: "{{ item }}"
+    description: "Netapp"
+    mode: layer2
+  loop: "{{ netapp_port_list }}"
+  tags:
+  - netapp
+
+- name: Configure trunk interfaces for vlan "{{ vlan_netapp_id }}"
+  nxos_l2_interface:
+    interface: "{{ item }}"
+    mode: trunk
+    trunk_allowed_vlans: "{{ vlan_netapp_id }}"
+  loop: "{{ netapp_port_list }}"
+  tags:
+  - netapp
+
+- name: Ensure VLAN {{ vlan_netapp_id }} exists on the device
+  nxos_vlan:
+    vlan_id: "{{ vlan_netapp_id }}"
+    name: "{{ vlan_netapp_name }}"
+    state: present
+  tags:
+  - netapp
+
+- name: Ensure VLAN {{ vlan_netapp_id }} is up and active
+  nxos_vlan:
+    vlan_id: "{{ vlan_netapp_id }}"
+    name: "{{ vlan_netapp_name }}"
+    admin_state: up
+    vlan_state: active
+  tags:
+  - netapp
+
+- name: Create interface SVI {{ vlan_netapp_id }}
+  nxos_interface:
+    name: "vlan{{ vlan_netapp_name }}"
+    admin_state: up
+    state: present
+  tags:
+  - netapp
+
+- name: Ensure vlan {{ vlan_netapp_id }} exist on the vrf
+  nxos_vrf_interface:
+    vrf: "{{ env_vrf }}"
+    interface: "{{ vlan_netapp_name }}"
+    state: present
+  tags:
+  - netapp
+
+- name: Set interface IPv4 address for "{{ vlan_netapp_id }}"
+  nxos_l3_interface:
+    name: "{{ vlan_netapp_name }}"
+    ipv4: "{{ vlan_netapp_ipv4 }}"
+    state: present
+  tags:
+  - netapp

@@ -74,3 +74,13 @@ additional_config:
   - ip prefix-list Public-K8S-On-Prem-DEV_OUT seq 5 permit 85.91.50.0/24
 internal_prefix_list_out: K8S-On-Prem-DEV_OUT
 public_prefix_list_out: Public-K8S-On-Prem-DEV_OUT
+
+# NetApp
+vlan_netapp_id: 1000
+vlan_netapp_name: Vlan1000
+
+netapp_port_list:
+  - Eth1/3
+  - Eth1/43
+
+vlan_netapp_ipv4: 10.10.50.1/24
