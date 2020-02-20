@@ -77,10 +77,10 @@ public_prefix_list_out: Public-K8S-On-Prem-DEV_OUT
 
 # NetApp
 vlan_netapp_id: 1000
-vlan_netapp_name: VLAN1000
+vlan_netapp_name: Vlan1000
 
 netapp_port_list:
   - Eth1/3
   - Eth1/43
 
-vlan_netapp_ipv4: XXXX
+vlan_netapp_ipv4: 10.10.50.1/24
