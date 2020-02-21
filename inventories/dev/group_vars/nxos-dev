@@ -28,6 +28,7 @@ kube_iport_list:
 
 # Name used when creating an acl for k8s private network
 kube_private_net_acl_name: pbr-gw-private
+kube_private_route_map: pbr-gw-private
 
 # private bgp connection vlan
 vlan_172_id: 88
@@ -84,3 +85,4 @@ netapp_port_list:
   - Eth1/43
 
 vlan_netapp_ipv4: 10.10.50.1/24
+netapp_acl_name: pbr-netapp-private-gw

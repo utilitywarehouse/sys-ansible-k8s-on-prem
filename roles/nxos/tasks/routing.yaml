@@ -21,8 +21,7 @@
       - match ip address {{ kube_private_net_acl_name }}
       - set ip next-hop {{ ebgp_peer_172_ip }}
     parents:
-      - interface vlan{{kube_vlan_id}}
-      - route-map {{ kube_private_net_acl_name }} permit 10
+      - route-map {{ kube_private_route_map }} permit 10
   when: not ansible_check_mode
   tags:
   - kubernetes
@@ -46,7 +45,7 @@
 - name: Add route-map for internal addresses on vlan {{ kube_vlan_id }}
   nxos_config:
     lines:
-      - ip policy route-map {{ kube_private_net_acl_name }}
+      - ip policy route-map {{ kube_private_route_map }}
     parents: interface vlan{{kube_vlan_id}}
   register: ret
   ignore_errors: yes
@@ -56,7 +55,7 @@
   - routing
   - static
 
-# The above command will fail if route-map {{ kube_private_net_acl_name }} is already attached on the
+# The above command will fail if route-map {{ kube_private_route_map }} is already attached on the
 # interface, so we need to catch that error and fail accordingly.
 - fail:
     msg: "{{ ret['msg'] }"

@@ -56,3 +56,30 @@
     state: present
   tags:
   - netapp
+
+# Routing
+- name: Create an acl for the netapp and kubernetes private network
+  nxos_acl:
+    name: "{{ netapp_acl_name }}"
+    seq: 5 # Has to be lower than kube outgoing traffic acl
+    action: permit
+    proto: ip
+    src: "{{ kube_vlan_ip_address }}/{{ kube_vlan_ip_netmask }}"
+    dest: "{{ vlan_netapp_ipv4 }}"
+    state: present
+  tags:
+  - kubernetes
+  - netapp
+  - routing
+
+- name: Create route map for netapp traffic initiated from kubernetes nodes
+  nxos_config:
+    lines:
+      - match ip address {{ netapp_acl_name }}
+    parents:
+      - route-map {{ kube_private_route_map }} permit 5
+  when: not ansible_check_mode
+  tags:
+  - kubernetes
+  - netapp
+  - routing
