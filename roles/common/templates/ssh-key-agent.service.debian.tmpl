@@ -10,7 +10,7 @@ ExecStartPre=-/bin/chown -R "{{ ssh_agent_user }}":"{{ ssh_agent_user_group }}" 
 ExecStartPre=-/bin/chmod 700 {{ ssh_agent_user_home }}/.ssh
 ExecStartPre=-/bin/chmod 644 {{ ssh_agent_user_home }}/.ssh/authorized_keys
 ExecStart=/bin/sh -c 'docker run --name=%p_$(uuidgen) --rm \
- -v /home/core/.ssh/authorized_keys:/authorized_keys \
+ -v /root/.ssh/authorized_keys:/authorized_keys \
  -e SKA_KEY_URI={{ ssh_agent_uri }} \
  -e SKA_GROUPS={{ ssh_agent_groups }} \
  -e SKA_AKF_LOC=/authorized_keys \
