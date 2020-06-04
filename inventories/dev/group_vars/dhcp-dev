@@ -26,7 +26,7 @@ dhcp_static_hosts: |-
 # dhcp options
 dhcp_options: |-
   dhcp-option=tag:k8s,option:router,10.88.0.1
-  dhcp-option=tag:k8s,6,1.1.1.1
+  dhcp-option=tag:k8s,6,1.1.1.1,1.0.0.1
 
 # matchbox address
 dhcp_matchbox: 'http://matchbox.dev.gcp.uw.systems:80/boot.ipxe'
