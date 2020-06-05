@@ -5,7 +5,6 @@ dhcp_listen_interfaces: |-
 # dhcp ranges
 dhcp_ranges: |-
   dhcp-range=set:cfssl,10.88.0.8,10.88.0.8,12h
-  dhcp-range=set:k8s-masters,10.88.0.64,10.88.0.65,12h
   dhcp-range=set:k8s-workers,10.88.0.128,10.88.0.130,12h
   dhcp-range=set:k8s-storage,10.88.0.192,10.88.0.193,12h
   dhcp-range=set:cumulus,10.88.0.197,10.88.0.198,12h
@@ -13,8 +12,6 @@ dhcp_ranges: |-
 # dhcp static hosts
 dhcp_static_hosts: |-
   dhcp-host=6C:4B:90:66:C1:17,10.88.0.8   # cfssl @ fex port 2
-  dhcp-host=94:18:82:88:bc:30,10.88.0.64  # master-0 - hp @fex 101 port 11
-  dhcp-host=94:18:82:80:87:78,10.88.0.65  # master-1 - hp @ fex 101 port 13
   dhcp-host=78:45:C4:82:45:5F,10.88.0.128 # worker-0 - dell M630 @ chassis slot 13
   dhcp-host=78:45:C4:82:45:6C,10.88.0.129 # worker-1 - dell M630 @ chassis slot 14
   dhcp-host=78:45:C4:82:45:79,10.88.0.130 # worker-2 - dell M630 @ chassis slot 15
