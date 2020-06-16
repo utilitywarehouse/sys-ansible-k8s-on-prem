@@ -5,16 +5,12 @@ dhcp_listen_interfaces: |-
 # dhcp ranges
 dhcp_ranges: |-
   dhcp-range=set:cfssl,10.88.0.8,10.88.0.8,12h
-  dhcp-range=set:k8s-workers,10.88.0.128,10.88.0.130,12h
   dhcp-range=set:k8s-storage,10.88.0.192,10.88.0.193,12h
   dhcp-range=set:cumulus,10.88.0.197,10.88.0.198,12h
 
 # dhcp static hosts
 dhcp_static_hosts: |-
   dhcp-host=6C:4B:90:66:C1:17,10.88.0.8   # cfssl @ fex port 2
-  dhcp-host=78:45:C4:82:45:5F,10.88.0.128 # worker-0 - dell M630 @ chassis slot 13
-  dhcp-host=78:45:C4:82:45:6C,10.88.0.129 # worker-1 - dell M630 @ chassis slot 14
-  dhcp-host=78:45:C4:82:45:79,10.88.0.130 # worker-2 - dell M630 @ chassis slot 15
   dhcp-host=78:45:C4:82:45:86,10.88.0.192 # storage-node-0 - dell M630 @ chassis slot 16
   dhcp-host=a0:36:9f:9d:a8:9a,10.88.0.193 # storage-node-1 - dell R620 @ port 33
   dhcp-host=cc:37:ab:a9:23:16,10.88.0.197
