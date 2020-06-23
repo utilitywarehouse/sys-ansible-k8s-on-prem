@@ -26,3 +26,9 @@ dhcp-dev: version-check
 
 dry-run-dhcp-dev: version-check
 	ansible-playbook -i inventories/dev/hosts dhcp_dev.yaml --check --diff
+
+dry-run-netapp-dev: version-check
+	ansible-playbook -i inventories/dev/hosts netapp_dev.yaml --check --diff
+
+netapp-dev: version-check
+	ansible-playbook -i inventories/dev/hosts netapp_dev.yaml --diff
