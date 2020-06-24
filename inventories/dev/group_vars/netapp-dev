@@ -1,0 +1,19 @@
+env: "dev"
+netapp_username: "admin"
+netapp_password: "{{vault_netapp_admin_pass}}"
+node_1: system-01
+node_2: system-02
+vlan_port: e0c-2000
+
+# cfssl
+cfssl_aggregate_list:
+  - system_01_SSD_1
+  - system_02_SSD_1
+cfssl_volume_aggregate: system_01_SSD_1
+cfssl_network_gateway: 10.20.50.1
+cfssl_lif_netmask: 255.255.255.0
+cfssl_data_lif_1_address: 10.20.50.14
+cfssl_data_lif_2_address: 10.20.50.15
+cfssl_mgmt_lif_address: 10.20.50.16
+cfssl_admin_password: "{{vault_cfssl_admin_password}}"
+cfssl_igroup_initiators: "iqn.2005-03.org.open-iscsi:cfssl"
