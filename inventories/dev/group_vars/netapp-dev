@@ -10,6 +10,7 @@ cfssl_aggregate_list:
   - system_01_SSD_1
   - system_02_SSD_1
 cfssl_volume_aggregate: system_01_SSD_1
+cfssl_network_gateway: 10.20.50.1
 cfssl_lif_netmask: 255.255.255.0
 cfssl_data_lif_1_address: 10.20.50.14
 cfssl_data_lif_2_address: 10.20.50.15
