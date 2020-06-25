@@ -3,3 +3,6 @@
 
 - name: Create cfssl SVM and volume
   include: cfssl.yaml
+
+- name: Create kube SVM and trident user
+  include: kube.yaml

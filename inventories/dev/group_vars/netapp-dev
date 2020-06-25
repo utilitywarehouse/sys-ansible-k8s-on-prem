@@ -19,3 +19,16 @@ cfssl_data_lif_2_address: 10.20.50.15
 cfssl_mgmt_lif_address: 10.20.50.16
 cfssl_admin_password: "{{vault_cfssl_admin_password}}"
 cfssl_igroup_initiators: "iqn.2005-03.org.open-iscsi:cfssl"
+
+# kube
+kube_aggregate_list:
+  - system_01_SSD_1
+  - system_02_SSD_1
+kube_network_gateway: 10.20.50.1
+kube_lif_netmask: 255.255.255.0
+kube_data_lif_1_address: 10.20.50.4
+kube_data_lif_2_address: 10.20.50.5
+kube_mgmt_lif_address: 10.20.50.6
+
+kube_trident_user: trident_user
+kube_trident_password: "{{vault_kube_trident_password}}"
