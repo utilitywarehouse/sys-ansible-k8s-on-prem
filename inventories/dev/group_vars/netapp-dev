@@ -3,6 +3,8 @@ netapp_username: "admin"
 netapp_password: "{{vault_netapp_admin_pass}}"
 node_1: system-01
 node_2: system-02
+vlan_parent_interface: e0c
+vlan_id: "2000"
 vlan_port: e0c-2000
 
 # cfssl

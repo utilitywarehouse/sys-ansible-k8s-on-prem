@@ -1,2 +1,5 @@
+- name: Create core network connectivity
+  include: core.yaml
+
 - name: Create cfssl SVM and volume
   include: cfssl.yaml

@@ -1,0 +1,50 @@
+- name: create {{ env }} VLAN {{ vlan_id }} on {{ node_1 }}
+  na_ontap_net_vlan:
+    state: present
+    vlanid: "{{ vlan_id }}"
+    node: "{{ node_1 }}"
+    parent_interface: "{{ vlan_parent_interface }}"
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+- name: create {{ env }} VLAN {{ vlan_id }} on {{ node_2 }}
+  na_ontap_net_vlan:
+    state: present
+    vlanid: "{{ vlan_id }}"
+    node: "{{ node_2 }}"
+    parent_interface: "{{ vlan_parent_interface }}"
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+- name: Use jumbo frames (mtu=9000) on {{ node_1 }} port {{ vlan_parent_interface }}
+  na_ontap_net_port:
+    state: present
+    mtu: "9000"
+    node: "{{ node_1 }}"
+    ports: "{{ vlan_parent_interface }}"
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+- name: Use jumbo frames (mtu=9000) on {{ node_2 }} port {{ vlan_parent_interface }}
+  na_ontap_net_port:
+    state: present
+    mtu: "9000"
+    node: "{{ node_2 }}"
+    ports: "{{ vlan_parent_interface }}"
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+- name: Set mtu 9000 for Default broadcast domain
+  na_ontap_broadcast_domain:
+    state: present
+    name: Default
+    mtu: "9000"
+    ipspace: Default
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
