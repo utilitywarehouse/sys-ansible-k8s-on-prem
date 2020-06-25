@@ -8,7 +8,6 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
-    validate_certs: no
 
 - name: Create iscsi service on {{ env }} cfssl SVM
   na_ontap_iscsi:
