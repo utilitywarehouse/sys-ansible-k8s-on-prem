@@ -1,4 +1,6 @@
 - hosts: netapp-dev
+  collections:
+    - netapp.ontap
   roles:
     - netapp
   vars_files:
