@@ -60,55 +60,13 @@
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
 
-# https://library.netapp.com/ecmdocs/ECMP1804825/html/GUID-0FF33AC9-33B0-4878-9162-A46D3075D775.html
-- name: Create {{ env }} cfssl vserver management lif
-  na_ontap_interface:
-    state: present
-    interface_name: "{{ env }}_cfssl_mgmt_lif"
-    home_port: "{{ vlan_port }}"
-    home_node: "{{ node_1 }}"
-    role: data
-    firewall_policy: mgmt
-    protocols: none
-    admin_status: up
-    address: "{{ cfssl_mgmt_lif_address }}"
-    netmask: "{{ cfssl_lif_netmask }}"
-    vserver: "{{ env }}_cfssl"
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-
-- name: Create {{ env }} cfssl SVM admin role
-  na_ontap_user_role:
-    state: present
-    name: "{{ env }}_cfssl_admin"
-    command_directory_name: volume
-    access_level: all
-    vserver: "{{ env }}_cfssl"
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-
-- name: Create {{ env }} cfssl admin user
-  na_ontap_user:
-    state: present
-    name: "{{ env }}_cfssl_admin"
-    applications: ontapi
-    authentication_method: password
-    set_password: "{{ cfssl_admin_password }}"
-    role_name: "{{ env }}_cfssl_admin"
-    vserver: "{{ env }}_cfssl"
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-
 - name: Create iSCSI Igroup for {{ env }} cfssl
   na_ontap_igroup:
     state: present
     name: "{{ env }}CfsslIgroup"
     initiator_group_type: iscsi
     ostype: linux
-    initiators: "{{ cfssl_igroup_initiators }}"
+    initiators: "{{ cfssl_igroup_initiator }}"
     vserver: "{{ env }}_cfssl"
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
@@ -166,3 +124,18 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+
+# https://github.com/ansible-collections/netapp/blob/master/ansible_collections/netapp/ontap/plugins/modules/na_ontap_iscsi_security.py
+- name: Create {{ env }} cfssl iSCSI initiator security policy
+  netapp.ontap.na_ontap_iscsi_security:
+    state: present
+    initiator: "{{ cfssl_igroup_initiator }}"
+    inbound_username: "{{ env }}_cfssl"
+    inbound_password: "{{ cfssl_chap_password }}"
+    auth_type: chap
+    address_ranges: "{{ cfssl_initiator_ip }}"
+    vserver: "{{ env }}_cfssl"
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+    validate_certs: no # collection errors when it cannot verify the server cert
