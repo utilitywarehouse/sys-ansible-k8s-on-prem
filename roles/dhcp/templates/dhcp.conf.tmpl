@@ -30,3 +30,23 @@ host {{ dhcp_vrf_name }}-merit-dhcp-0-2 {
     filename "ipxe.pxe";
   }
 }
+
+host {{ dhcp_vrf_name }}-merit-dhcp-1-1 {
+  hardware ethernet {{ dhcp_host_1_nic_1 }};
+  fixed-address {{ dhcp_host_1_address }};
+  if exists user-class and option user-class = "iPXE" {
+    filename "{{ dhcp_matchbox }}";
+  } else {
+    filename "ipxe.pxe";
+  }
+}
+
+host {{ dhcp_vrf_name }}-merit-dhcp-1-2 {
+  hardware ethernet {{ dhcp_host_1_nic_2 }};
+  fixed-address {{ dhcp_host_1_address }};
+  if exists user-class and option user-class = "iPXE" {
+    filename "{{ dhcp_matchbox }}";
+  } else {
+    filename "ipxe.pxe";
+  }
+}

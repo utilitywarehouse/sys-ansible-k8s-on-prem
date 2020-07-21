@@ -12,6 +12,9 @@ dns: 1.1.1.1,1.0.0.1
 dhcp_host_0_nic_1 : fc:15:b4:22:07:a2
 dhcp_host_0_nic_2 : fc:15:b4:22:07:a2
 dhcp_host_0_address: 10.88.0.3
+dhcp_host_1_nic_1 : fc:15:b4:24:7f:d2
+dhcp_host_1_nic_2 : fc:15:b4:24:7f:d3
+dhcp_host_1_address: 10.88.0.5
 
 # matchbox address
 dhcp_matchbox: 'http://matchbox.dev.gcp.uw.systems:80/boot.ipxe'
