@@ -1,0 +1,10 @@
+[Unit]
+Description=Atftpd {{ dhcp_vrf_name }} Daemon
+After=network-online.target networking.service syslog.service
+
+[Service]
+ExecStartPre=mkdir -p /etc/tftpboot-{{ dhcp_vrf_name }}
+ExecStart=/usr/sbin/ip vrf exec {{ dhcp_vrf_name }} /usr/sbin/atftpd --listen-local --daemon -v  /etc/tftpboot-{{ dhcp_vrf_name }}/
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target

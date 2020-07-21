@@ -1,5 +1,15 @@
-- name: restart dnsmasq-dhcp
+- name: restart dhcp
   service:
-    name: dnsmasq-dhcp
+    name: "dhcp-{{ dhcp_vrf_name }}"
     state: restarted
   become: yes
+
+- name: restart atftp
+  service:
+    name: "atftp-{{ dhcp_vrf_name }}"
+    state: restarted
+  become: yes
+
+- name: daemon-reload
+  systemd:
+    daemon_reload: yes

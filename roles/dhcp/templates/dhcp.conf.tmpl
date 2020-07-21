@@ -1,0 +1,32 @@
+default-lease-time 43200;
+max-lease-time 43200;
+option domain-name-servers {{ dns }};
+
+allow booting;
+allow bootp;
+
+subnet {{ subnet }} netmask {{ netmask }} {
+  deny unknown-clients;
+  option routers {{ router }};
+  option domain-name "{{ domain_name }}";
+}
+
+host {{ dhcp_vrf_name }}-merit-dhcp-0-1 {
+  hardware ethernet {{ dhcp_host_0_nic_1 }};
+  fixed-address {{ dhcp_host_0_address }};
+  if exists user-class and option user-class = "iPXE" {
+    filename "{{ dhcp_matchbox }}";
+  } else {
+    filename "ipxe.pxe";
+  }
+}
+
+host {{ dhcp_vrf_name }}-merit-dhcp-0-2 {
+  hardware ethernet {{ dhcp_host_0_nic_2 }};
+  fixed-address {{ dhcp_host_0_address }};
+  if exists user-class and option user-class = "iPXE" {
+    filename "{{ dhcp_matchbox }}";
+  } else {
+    filename "ipxe.pxe";
+  }
+}

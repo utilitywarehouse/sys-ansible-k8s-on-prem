@@ -7,14 +7,12 @@ nxos-dev-switches
 [nxos-dev:vars]
 ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q jumpbox.dev.uw.systems"'
 
-[dhcp-pi-servers]
-10.88.0.2
+[dhcp-cumulus]
+10.91.5.104
+10.91.5.105
 
 [dhcp-dev:children]
-dhcp-pi-servers
-
-[dhcp-dev:vars]
-ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q jumpbox.dev.uw.systems"'
+dhcp-cumulus
 
 [netapp-clusters]
 10.91.5.200
