@@ -3,3 +3,4 @@
   connection: ssh 
   roles:
     - dhcp
+  become: yes

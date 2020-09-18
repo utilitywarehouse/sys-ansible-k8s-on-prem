@@ -3,7 +3,6 @@
     name: dhcpd
     state: present
     update_cache: yes
-  become: yes
   when:
     - ansible_facts['distribution'] == "Debian"
   tags: dhcp
@@ -26,7 +25,6 @@
   template:
     src:  dhcp.service.tmpl
     dest: "/etc/systemd/system/dhcp-{{ dhcp_vrf_name }}.service"
-  become: yes
   notify:
     - daemon-reload
     - restart dhcp
@@ -37,7 +35,6 @@
     name: "dhcp-{{ dhcp_vrf_name }}"
     state: started
     enabled: yes
-  become: yes
   tags: dhcp
 
 - name: Make sure atftpd is installed
@@ -45,7 +42,6 @@
     name: atftpd
     state: present
     update_cache: yes
-  become: yes
   when:
     - ansible_facts['distribution'] == "Debian"
   tags: dhcp
@@ -56,21 +52,22 @@
     state: directory
   tags: dhcp
 
-- name: Download ipxe.efi
-  get_url:
-    url: https://storage.googleapis.com/sys-ipxe/ipxe.pxe
+# Ideally we want to fetch this directly on the target host via get_url from
+# our bucket roles/dhcp/files/ipxe.pxe. The problem here is that we need to
+# specify a vrf on cumulus to be able to talk to the internet and this is not
+# available via the ansible command. Thus we include ipxe.pxe in the repo and
+# use a simple copy to put it in place.
+- name: Copy ipxe file into cumulus
+  copy:
+    src: roles/dhcp/files/ipxe.pxe
     dest: "/etc/tftpboot-{{ dhcp_vrf_name }}/ipxe.pxe"
-    checksum: sha256:82c39e589a1b45db3c6cb58bcf14f47a1330778c4c2e61d57156cb9ec575ae87
     mode: 0644
-  notify:
-    - restart atftp
   tags: dhcp
 
 - name: Copy atftp system unit file
   template:
     src:  atftp.service.tmpl
     dest: "/etc/systemd/system/atftp-{{ dhcp_vrf_name }}.service"
-  become: yes
   notify:
     - daemon-reload
     - restart atftp
@@ -81,5 +78,4 @@
     name: "atftp-{{ dhcp_vrf_name }}"
     state: started
     enabled: yes
-  become: yes
   tags: dhcp
