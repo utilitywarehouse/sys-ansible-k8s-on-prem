@@ -1,8 +1,0 @@
-- hosts: nxos-dev
-  roles:
-    - nxos
-  vars_files:
-    - inventories/dev/group_vars/vault
-  vars_prompt:
-    - name: ansible_user
-      prompt: "user to ssh into nxos switch dev"
