@@ -1,1 +1,2 @@
 .vault_pass.txt filter=strongbox diff=strongbox
+roles/dhcp/files/ipxe.pxe filter=strongbox diff=strongbox

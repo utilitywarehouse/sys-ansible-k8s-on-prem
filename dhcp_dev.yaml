@@ -1,7 +1,6 @@
-- hosts: dhcp-pi-servers
-  user: root
+- hosts: dhcp-dev
+  user: cumulus
   connection: ssh 
   roles:
-    - common
     - dhcp
-
+  become: yes

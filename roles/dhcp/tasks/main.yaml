@@ -1,80 +1,81 @@
-- name: Make sure docker is installed
+- name: Make sure dhcpd is installed
   apt:
-    name: docker
+    name: dhcpd
     state: present
     update_cache: yes
-  become: yes
   when:
     - ansible_facts['distribution'] == "Debian"
-
-- name: Create /etc/dnsmasq
-  file:
-    path: /etc/dnsmasq
-    state: directory
   tags: dhcp
 
-- name: Create /etc/dnsmasq/tftpboot
+- name: Create /etc/dhcp-{{ dhcp_vrf_name }}
   file:
-    path: /etc/dnsmasq/tftpboot
-    state: directory
-  tags: dhcp
-
-- name: Create /etc/dnsmasq/tftpboot/pxelinux.cfg
-  file:
-    path: /etc/dnsmasq/tftpboot/pxelinux.cfg
+    path: "/etc/dhcp-{{ dhcp_vrf_name }}"
     state: directory
   tags: dhcp
 
 - name: Copy dhcp configuration
   template:
-    src:  dnsmasq.conf.tmpl
-    dest: /etc/dnsmasq/dnsmasq.conf
+    src:  dhcp.conf.tmpl
+    dest: "/etc/dhcp-{{ dhcp_vrf_name }}/dhcp.conf"
   notify:
-    - restart dnsmasq-dhcp
+    - restart dhcp
   tags: dhcp
 
-- name: Copy pxe linux default configuration
+- name: Copy dhcp system unit file
   template:
-    src:  pxelinux.cfg.default.tmpl
-    dest: /etc/dnsmasq/tftpboot/pxelinux.cfg/default
-  notify:
-    - restart dnsmasq-dhcp
-  tags: dhcp
-
-- name: Download undionly.kpxe
-  get_url:
-    url: https://storage.googleapis.com/sys-ipxe/undionly.kpxe
-    dest: /etc/dnsmasq/tftpboot/undionly.kpxe
-    checksum: sha256:37bc3f26ee8d5258c6641f4991a180d4e9eeb7e9c535071757cb29ef0a5ba28e
-    mode: 0644
-  notify:
-    - restart dnsmasq-dhcp
-  tags: dhcp
-
-- name: Download ipxe.efi
-  get_url:
-    url: https://storage.googleapis.com/sys-ipxe/ipxe.efi
-    dest: /etc/dnsmasq/tftpboot/ipxe.efi
-    checksum: sha256:9693772f880cf76cd4eb5a0ae737f0a3a18a8e5cca916ac047c0d60e10bc4f03
-    mode: 0644
-  notify:
-    - restart dnsmasq-dhcp
-  tags: dhcp
-
-- name: Copy dnsmasq-dhcp system unit file
-  template:
-    src:  dnsmasq-dhcp.service.tmpl
-    dest: /etc/systemd/system/dnsmasq-dhcp.service
-  become: yes
+    src:  dhcp.service.tmpl
+    dest: "/etc/systemd/system/dhcp-{{ dhcp_vrf_name }}.service"
   notify:
     - daemon-reload
-    - restart dnsmasq-dhcp
+    - restart dhcp
   tags: dhcp
 
-- name: Make sure dnsmasq-dhcp is running and enabled
+- name: Make sure dhcp is running and enabled
   service:
-    name: dnsmasq-dhcp
+    name: "dhcp-{{ dhcp_vrf_name }}"
     state: started
     enabled: yes
-  become: yes
+  tags: dhcp
+
+- name: Make sure atftpd is installed
+  apt:
+    name: atftpd
+    state: present
+    update_cache: yes
+  when:
+    - ansible_facts['distribution'] == "Debian"
+  tags: dhcp
+
+- name: Create /etc/tftpboot-{{ dhcp_vrf_name }}
+  file:
+    path: /etc/tftpboot-{{ dhcp_vrf_name }}
+    state: directory
+  tags: dhcp
+
+# Ideally we want to fetch this directly on the target host via get_url from
+# our bucket roles/dhcp/files/ipxe.pxe. The problem here is that we need to
+# specify a vrf on cumulus to be able to talk to the internet and this is not
+# available via the ansible command. Thus we include ipxe.pxe in the repo and
+# use a simple copy to put it in place.
+- name: Copy ipxe file into cumulus
+  copy:
+    src: roles/dhcp/files/ipxe.pxe
+    dest: "/etc/tftpboot-{{ dhcp_vrf_name }}/ipxe.pxe"
+    mode: 0644
+  tags: dhcp
+
+- name: Copy atftp system unit file
+  template:
+    src:  atftp.service.tmpl
+    dest: "/etc/systemd/system/atftp-{{ dhcp_vrf_name }}.service"
+  notify:
+    - daemon-reload
+    - restart atftp
+  tags: dhcp
+
+- name: Make sure atftp is running and enabled
+  service:
+    name: "atftp-{{ dhcp_vrf_name }}"
+    state: started
+    enabled: yes
   tags: dhcp

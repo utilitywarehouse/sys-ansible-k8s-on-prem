@@ -1,23 +1,20 @@
 # interfaces
-dhcp_listen_interfaces: |-
-  interface=eth0
+dhcp_listen_interface: vlan188
+dhcp_vrf_name: dev
 
-# dhcp ranges
-dhcp_ranges: |-
-  dhcp-range=set:dhcp,10.88.0.3,10.88.0.4,12h
-  dhcp-range=set:cumulus,10.88.0.197,10.88.0.198,12h
+subnet: 10.88.0.0
+netmask: 255.255.255.0
+router: 10.88.0.1
+domain_name: dev.merit.uw.systems
+dns: 1.1.1.1,1.0.0.1
 
 # dhcp static hosts
-dhcp_static_hosts: |-
-  dhcp-host=fc:15:b4:22:07:a2,10.88.0.3
-  dhcp-host=fc:15:b4:22:07:a3,10.88.0.4
-  dhcp-host=cc:37:ab:a9:23:16,10.88.0.197
-  dhcp-host=cc:37:ab:a9:23:f4,10.88.0.198
-
-# dhcp options
-dhcp_options: |-
-  dhcp-option=tag:k8s,option:router,10.88.0.1
-  dhcp-option=tag:k8s,6,1.1.1.1,1.0.0.1
+dhcp_host_0_nic_1 : fc:15:b4:22:07:a2
+dhcp_host_0_nic_2 : fc:15:b4:22:07:a2
+dhcp_host_0_address: 10.88.0.3
+dhcp_host_1_nic_1 : fc:15:b4:24:7f:d2
+dhcp_host_1_nic_2 : fc:15:b4:24:7f:d3
+dhcp_host_1_address: 10.88.0.5
 
 # matchbox address
 dhcp_matchbox: 'http://matchbox.dev.gcp.uw.systems:80/boot.ipxe'
