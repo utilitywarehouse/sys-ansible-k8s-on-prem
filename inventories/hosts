@@ -1,9 +1,9 @@
-[dhcp-cumulus]
+[cumulus]
 10.91.5.104
 10.91.5.105
 
 [dhcp-dev:children]
-dhcp-cumulus
+cumulus
 
 [netapp-clusters]
 10.91.5.200

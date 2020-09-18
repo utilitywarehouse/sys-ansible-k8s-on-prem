@@ -1,0 +1,11 @@
+- name: copy authorized_keys file
+  copy:
+    src: "files/authorized_keys"
+    dest: "/home/cumulus/.ssh/authorized_keys"
+
+- name: copy 10ssh.rules
+  copy:
+    src: "files/10ssh.rules"
+    dest: "/etc/cumulus/acl/policy.d/10ssh.rules"
+  notify:
+    - "install ACL rules"

@@ -13,10 +13,10 @@ version-check:
 	ansible --version | head -n 1 | awk '$$2<2.7 {print "ansible version < 2.7"; exit 1}'
 
 dhcp-dev: version-check
-	ansible-playbook -i inventories/dev/hosts dhcp_dev.yaml --diff $(check_flag)
+	ansible-playbook -i inventories/hosts dhcp_dev.yaml --diff $(check_flag)
 
 netapp-dev: version-check
-	ansible-playbook -i inventories/dev/hosts netapp_dev.yaml --diff $(check_flag)
+	ansible-playbook -i inventories/hosts netapp_dev.yaml --diff $(check_flag)
 
 netapp-collections-install:
 	ansible-galaxy collection install netapp.ontap

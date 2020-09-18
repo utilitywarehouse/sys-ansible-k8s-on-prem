@@ -1,0 +1,6 @@
+- hosts: cumulus
+  user: cumulus
+  connection: ssh
+  roles:
+    - cumulus
+  become: yes
