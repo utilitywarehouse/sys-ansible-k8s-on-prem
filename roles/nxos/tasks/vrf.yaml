@@ -1,5 +1,0 @@
-# Vrf
-- name: Ensure environment VRF exists on switch
-  nxos_vrf:
-    name: "{{ env_vrf }}"
-    state: present
