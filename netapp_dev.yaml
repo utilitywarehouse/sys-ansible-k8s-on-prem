@@ -4,6 +4,6 @@
   roles:
     - netapp
   vars_files:
-    - inventories/dev/group_vars/vault
+    - inventories/group_vars/vault
   vars:
     ansible_connection: local

@@ -1,0 +1,4 @@
+- name: install ACL rules
+  command:
+    cmd: "cl-acltool -i"
+  become: true
