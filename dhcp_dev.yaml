@@ -3,4 +3,6 @@
   connection: ssh 
   roles:
     - dhcp
+  vars_files:
+    - inventories/group_vars/hosts-dev
   become: yes

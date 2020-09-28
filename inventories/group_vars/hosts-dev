@@ -1,0 +1,77 @@
+cfssl:
+  - ip_address: 10.88.0.8
+    mac_addresses:
+      - fc:15:b4:22:d6:42
+      - fc:15:b4:22:d6:43
+
+gobgp:
+  - ip_address: 10.88.0.12
+    mac_addresses:
+      - fc:15:b4:22:07:a4
+      - fc:15:b4:22:07:a5
+  - ip_address: 10.88.0.13
+    mac_addresses:
+      - fc:15:b4:22:d6:44
+      - fc:15:b4:22:d6:45
+  - ip_address: 10.88.0.14
+    mac_addresses:
+      - fc:15:b4:24:7f:d4
+      - fc:15:b4:24:7f:d5
+
+etcd:
+  - ip_address: 10.88.0.32
+    mac_addresses:
+      - a0:1d:48:b5:4d:98
+      - a0:1d:48:b5:4d:99
+  - ip_address: 10.88.0.33
+    mac_addresses:
+      - a0:1d:48:b5:4e:30
+      - a0:1d:48:b5:4e:31
+  - ip_address: 10.88.0.34
+    mac_addresses:
+      - a0:1d:48:b5:4b:58
+      - a0:1d:48:b5:4b:59
+
+masters:
+  - ip_address: 10.88.0.64
+    mac_addresses:
+      - a0:1d:48:b5:48:10
+      - a0:1d:48:b5:48:11
+  - ip_address: 10.88.0.65
+    mac_addresses:
+      - a0:1d:48:b5:4e:04
+      - a0:1d:48:b5:4e:05
+  - ip_address: 10.88.0.66
+    mac_addresses:
+      - a0:1d:48:b5:48:c4
+      - a0:1d:48:b5:48:c5
+
+workers:
+  - ip_address: 10.88.0.128
+    mac_addresses:
+      - a0:1d:48:b5:47:84
+      - a0:1d:48:b5:47:85
+  - ip_address: 10.88.0.129
+    mac_addresses:
+      - a0:1d:48:b5:47:f0
+      - a0:1d:48:b5:47:f1
+  - ip_address: 10.88.0.130
+    mac_addresses:
+      - a0:1d:48:b5:47:ec
+      - a0:1d:48:b5:47:ed
+  - ip_address: 10.88.0.131
+    mac_addresses:
+      - a0:1d:48:b5:4b:d8
+      - a0:1d:48:b5:4b:d9
+  - ip_address: 10.88.0.132
+    mac_addresses:
+      - a0:1d:48:b5:47:40
+      - a0:1d:48:b5:47:41
+  - ip_address: 10.88.0.133
+    mac_addresses:
+      - a0:1d:48:b5:48:48
+      - a0:1d:48:b5:48:49
+  - ip_address: 10.88.0.134
+    mac_addresses:
+      - a0:1d:48:b5:1c:4e
+      - a0:1d:48:b5:1c:4f
