@@ -64,6 +64,14 @@
     mode: 0644
   tags: dhcp
 
+# Same as above for ipxe.efi, needed by m510 cartridges
+- name: Copy ipxe file into cumulus
+  copy:
+    src: roles/dhcp/files/ipxe.efi
+    dest: "/etc/tftpboot-{{ dhcp_vrf_name }}/ipxe.efi"
+    mode: 0644
+  tags: dhcp
+
 - name: Copy atftp system unit file
   template:
     src:  atftp.service.tmpl

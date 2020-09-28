@@ -78,7 +78,11 @@ host worker-{{ worker_count }}-{{ loop.index }} {
   option host-name "worker-{{ worker_count }}.{{ domain_name }}";
   hardware ethernet {{ mac_address }};
   fixed-address {{ w.ip_address }};
-  filename "{{ dhcp_matchbox }}";
+  if exists user-class and option user-class = "iPXE" {
+    filename "{{ dhcp_matchbox }}";
+  } else {
+    filename "ipxe.efi";
+  }
 }
 {% endfor %}
 {% endfor %}
