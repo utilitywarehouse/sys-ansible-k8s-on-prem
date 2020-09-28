@@ -6,6 +6,7 @@ node_2: system-02
 vlan_parent_interface: e0c
 vlan_id: "2000"
 vlan_port: e0c-2000
+default_mtu: "9216"
 
 # cfssl
 cfssl_aggregate_list:
