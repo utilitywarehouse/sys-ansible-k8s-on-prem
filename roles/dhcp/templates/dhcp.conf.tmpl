@@ -11,42 +11,74 @@ subnet {{ subnet }} netmask {{ netmask }} {
   option domain-name "{{ domain_name }}";
 }
 
-host {{ dhcp_vrf_name }}-merit-dhcp-0-1 {
-  hardware ethernet {{ dhcp_host_0_nic_1 }};
-  fixed-address {{ dhcp_host_0_address }};
+## Cfssl
+{% for c in cfssl %}
+{% for mac_address in c.mac_addresses %}
+host cfssl-{{ loop.index }} {
+  option host-name "cfssl.{{ domain_name }}";
+  hardware ethernet {{ mac_address }};
+  fixed-address {{ c.ip_address }};
   if exists user-class and option user-class = "iPXE" {
     filename "{{ dhcp_matchbox }}";
   } else {
     filename "ipxe.pxe";
   }
 }
+{% endfor %}
+{% endfor %}
 
-host {{ dhcp_vrf_name }}-merit-dhcp-0-2 {
-  hardware ethernet {{ dhcp_host_0_nic_2 }};
-  fixed-address {{ dhcp_host_0_address }};
+## GoBgp
+{% for g in gobgp %}
+{% set gobgp_count = loop.index-1 %}
+{% for mac_address in g.mac_addresses %}
+host gobgp-{{ gobgp_count }}-{{ loop.index }} {
+  option host-name "gobgp-{{ gobgp_count }}.{{ domain_name }}";
+  hardware ethernet {{ mac_address }};
+  fixed-address {{ g.ip_address }};
   if exists user-class and option user-class = "iPXE" {
     filename "{{ dhcp_matchbox }}";
   } else {
     filename "ipxe.pxe";
   }
 }
+{% endfor %}
+{% endfor %}
 
-host {{ dhcp_vrf_name }}-merit-dhcp-1-1 {
-  hardware ethernet {{ dhcp_host_1_nic_1 }};
-  fixed-address {{ dhcp_host_1_address }};
-  if exists user-class and option user-class = "iPXE" {
-    filename "{{ dhcp_matchbox }}";
-  } else {
-    filename "ipxe.pxe";
-  }
+## Etcd
+{% for e in etcd %}
+{% set etcd_count = loop.index-1 %}
+{% for mac_address in e.mac_addresses %}
+host etcd-{{ etcd_count }}-{{ loop.index }} {
+  option host-name "etcd-{{ etcd_count }}.{{ domain_name }}";
+  hardware ethernet {{ mac_address }};
+  fixed-address {{ e.ip_address }};
+  filename "{{ dhcp_matchbox }}";
 }
+{% endfor %}
+{% endfor %}
 
-host {{ dhcp_vrf_name }}-merit-dhcp-1-2 {
-  hardware ethernet {{ dhcp_host_1_nic_2 }};
-  fixed-address {{ dhcp_host_1_address }};
-  if exists user-class and option user-class = "iPXE" {
-    filename "{{ dhcp_matchbox }}";
-  } else {
-    filename "ipxe.pxe";
-  }
+## Masters
+{% for m in masters %}
+{% set master_count = loop.index-1 %}
+{% for mac_address in m.mac_addresses %}
+host master-{{ master_count }}-{{ loop.index }} {
+  option host-name "master-{{ master_count }}.{{ domain_name }}";
+  hardware ethernet {{ mac_address }};
+  fixed-address {{ m.ip_address }};
+  filename "{{ dhcp_matchbox }}";
 }
+{% endfor %}
+{% endfor %}
+
+## Workers
+{% for w in workers %}
+{% set worker_count = loop.index-1 %}
+{% for mac_address in w.mac_addresses %}
+host worker-{{ worker_count }}-{{ loop.index }} {
+  option host-name "worker-{{ worker_count }}.{{ domain_name }}";
+  hardware ethernet {{ mac_address }};
+  fixed-address {{ w.ip_address }};
+  filename "{{ dhcp_matchbox }}";
+}
+{% endfor %}
+{% endfor %}
