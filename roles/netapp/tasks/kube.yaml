@@ -5,6 +5,7 @@
     aggr_list: "{{ kube_aggregate_list }}"
     allowed_protocols:
     - iscsi
+    ipspace: "{{ env }}_ipspace"
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -32,7 +33,7 @@
   na_ontap_interface:
     state: present
     interface_name: "{{ env }}_kube_data_lif_1"
-    home_port: "{{ vlan_port }}"
+    home_port: "{{ vlan_port_1 }}"
     home_node: "{{ node_1 }}"
     role: data
     protocols: iscsi
@@ -48,7 +49,7 @@
   na_ontap_interface:
     state: present
     interface_name: "{{ env }}_kube_data_lif_2"
-    home_port: "{{ vlan_port }}"
+    home_port: "{{ vlan_port_1 }}"
     home_node: "{{ node_2 }}"
     role: data
     protocols: iscsi
@@ -65,7 +66,7 @@
   na_ontap_interface:
     state: present
     interface_name: "{{ env }}_kube_mgmt_lif"
-    home_port: "{{ vlan_port }}"
+    home_port: "{{ vlan_port_1 }}"
     home_node: "{{ node_1 }}"
     role: data
     firewall_policy: mgmt
