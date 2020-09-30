@@ -120,13 +120,15 @@
   na_ontap_lun_map:
     state: present
     initiator_group_name: "{{ env }}CfsslIgroup"
-    path: "/vol/dev_cfssl_vol/dev_cfssl_lun"
+    path: "/vol/{{ env }}_cfssl_vol/{{ env }}_cfssl_lun"
     vserver: "{{ env }}_cfssl"
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
 
 # https://github.com/ansible-collections/netapp/blob/master/ansible_collections/netapp/ontap/plugins/modules/na_ontap_iscsi_security.py
+# TODO: This command errored when creating the policy so it was created
+# manually with `vserver iscsi security create` and modified by this block
 - name: Create {{ env }} cfssl iSCSI initiator security policy
   netapp.ontap.na_ontap_iscsi_security:
     state: present

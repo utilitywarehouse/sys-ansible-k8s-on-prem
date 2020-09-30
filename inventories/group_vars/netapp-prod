@@ -34,5 +34,5 @@ kube_data_lif_1_address: 10.10.50.4
 kube_data_lif_2_address: 10.10.50.5
 kube_mgmt_lif_address: 10.10.50.6
 
-kube_trident_user: trident_user
+kube_trident_user: trident
 kube_trident_password: "{{vault_kube_trident_password_prod}}"
