@@ -5,6 +5,9 @@
 [dhcp-dev:children]
 cumulus
 
+[dhcp-prod:children]
+cumulus
+
 [netapp-clusters]
 10.91.5.200
 
