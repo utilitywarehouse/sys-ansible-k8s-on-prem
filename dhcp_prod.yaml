@@ -1,0 +1,8 @@
+- hosts: dhcp-prod
+  user: cumulus
+  connection: ssh
+  roles:
+    - dhcp
+  vars_files:
+    - inventories/group_vars/hosts-prod
+  become: yes

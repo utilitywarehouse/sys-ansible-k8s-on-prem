@@ -15,6 +15,9 @@ version-check:
 dhcp-dev: version-check
 	ansible-playbook -i inventories/hosts dhcp_dev.yaml --diff $(check_flag)
 
+dhcp-prod: version-check
+	ansible-playbook -i inventories/hosts dhcp_prod.yaml --diff $(check_flag)
+
 netapp-dev: version-check
 	ansible-playbook -i inventories/hosts netapp_dev.yaml --diff $(check_flag)
 

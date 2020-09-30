@@ -1,0 +1,12 @@
+# interfaces
+dhcp_listen_interface: vlan189
+dhcp_vrf_name: prod
+
+subnet: 10.89.0.0
+netmask: 255.255.255.0
+router: 10.89.0.1
+domain_name: prod.merit.uw.systems
+dns: 1.1.1.1,1.0.0.1
+
+# matchbox address
+dhcp_matchbox: 'http://matchbox.prod.gcp.uw.systems:80/boot.ipxe'
