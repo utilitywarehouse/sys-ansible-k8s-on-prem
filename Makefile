@@ -21,5 +21,8 @@ dhcp-prod: version-check
 netapp-dev: version-check
 	ansible-playbook -i inventories/hosts netapp_dev.yaml --diff $(check_flag)
 
+netapp-prod: version-check
+	ansible-playbook -i inventories/hosts netapp_prod.yaml --diff $(check_flag)
+
 netapp-collections-install:
 	ansible-galaxy collection install netapp.ontap

@@ -8,11 +8,8 @@ cumulus
 [dhcp-prod:children]
 cumulus
 
-[netapp-clusters]
+[netapp]
 10.91.5.200
 
-[netapp-dev:children]
-netapp-clusters
-
-[netapp-dev:vars]
+[netapp:vars]
 ansible_connection: local
