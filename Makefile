@@ -24,5 +24,8 @@ netapp-dev: version-check
 netapp-prod: version-check
 	ansible-playbook -i inventories/hosts netapp_prod.yaml --diff $(check_flag)
 
+cumulus: version-check
+	ansible-playbook -i inventories/hosts cumulus.yaml --diff $(check_flag)
+
 netapp-collections-install:
 	ansible-galaxy collection install netapp.ontap
