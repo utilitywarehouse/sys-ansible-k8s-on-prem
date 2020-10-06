@@ -45,6 +45,10 @@ masters:
     mac_addresses:
       - a0:1d:48:b5:48:c4
       - a0:1d:48:b5:48:c5
+  - ip_address: 10.88.0.67
+    mac_addresses:
+      - a0:1d:48:b5:1d:84
+      - a0:1d:48:b5:1d:85
 
 workers:
   - ip_address: 10.88.0.128
