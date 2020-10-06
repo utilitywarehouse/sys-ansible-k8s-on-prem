@@ -4,5 +4,6 @@
   roles:
     - dhcp
   vars_files:
+    - inventories/group_vars/dhcp-prod
     - inventories/group_vars/hosts-prod
   become: yes
