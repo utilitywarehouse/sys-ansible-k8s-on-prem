@@ -75,3 +75,83 @@ workers:
     mac_addresses:
       - ec:eb:b8:a5:b2:42
       - ec:eb:b8:a5:b2:43
+  - ip_address: 10.89.0.133
+    mac_addresses:
+      - ec:eb:b8:a5:f3:f2
+      - ec:eb:b8:a5:f3:f3
+  - ip_address: 10.89.0.134
+    mac_addresses:
+      - ec:eb:b8:a5:d4:12
+      - ec:eb:b8:a5:d4:13
+  - ip_address: 10.89.0.135
+    mac_addresses:
+      - ec:eb:b8:a5:72:72
+      - ec:eb:b8:a5:72:73
+  - ip_address: 10.89.0.136
+    mac_addresses:
+      - ec:eb:b8:a5:03:a2
+      - ec:eb:b8:a5:03:a3
+  - ip_address: 10.89.0.137
+    mac_addresses:
+      - ec:eb:b8:a5:43:b2
+      - ec:eb:b8:a5:43:b3
+  - ip_address: 10.89.0.138
+    mac_addresses:
+      - ec:eb:b8:a5:94:a2
+      - ec:eb:b8:a5:94:a3
+  - ip_address: 10.89.0.139
+    mac_addresses:
+      - ec:eb:b8:a5:82:42
+      - ec:eb:b8:a5:82:43
+  - ip_address: 10.89.0.140
+    mac_addresses:
+      - ec:eb:b8:a5:83:a2
+      - ec:eb:b8:a5:83:a3
+  - ip_address: 10.89.0.141
+    mac_addresses:
+      - ec:eb:b8:a5:d2:22
+      - ec:eb:b8:a5:d2:23
+  - ip_address: 10.89.0.142
+    mac_addresses:
+      - ec:eb:b8:a5:83:72
+      - ec:eb:b8:a5:83:73
+  - ip_address: 10.89.0.143
+    mac_addresses:
+      - ec:eb:b8:a5:25:02
+      - ec:eb:b8:a5:25:03
+  - ip_address: 10.89.0.144
+    mac_addresses:
+      - ec:eb:b8:a5:55:32
+      - ec:eb:b8:a5:55:33
+  - ip_address: 10.89.0.145
+    mac_addresses:
+      - ec:eb:b8:a5:d2:32
+      - ec:eb:b8:a5:d2:33
+  - ip_address: 10.89.0.146
+    mac_addresses:
+      - ec:eb:b8:a5:c2:f2
+      - ec:eb:b8:a5:c2:f3
+  - ip_address: 10.89.0.147
+    mac_addresses:
+      - ec:eb:b8:a5:44:a2
+      - ec:eb:b8:a5:44:a3
+  - ip_address: 10.89.0.148
+    mac_addresses:
+      - ec:eb:b8:a5:15:d2
+      - ec:eb:b8:a5:15:d3
+  - ip_address: 10.89.0.149
+    mac_addresses:
+      - ec:eb:b8:a5:c3:02
+      - ec:eb:b8:a5:c3:03
+  - ip_address: 10.89.0.150
+    mac_addresses:
+      - ec:eb:b8:a5:b2:22
+      - ec:eb:b8:a5:b2:23
+  - ip_address: 10.89.0.151
+    mac_addresses:
+      - ec:eb:b8:a5:44:72
+      - ec:eb:b8:a5:44:73
+  - ip_address: 10.89.0.152
+    mac_addresses:
+      - ec:eb:b8:a5:a2:52
+      - ec:eb:b8:a5:a2:53
