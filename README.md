@@ -1,19 +1,30 @@
-Ansible scripts to setup on-prem environment
+Ansible scripts to setup on-prem environment components that do not fit in our
+terraform based model.
 
-Assumes:
-- ansible 2.7 local setup
-- `system` ansible vault password stored under `${HOME}/ansible/vault_password`
-- working local ssh connection to nxos switch
+# Requirements
 
-Example for configuring nxos switch for dev/lab environment
+- ansible >=2.7 local setup
+- `system` strongbox key
 
+# Makefile support
+
+There is a [Makefile](./Makefile) which includes targets for the playbooks that
+one would need to run from this repo.
+
+For example:
 ```
-ansible-playbook -i inventories/dev/hosts nxos_dev.yaml
+make dhcp-dev
 ```
+will run the [dhcp-dev](./dhcp_dev.yaml) playbook against hosts specified under
+the defined [hosts](./inventories/hosts)
 
-There is also Makefile support that includes the basic commands, etc:
+`DRY_RUN` environment variable can be used as `DRY_RUN=true make dhcp-dev` to
+perform dry runs and check diffs before actually applying playbooks config.
 
-```
-make nxos-dev
-```
-will have the same result as the above command.
+`netapp-collections-install` is also available to install netapp library
+dependencies that do not ship with ansible by default.
+
+Optionally `ARGS` environment variable can be used to append arguments to
+playbook commands, like `make cumulus ARGS="--tags frr"`
+
+Please add new targets for all new roles and collections installations needed.

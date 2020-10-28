@@ -3,4 +3,9 @@
   connection: ssh
   roles:
     - cumulus
+  vars_files:
+    - inventories/group_vars/cumulus
+    - inventories/group_vars/vault
+    - inventories/group_vars/hosts-dev
+    - inventories/group_vars/hosts-prod
   become: yes

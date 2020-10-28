@@ -2,6 +2,7 @@
   copy:
     src: "files/authorized_keys"
     dest: "/home/cumulus/.ssh/authorized_keys"
+  tags: ssh_authorized_keys
 
 - name: copy 10ssh.rules
   copy:
@@ -9,3 +10,12 @@
     dest: "/etc/cumulus/acl/policy.d/10ssh.rules"
   notify:
     - "install ACL rules"
+  tags: ssh_rules
+
+- name: Copy frr configuration
+  template:
+    src:  frr.conf.tmpl
+    dest: "/etc/frr/frr.conf"
+  notify:
+    - restart frr
+  tags: frr
