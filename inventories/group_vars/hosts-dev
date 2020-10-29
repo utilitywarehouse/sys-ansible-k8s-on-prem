@@ -32,7 +32,15 @@ etcd:
       - a0:1d:48:b5:4b:58
       - a0:1d:48:b5:4b:59
 
-masters:
+# Suffix masters and workers with environment so that we can use them via:
+# `vars["workers_" + env]` on roles where we do separate runs for dev and prod,
+# like dhcp, and still be able to explicitly refer to all hosts when rendering
+# cumulus config files, where we need to bundle everything under a single file
+# (for example for /etc/frr/frr.conf)
+
+env: dev
+
+masters_dev:
   - ip_address: 10.88.0.64
     mac_addresses:
       - a0:1d:48:b5:48:10
@@ -50,7 +58,7 @@ masters:
       - a0:1d:48:b5:1d:84
       - a0:1d:48:b5:1d:85
 
-workers:
+workers_dev:
   - ip_address: 10.88.0.128
     mac_addresses:
       - ec:eb:b8:a5:75:c2

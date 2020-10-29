@@ -1,0 +1,1 @@
+core_network_bgp_password: "{{vault_core_network_bgp_password}}"

@@ -1,6 +1,18 @@
-[cumulus]
+[cumulus:children]
+cumulus-1
+cumulus-2
+
+[cumulus-1]
 10.91.5.104
+[cumulus-1:vars]
+hostname=mer-cumulus-1
+router_id=10.254.254.253
+
+[cumulus-2]
 10.91.5.105
+[cumulus-2:vars]
+hostname=mer-cumulus-2
+router_id=10.254.254.254
 
 [dhcp-dev:children]
 cumulus
@@ -10,6 +22,3 @@ cumulus
 
 [netapp]
 10.91.5.200
-
-[netapp:vars]
-ansible_connection: local

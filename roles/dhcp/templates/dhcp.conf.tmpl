@@ -58,7 +58,7 @@ host etcd-{{ etcd_count }}-{{ loop.index }} {
 {% endfor %}
 
 ## Masters
-{% for m in masters %}
+{% for m in vars["masters_" + env] %}
 {% set master_count = loop.index-1 %}
 {% for mac_address in m.mac_addresses %}
 host master-{{ master_count }}-{{ loop.index }} {
@@ -71,7 +71,7 @@ host master-{{ master_count }}-{{ loop.index }} {
 {% endfor %}
 
 ## Workers
-{% for w in workers %}
+{% for w in vars["workers_" + env] %}
 {% set worker_count = loop.index-1 %}
 {% for mac_address in w.mac_addresses %}
 host worker-{{ worker_count }}-{{ loop.index }} {

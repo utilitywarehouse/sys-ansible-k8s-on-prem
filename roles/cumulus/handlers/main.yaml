@@ -2,3 +2,9 @@
   command:
     cmd: "cl-acltool -i"
   become: true
+
+- name: restart frr
+  service:
+    name: frr.service
+    state: restarted
+  become: yes
