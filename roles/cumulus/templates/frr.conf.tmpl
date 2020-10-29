@@ -4,8 +4,6 @@ hostname {{ hostname }}
 log syslog informational
 service integrated-vtysh-config
 !
-ip route 0.0.0.0/0 172.30.88.1
-!
 vrf dev
  ip route 0.0.0.0/0 172.30.88.3
  ip route 10.10.51.0/24 Null0
