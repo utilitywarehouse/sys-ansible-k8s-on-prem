@@ -19,3 +19,46 @@
   notify:
     - restart frr
   tags: frr
+
+- name: Ensure /opt/bin directory exists
+  file:
+    path: /opt/bin
+    state: directory
+  tags: node-exporter
+
+- name: Download, extract and copy node-exporter binary
+  unarchive:
+    src: "https://github.com/prometheus/node_exporter/releases/download/v{{node_exporter_version}}/node_exporter-{{node_exporter_version}}.linux-amd64.tar.gz"
+    dest: /opt/bin
+    remote_src: yes
+  tags: node-exporter
+
+- name: Ensure prometheus text collectors directory exists
+  file:
+    path: /etc/node-exporter/prom-text-collectors
+    state: directory
+  tags: node-exporter
+
+- name: copy static prometheus metrics
+  copy:
+    src: files/machine_role.prom
+    dest: /etc/node-exporter/prom-text-collectors/machine_role.prom
+  notify:
+    - restart node-exporter
+  tags: node-exporter
+
+- name: Copy node-exporter systemd service unit file
+  template:
+    src:  node-exporter.service.tmpl
+    dest: /etc/systemd/system/node-exporter.service
+  notify:
+    - daemon-reload
+    - restart node-exporter
+  tags: node-exporter
+
+- name: Make sure node-exporter is enabled and running
+  service:
+    name: node-exporter
+    state: started
+    enabled: yes
+  tags: node-exporter
