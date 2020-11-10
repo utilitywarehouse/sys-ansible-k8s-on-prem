@@ -144,4 +144,4 @@ matchbox:
   - ip_address: 10.88.0.248
     mac_addresses:
       - fc:15:b4:24:7f:d0
-      - fc:15:b4:24:7f:d0
+      - fc:15:b4:24:7f:d1
