@@ -165,4 +165,4 @@ workers_prod:
       - ec:eb:b8:a5:a2:53
 
 # empty matchbox to comply with the config template
-matchbox: []
+matchbox_prod: []

@@ -88,7 +88,7 @@ host worker-{{ worker_count }}-{{ loop.index }} {
 {% endfor %}
 
 ## Matchbox
-{% for m in matchbox %}
+{% for m in vars["matchbox_" + env] %}
 {% set matchbox_count = loop.index-1 %}
 {% for mac_address in m.mac_addresses %}
 host matchbox-{{ matchbox_count }}-{{ loop.index }} {

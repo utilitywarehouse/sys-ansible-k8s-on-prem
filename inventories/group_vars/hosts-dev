@@ -140,8 +140,12 @@ workers_dev:
       - ec:eb:b8:a4:bf:e2
       - ec:eb:b8:a4:bf:e3
 
-matchbox:
+matchbox_dev:
   - ip_address: 10.88.0.248
     mac_addresses:
       - fc:15:b4:24:7f:d0
       - fc:15:b4:24:7f:d1
+  - ip_address: 10.88.0.249
+    mac_addresses:
+      - fc:15:b4:22:07:a0
+      - fc:15:b4:22:07:a1
