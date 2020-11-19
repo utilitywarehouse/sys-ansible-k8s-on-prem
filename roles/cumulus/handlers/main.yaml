@@ -1,7 +1,16 @@
+- name: daemon-reload
+  systemd:
+    daemon_reload: yes
+
 - name: install ACL rules
   command:
     cmd: "cl-acltool -i"
-  become: true
+  become: yes
+
+- name: reload network interfaces
+  command:
+    cmd: "ifreload -a"
+  become: yes
 
 - name: restart frr
   service:
@@ -14,7 +23,3 @@
     name: node-exporter.service
     state: restarted
   become: yes
-
-- name: daemon-reload
-  systemd:
-    daemon_reload: yes
