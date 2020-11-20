@@ -1,0 +1,100 @@
+- name: Create {{ env }} nfs SVM
+  na_ontap_svm:
+    name: "{{ env }}_nfs"
+    aggr_list: "{{ nfs_aggregate_list }}"
+    allowed_protocols:
+    - nfs
+    ipspace: "{{ env }}_ipspace"
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+- name: Create nfs service on {{ env }} nfs SVM
+  na_ontap_nfs:
+    service_state: started
+    vserver: "{{ env }}_nfs"
+    nfsv41: enabled
+    nfsv3: disabled
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+# Default policy must allow nfs from all possible clients
+# Each volume should have its own export policy with stricter rules
+- name: Create export policy rule on default policy
+  na_ontap_export_policy_rule:
+    name: default
+    rule_index: 1
+    vserver: "{{ env }}_nfs"
+    client_match: 10.0.0.0/8
+    protocol: nfs
+    ro_rule: any
+    rw_rule: any
+    super_user_security: any
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+- name: create route for {{ env }} nfs outgoing traffic
+  na_ontap_net_routes:
+    destination: 0.0.0.0/0
+    gateway: "{{ nfs_network_gateway }}"
+    vserver: "{{ env }}_nfs"
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+- name: Create {{ env }} nfs vserver data lif on controller {{ node_1 }}
+  na_ontap_interface:
+    interface_name: "{{ env }}_nfs_data_lif_1"
+    home_port: "{{ vlan_port_1 }}"
+    home_node: "{{ node_1 }}"
+    role: data
+    protocols: nfs
+    admin_status: up
+    address: "{{ nfs_data_lif_1_address }}"
+    netmask: "{{ nfs_lif_netmask }}"
+    vserver: "{{ env }}_nfs"
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+# matchbox
+- name: Create matchbox export policy on {{ env }} nfs SVM
+  na_ontap_export_policy:
+    name: matchbox
+    vserver: "{{ env }}_nfs"
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+- name: Create export policy rule on matchbox policy
+  na_ontap_export_policy_rule:
+    name: matchbox
+    rule_index: 1
+    vserver: "{{ env }}_nfs"
+    client_match: "{{ matchbox_ips }}"
+    protocol: nfs
+    ro_rule: any
+    rw_rule: any
+    super_user_security: any
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+- name: Create matchbox volume on {{ env }} nfs SVM
+  na_ontap_volume:
+    name: "{{ env }}_nfs_matchbox_vol"
+    junction_path: /matchbox
+    is_infinite: False
+    aggregate_name: "{{ matchbox_volume_aggregate }}"
+    size: 1536
+    size_unit: mb
+    policy: matchbox
+    encrypt: yes
+    comment: "ansible created {{ env }} nfs matchbox volume"
+    vserver: "{{ env }}_nfs"
+    wait_for_completion: True
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
