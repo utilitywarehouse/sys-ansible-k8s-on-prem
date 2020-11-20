@@ -62,3 +62,11 @@
     state: started
     enabled: yes
   tags: node-exporter
+
+- name: Copy network interfaces configuration
+  template:
+    src: network-interfaces.tmpl
+    dest: "/etc/network/interfaces"
+  notify:
+    - reload network interfaces
+  tags: network

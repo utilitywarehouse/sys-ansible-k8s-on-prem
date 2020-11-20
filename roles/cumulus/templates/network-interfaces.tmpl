@@ -1,0 +1,231 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+source /etc/network/interfaces.d/*.intf
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto eth0
+iface eth0 inet dhcp
+    vrf mgmt
+
+auto dev
+iface dev
+    vrf-table auto
+
+auto mgmt
+iface mgmt
+    address 127.0.0.1/8
+    address ::1/128
+    vrf-table auto
+
+#PeerLink Bond interace
+auto swp1
+iface swp1
+    mtu 9216
+    link-speed 400000
+
+auto swp2
+iface swp2
+    mtu 9216
+    link-speed 400000
+
+#Link to Merit-Network-VPC
+auto swp3
+iface swp3
+     mtu 9216
+
+#Link to Merit-Network-VPC
+auto swp4
+iface swp4
+     mtu 9216
+
+#PROD - Link to Netapp Controller "A" ( No Bond interface is supported by NetApp)
+auto swp5
+iface swp5
+    alias swp5 prod-netapp-ctrl-a
+    bridge-vids 1000
+    mtu 9216
+    link-autoneg on
+
+#DEV - Link to Netapp Controller "A" ( No Bond interface is supported by NetApp)
+auto swp6
+iface swp6
+    alias swp6 dev-netapp-ctrl-a
+    bridge-vids 2000
+    mtu 9216
+
+#PROD - Link to Netapp Controller "B" ( No Bond interface is supported by NetApp)
+auto swp28
+iface swp28
+    alias swp28 prod-netapp-ctrl-b
+    bridge-vids 1000
+    mtu 9216
+    link-autoneg on
+
+#DEV - Link to Netapp Controller "B" ( No Bond interface is supported by NetApp)
+auto swp29
+iface swp29
+    alias swp29 dev-netapp-ctrl-b
+    bridge-vids 2000
+    mtu 9216
+
+#Link to Moonshoot 1 (New one - DEV)
+auto swp30
+iface swp30
+    mtu 9216
+
+#Link to Moonshot 1 (New one - PROD)
+auto swp27
+iface swp27
+    link-down yes
+    mtu 9216
+
+#Link to Moonshoot 0 (Old one - DEV)
+auto swp31
+iface swp31
+    mtu 9216
+
+#PO to Merit-network-VPC
+auto bond-mer-mer
+iface bond-mer-mer
+    bond-slaves swp3 swp4
+    bridge-vids 1 88 89 288 289
+    mtu 9216
+    clag-id 4
+
+#PO to Moonshoot DEV (new one) - One iface per SW in MLAG
+auto bond-hp-m1-dev
+iface bond-hp-m1-dev
+    bond-slaves swp30
+    bridge-vids 188 189
+    clag-id 30
+    mtu 9216
+
+#PO to Moonshoot PROD (new one) - One iface per SW in MLAG
+auto bond-hp-m1-prod
+iface bond-hp-m1-prod
+    bond-slaves swp27
+    bridge-vids 189
+    clag-id 27
+    mtu 9216
+
+#PO to Moonshoot DEV (Old one) - One iface per SW in MLAG
+auto bond-hp-m0-dev
+iface bond-hp-m0-dev
+    bond-slaves swp31
+    bridge-vids 188 189
+    clag-id 31
+    mtu 9216
+
+#Brigde interface (All L2 Interfaces)
+auto bridge
+iface bridge
+    bridge-ports peerlink bond-hp-m0-dev bond-hp-m1-dev bond-hp-m1-prod bond-mer-mer swp5 swp6 swp28 swp29
+    bridge-vids 2 88 89 188 189 288 289 1000 2000
+    bridge-vlan-aware yes
+    mstpctl-treeprio 8192
+    mtu 9216
+
+#PeerLink bond for MLAG setup
+auto peerlink
+iface peerlink
+    bond-slaves swp1 swp2
+    mtu 9216
+
+auto peerlink.4094
+iface peerlink.4094
+    clagd-peer-ip linklocal
+    clagd-backup-ip {{ clagd_backup_ip }}
+    clagd-priority {{ clagd_priority }}
+    clagd-sys-mac 44:38:39:FF:01:01
+
+auto prod
+iface prod
+    vrf-table auto
+
+#This is an standard vlan created for CLAG-Backup LINK
+auto vlan2
+iface vlan2
+   address {{ vlan_2_address }}
+   vlan-id 2
+   vlan-raw-device bridge
+   mtu 9216
+
+#DEV- VLAN in use to PEER with Main Network - VRF internal
+auto vlan88
+iface vlan88
+    address {{ vlan_88_address }}
+    vlan-id 88
+    vlan-raw-device bridge
+    vrf dev
+    mtu 9216
+
+#PROD- VLAN in use to PEER with Main Network - VRF internal
+auto vlan89
+iface vlan89
+    address {{ vlan_89_address }}
+    vlan-id 89
+    vlan-raw-device bridge
+    vrf prod
+    mtu 9216
+
+#DEV Internal VLAN - where the nodes live
+auto vlan188
+iface vlan188
+    address {{ vlan_188_address }}
+    address-virtual 00:00:5E:00:01:01 10.88.0.1/24
+    vlan-id 188
+    vlan-raw-device bridge
+    vrf dev
+    mtu 9216
+
+#PROD Internal VLAN - where the nodes live
+auto vlan189
+iface vlan189
+    address {{ vlan_189_address }}
+    address-virtual 00:00:5E:00:01:01 10.89.0.1/24
+    vlan-id 189
+    vlan-raw-device bridge
+    vrf prod
+    mtu 9216
+
+#DEV VLAN in use to PEER with Main Network - VRF Public
+auto vlan288
+iface vlan288
+    address {{ vlan_288_address }}
+    vlan-id 288
+    vlan-raw-device bridge
+    vrf dev
+    mtu 9216
+
+#PROD VLAN in use to PEER with Main Network - VRF Public
+auto vlan289
+iface vlan289
+    address {{ vlan_289_address }}
+    vlan-id 289
+    vlan-raw-device bridge
+    vrf prod
+    mtu 9216
+
+#PROD Vlan in use for NETAPP (Storage)
+auto vlan1000
+iface vlan1000
+   address {{ vlan_1000_address }}
+   address-virtual 00:00:5E:00:01:04 10.10.50.1/24
+   vlan-id 1000
+   vlan-raw-device bridge
+   vrf prod
+   mtu 9216
+
+#DEV Vlan in use for NETAPP (Storage)
+auto vlan2000
+iface vlan2000
+   address {{ vlan_2000_address }}
+   address-virtual 00:00:5E:00:01:04 10.20.50.1/24
+   vlan-id 2000
+   vlan-raw-device bridge
+   vrf dev
+   mtu 9216
