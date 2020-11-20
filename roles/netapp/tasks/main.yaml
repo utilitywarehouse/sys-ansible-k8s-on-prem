@@ -6,3 +6,6 @@
 
 - name: Create kube SVM and trident user
   include: kube.yaml
+
+- name: Create nfs SVM and volumes
+  include: nfs.yaml

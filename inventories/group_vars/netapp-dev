@@ -35,3 +35,15 @@ kube_mgmt_lif_address: 10.20.50.6
 
 kube_trident_user: trident_user
 kube_trident_password: "{{vault_kube_trident_password_dev}}"
+
+# nfs
+nfs_aggregate_list:
+  - system_01_SSD_1
+  - system_02_SSD_1
+nfs_network_gateway: 10.20.50.1
+nfs_lif_netmask: 255.255.255.0
+nfs_data_lif_1_address: 10.20.50.24
+
+# matchbox
+matchbox_volume_aggregate: system_02_SSD_1
+matchbox_ips: 10.88.0.248,10.88.0.249
