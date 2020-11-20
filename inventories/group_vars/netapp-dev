@@ -19,7 +19,6 @@ cfssl_network_gateway: 10.20.50.1
 cfssl_lif_netmask: 255.255.255.0
 cfssl_data_lif_1_address: 10.20.50.14
 cfssl_data_lif_2_address: 10.20.50.15
-cfssl_mgmt_lif_address: 10.20.50.16
 cfssl_chap_password: "{{vault_cfssl_chap_password_dev}}"
 cfssl_igroup_initiator: "iqn.2005-03.org.open-iscsi:cfssl"
 cfssl_initiator_ip: 10.88.0.8
