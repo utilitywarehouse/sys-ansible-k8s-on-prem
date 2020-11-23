@@ -5,6 +5,7 @@ log syslog informational
 service integrated-vtysh-config
 !
 vrf default
+ ip route {{ dev_nat_peer_ip_address }}/32 {{ dev_nat_vlan_288_peer_address }}
  ip route 85.91.50.0/24 Null0
  exit-vrf
 !
@@ -98,9 +99,9 @@ ip prefix-list private-prod seq 5 permit 10.89.0.0/16
 ip prefix-list public-dev seq 5 permit 85.91.50.0/24
 ip prefix-list public-prod seq 5 permit 85.91.53.0/24
 !
-pbr-map pbr-dev seq 1
- match src-ip 85.91.50.0/24
- set nexthop 192.168.88.3 vlan288 nexthop-vrf dev
+!pbr-map pbr-dev seq 1
+! match src-ip 85.91.50.0/24
+! set nexthop 192.168.88.3 vlan288 nexthop-vrf default
 !
 pbr-map pbr-prod seq 1
  match src-ip 85.91.53.0/24

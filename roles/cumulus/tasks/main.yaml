@@ -70,3 +70,21 @@
   notify:
     - reload network interfaces
   tags: network
+
+# files/switchd.conf is grabbed directly from a cumulus host and has the desired
+# configuration (nat) uncommented
+- name: copy switchd.conf
+  copy:
+    src: "files/switchd.conf"
+    dest: "/etc/cumulus/switchd.conf"
+  notify:
+    - restart switchd
+  tags: switchd, nat
+
+- name: Copy nat rules
+  template:
+    src: 60_nat.rules.tmpl
+    dest: "/etc/cumulus/acl/policy.d/60_nat.rules"
+  notify:
+    - install ACL rules
+  tags: acl_rules, nat

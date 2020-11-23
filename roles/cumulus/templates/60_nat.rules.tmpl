@@ -1,0 +1,2 @@
+[iptables]
+-t nat -A POSTROUTING -s 10.88.0.0/24 -j SNAT --to-source {{ dev_nat_ip_address }}

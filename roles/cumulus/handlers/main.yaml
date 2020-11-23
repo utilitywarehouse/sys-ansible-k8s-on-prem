@@ -23,3 +23,9 @@
     name: node-exporter.service
     state: restarted
   become: yes
+
+- name: restart switchd
+  service:
+    name: switchd.service
+    state: restarted
+  become: yes
