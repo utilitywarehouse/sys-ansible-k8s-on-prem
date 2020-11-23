@@ -198,6 +198,7 @@ iface vlan288
     address {{ vlan_288_address }}
     vlan-id 288
     vlan-raw-device bridge
+    vrf default
     mtu 9216
 
 #PROD VLAN in use to PEER with Main Network - VRF Public
@@ -207,14 +208,6 @@ iface vlan289
     vlan-id 289
     vlan-raw-device bridge
     vrf prod
-    mtu 9216
-
-#DEV VLAN in use by the nat interface
-auto vlan388
-iface vlan388
-    address {{ dev_nat_ip_address }}/24
-    vlan-id 388
-    vlan-raw-device bridge
     mtu 9216
 
 #PROD Vlan in use for NETAPP (Storage)
