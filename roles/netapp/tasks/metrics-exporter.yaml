@@ -1,0 +1,16 @@
+# create a cluster readonly user to use for the netapp-exporter
+# - cluster wide users are created under system svm
+# - readonly is a predefined netapp role
+- name: Create metrics-exporter user
+  na_ontap_user:
+    state: present
+    name: metrics-exporter
+    applications: ontapi
+    authentication_method: password
+    set_password: "{{ vault_metrics_exporter_password }}"
+    role_name: readonly
+    vserver: system
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+  tags: metrics
