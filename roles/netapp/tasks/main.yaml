@@ -9,3 +9,6 @@
 
 - name: Create nfs SVM and volumes
   include: nfs.yaml
+
+- name: Create metrics exporter user
+  include: metrics-exporter.yaml
