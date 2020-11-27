@@ -84,16 +84,17 @@
 
 - name: Create matchbox volume on {{ env }} nfs SVM
   na_ontap_volume:
+    vserver: "{{ env }}_nfs"
     name: "{{ env }}_nfs_matchbox_vol"
     junction_path: /matchbox
-    is_infinite: False
-    aggregate_name: "{{ matchbox_volume_aggregate }}"
     size: 1536
     size_unit: mb
     policy: matchbox
     encrypt: yes
+    aggregate_name: "{{ matchbox_volume_aggregate }}"
+    snapshot_policy: none
+    is_infinite: False
     comment: "ansible created {{ env }} nfs matchbox volume"
-    vserver: "{{ env }}_nfs"
     wait_for_completion: True
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
