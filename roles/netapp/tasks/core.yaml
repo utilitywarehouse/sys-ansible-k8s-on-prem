@@ -1,3 +1,4 @@
+# Assign a port on each node to each env vlan
 - name: create {{ env }} VLAN {{ vlan_id }} on {{ node_1 }} for {{ vlan_parent_interface_1 }}
   na_ontap_net_vlan:
     state: present
@@ -38,16 +39,7 @@
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
 
-- name: Set mtu {{ default_mtu }} for Default broadcast domain
-  na_ontap_broadcast_domain:
-    state: present
-    name: Default
-    mtu: "{{ default_mtu }}"
-    ipspace: Default
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-
+# Create ipscpaces for each env
 - name: Create {{ env }} dedicated ipspace
   na_ontap_ipspace:
     state: present
@@ -56,6 +48,7 @@
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
 
+# Create a broadcast domain for each env and assign all the ports of the environment to it
 - name: Create {{ env }} broadcast domain
   na_ontap_broadcast_domain:
     state: present
@@ -71,42 +64,13 @@
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
 
-- name: Use jumbo frames (mtu>=9000) on {{ node_1 }} port {{ vlan_parent_interface_1 }}
-  na_ontap_net_port:
+# Use jumbo frames in the default broadcast domain
+- name: Set mtu {{ default_mtu }} for Default broadcast domain
+  na_ontap_broadcast_domain:
     state: present
+    name: Default
     mtu: "{{ default_mtu }}"
-    node: "{{ node_1 }}"
-    ports: "{{ vlan_parent_interface_1 }}"
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-
-- name: Use jumbo frames (mtu>=9000) on {{ node_2 }} port {{ vlan_parent_interface_1 }}
-  na_ontap_net_port:
-    state: present
-    mtu: "{{ default_mtu }}"
-    node: "{{ node_2 }}"
-    ports: "{{ vlan_parent_interface_1 }}"
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-
-- name: Use jumbo frames (mtu>=9000) on {{ node_1 }} port {{ vlan_parent_interface_2 }}
-  na_ontap_net_port:
-    state: present
-    mtu: "{{ default_mtu }}"
-    node: "{{ node_1 }}"
-    ports: "{{ vlan_parent_interface_2 }}"
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-
-- name: Use jumbo frames (mtu>=9000) on {{ node_2 }} port {{ vlan_parent_interface_2 }}
-  na_ontap_net_port:
-    state: present
-    mtu: "{{ default_mtu }}"
-    node: "{{ node_2 }}"
-    ports: "{{ vlan_parent_interface_2 }}"
+    ipspace: Default
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
