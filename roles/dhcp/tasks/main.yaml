@@ -1,10 +1,8 @@
 - name: Make sure dhcpd is installed
   apt:
-    name: dhcpd
+    name: isc-dhcp-server
     state: present
     update_cache: yes
-  when:
-    - ansible_facts['distribution'] == "Debian"
   tags: dhcp
 
 - name: Create /etc/dhcp-{{ dhcp_vrf_name }}
@@ -42,8 +40,6 @@
     name: atftpd
     state: present
     update_cache: yes
-  when:
-    - ansible_facts['distribution'] == "Debian"
   tags: dhcp
 
 - name: Create /etc/tftpboot-{{ dhcp_vrf_name }}
