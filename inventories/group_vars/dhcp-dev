@@ -9,4 +9,4 @@ domain_name: dev.merit.uw.systems
 dns: 1.1.1.1,1.0.0.1
 
 # matchbox address
-dhcp_matchbox: 'http://matchbox.dev.gcp.uw.systems:80/boot.ipxe'
+dhcp_matchbox: 'http://matchbox.dev.merit.uw.systems:80/boot.ipxe'
