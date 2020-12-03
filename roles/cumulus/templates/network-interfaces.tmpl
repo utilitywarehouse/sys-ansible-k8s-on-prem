@@ -124,7 +124,7 @@ iface bond-hp-m0-dev
 auto bridge
 iface bridge
     bridge-ports peerlink bond-hp-m0-dev bond-hp-m1-dev bond-hp-m1-prod bond-mer-mer swp5 swp6 swp28 swp29
-    bridge-vids 2 88 89 188 189 288 289 1000 2000
+    bridge-vids 2 88 89 188 189 288 289 388 1000 2000
     bridge-vlan-aware yes
     mstpctl-treeprio 8192
     mtu 9216
@@ -208,6 +208,15 @@ iface vlan289
     vlan-id 289
     vlan-raw-device bridge
     vrf prod
+    mtu 9216
+
+#DEV VLAN in use for public ip addresses - VRF Public
+auto vlan388
+iface vlan388
+    address {{ vlan_388_address }}
+    vlan-id 388
+    vlan-raw-device bridge
+    vrf dev
     mtu 9216
 
 #PROD Vlan in use for NETAPP (Storage)

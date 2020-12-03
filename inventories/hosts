@@ -16,6 +16,7 @@ vlan_188_address=10.88.0.253/24
 vlan_189_address=10.89.0.253/24
 vlan_288_address=192.168.88.253/24
 vlan_289_address=192.168.89.253/24
+vlan_388_address=85.91.50.253/24
 vlan_1000_address=10.10.50.253/24
 vlan_2000_address=10.20.50.253/24
 
@@ -35,6 +36,7 @@ vlan_188_address=10.88.0.254/24
 vlan_189_address=10.89.0.254/24
 vlan_288_address=192.168.88.254/24
 vlan_289_address=192.168.89.254/24
+vlan_388_address=85.91.50.254/24
 vlan_1000_address=10.10.50.254/24
 vlan_2000_address=10.20.50.254/24
 

@@ -149,3 +149,13 @@ matchbox_dev:
     mac_addresses:
       - fc:15:b4:22:07:a0
       - fc:15:b4:22:07:a1
+
+wiresteward_dev:
+  - ip_address: 10.88.0.246
+    mac_addresses:
+      - fc:15:b4:22:07:a2
+      - fc:15:b4:22:07:a3
+  - ip_address: 10.88.0.247
+    mac_addresses:
+      - fc:15:b4:24:7f:d2
+      - fc:15:b4:24:7f:d3
