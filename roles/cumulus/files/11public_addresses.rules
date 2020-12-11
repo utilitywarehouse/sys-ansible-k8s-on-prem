@@ -1,8 +1,6 @@
 [iptables]
-# Drop traaffic to cumulus vlan 388 ips
+# Drop traffic to cumulus vlan 388 ips but allow FORWARD to be able to use these
+# as nect hops for public traffic
+-A INPUT -d 85.91.50.252/32 -j DROP
 -A INPUT -d 85.91.50.253/32 -j DROP
 -A INPUT -d 85.91.50.254/32 -j DROP
-# Do not forward traffic to cumulus vlan 388 ips
--A FORWARD -d 85.91.50.253/32 -j DROP
--A FORWARD -d 85.91.50.254/32 -j DROP
-
