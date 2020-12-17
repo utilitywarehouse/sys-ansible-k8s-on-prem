@@ -5,6 +5,8 @@ terraform based model.
 
 - ansible >=2.7 local setup
 - `system` strongbox key
+- `make netapp-collections-install` to install netapp.ontap collections for ansible
+- `pip install netapp-lib` is also needed by ansible netapp modules to run
 
 # Makefile support
 
