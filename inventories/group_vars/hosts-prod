@@ -164,8 +164,15 @@ workers_prod:
       - ec:eb:b8:a5:a2:52
       - ec:eb:b8:a5:a2:53
 
-# empty matchbox to comply with the config template
-matchbox_prod: []
+matchbox_prod:
+  - ip_address: 10.89.0.248
+    mac_addresses:
+      - fc:15:b4:24:3f:22
+      - fc:15:b4:24:3f:23
+  - ip_address: 10.89.0.249
+    mac_addresses:
+      - fc:15:b4:24:7f:a2
+      - fc:15:b4:24:7f:a3
 
 # empty wiresteward to comply with the config template
 wiresteward_prod: []

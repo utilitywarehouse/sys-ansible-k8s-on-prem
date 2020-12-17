@@ -68,6 +68,9 @@ router bgp 64512 vrf prod
 {% for w in workers_prod %}
  neighbor {{ w.ip_address }} remote-as 64512
 {% endfor %}
+{% for m in matchbox_prod %}
+ neighbor {{ m.ip_address }} remote-as 64512
+{% endfor %}
  neighbor 172.30.89.1 remote-as 51553
  neighbor 172.30.89.1 password {{ core_network_bgp_password }}
  neighbor 172.30.89.2 remote-as 51553
