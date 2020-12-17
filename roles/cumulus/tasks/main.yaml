@@ -10,7 +10,15 @@
     dest: "/etc/cumulus/acl/policy.d/10ssh.rules"
   notify:
     - "install ACL rules"
-  tags: ssh_rules
+  tags: acl_rules
+
+- name: copy 11public_addresses.rules
+  copy:
+    src: "files/11public_addresses.rules"
+    dest: "/etc/cumulus/acl/policy.d/11public_addresses.rules"
+  notify:
+    - "install ACL rules"
+  tags: acl_rules
 
 - name: Copy frr configuration
   template:

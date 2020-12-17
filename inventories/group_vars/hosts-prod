@@ -166,3 +166,6 @@ workers_prod:
 
 # empty matchbox to comply with the config template
 matchbox_prod: []
+
+# empty wiresteward to comply with the config template
+wiresteward_prod: []
