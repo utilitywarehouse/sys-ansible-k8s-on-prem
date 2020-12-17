@@ -96,7 +96,7 @@ host matchbox-{{ matchbox_count }}-{{ loop.index }} {
   hardware ethernet {{ mac_address }};
   fixed-address {{ m.ip_address }};
   if exists user-class and option user-class = "iPXE" {
-    filename "{{ dhcp_matchbox }}";
+    filename "{{ dhcp_matchbox_external }}";
   } else {
     filename "ipxe.pxe";
   }
