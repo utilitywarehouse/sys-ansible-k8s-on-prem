@@ -174,5 +174,12 @@ matchbox_prod:
       - fc:15:b4:24:7f:a2
       - fc:15:b4:24:7f:a3
 
-# empty wiresteward to comply with the config template
-wiresteward_prod: []
+wiresteward_prod:
+  - ip_address: 10.89.0.246
+    mac_addresses:
+      - fc:15:b4:24:2f:a8
+      - fc:15:b4:24:2f:a9
+  - ip_address: 10.89.0.247
+    mac_addresses:
+      - fc:15:b4:22:27:f8
+      - fc:15:b4:22:27:f9
