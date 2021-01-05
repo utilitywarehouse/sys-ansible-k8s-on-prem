@@ -159,3 +159,13 @@ wiresteward_dev:
     mac_addresses:
       - fc:15:b4:24:7f:d2
       - fc:15:b4:24:7f:d3
+
+nat_dev:
+  - ip_address: 10.88.0.250
+    mac_addresses:
+      - fc:15:b4:22:56:00
+      - fc:15:b4:22:56:01
+  - ip_address: 10.88.0.251
+    mac_addresses:
+      - fc:15:b4:24:3f:30
+      - fc:15:b4:24:3f:31
