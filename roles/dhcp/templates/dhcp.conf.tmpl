@@ -120,3 +120,20 @@ host wiresteward-{{ wiresteward_count }}-{{ loop.index }} {
 }
 {% endfor %}
 {% endfor %}
+
+## NAT boxes
+{% for n in vars["nat_" + env] %}
+{% set nat_count = loop.index-1 %}
+{% for mac_address in n.mac_addresses %}
+host nat-{{ nat_count }}-{{ loop.index }} {
+  option host-name "nat-{{ nat_count }}.{{ domain_name }}";
+  hardware ethernet {{ mac_address }};
+  fixed-address {{ n.ip_address }};
+  if exists user-class and option user-class = "iPXE" {
+    filename "{{ dhcp_matchbox }}";
+  } else {
+    filename "ipxe.pxe";
+  }
+}
+{% endfor %}
+{% endfor %}

@@ -183,3 +183,5 @@ wiresteward_prod:
     mac_addresses:
       - fc:15:b4:22:27:f8
       - fc:15:b4:22:27:f9
+
+nat_prod: []
