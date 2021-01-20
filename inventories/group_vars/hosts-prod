@@ -184,4 +184,12 @@ wiresteward_prod:
       - fc:15:b4:22:27:f8
       - fc:15:b4:22:27:f9
 
-nat_prod: []
+nat_prod:
+  - ip_address: 10.89.0.250
+    mac_addresses:
+      - fc:15:b4:22:56:02
+      - fc:15:b4:22:56:03
+  - ip_address: 10.89.0.251
+    mac_addresses:
+      - fc:15:b4:24:3f:32
+      - fc:15:b4:24:3f:33
