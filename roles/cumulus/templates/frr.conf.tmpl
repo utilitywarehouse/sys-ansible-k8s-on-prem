@@ -13,7 +13,6 @@ vrf dev
  exit-vrf
 !
 vrf prod
- ip route 0.0.0.0/0 172.30.89.3
  ip route 10.10.50.0/24 Null0
  ip route 10.88.0.0/16 Null0
  ip route 10.89.0.0/16 Null0
@@ -74,6 +73,9 @@ router bgp 64512 vrf prod
 {% endfor %}
 {% for m in matchbox_prod %}
  neighbor {{ m.ip_address }} remote-as 64512
+{% endfor %}
+{% for n in nat_prod %}
+ neighbor {{ n.ip_address }} remote-as 64512
 {% endfor %}
  neighbor 172.30.89.1 remote-as 51553
  neighbor 172.30.89.1 password {{ core_network_bgp_password }}
