@@ -193,3 +193,5 @@ nat_prod:
     mac_addresses:
       - fc:15:b4:24:3f:32
       - fc:15:b4:24:3f:33
+
+exp_wiresteward_prod: []
