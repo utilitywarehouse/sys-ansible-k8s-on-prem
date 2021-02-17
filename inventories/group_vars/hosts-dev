@@ -169,3 +169,13 @@ nat_dev:
     mac_addresses:
       - fc:15:b4:24:3f:30
       - fc:15:b4:24:3f:31
+
+exp_wiresteward_dev:
+  - ip_address: 10.88.0.244
+    mac_addresses:
+      - fc:15:b4:22:e6:98
+      - fc:15:b4:22:e6:99
+  - ip_address: 10.88.0.245
+    mac_addresses:
+      - fc:15:b4:22:e6:9a
+      - fc:15:b4:22:e6:9b
