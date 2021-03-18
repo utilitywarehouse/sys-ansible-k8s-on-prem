@@ -87,7 +87,7 @@
     vserver: "{{ env }}_nfs"
     name: "{{ env }}_nfs_matchbox_vol"
     junction_path: /matchbox
-    size: 1536
+    size: "{{ matchbox_volume_size_mb }}"
     size_unit: mb
     policy: matchbox
     encrypt: yes

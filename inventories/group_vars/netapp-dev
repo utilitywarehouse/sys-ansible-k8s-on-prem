@@ -47,3 +47,4 @@ nfs_data_lif_1_address: 10.20.50.24
 # matchbox
 matchbox_volume_aggregate: system_02_SSD_1
 matchbox_ips: 10.88.0.248,10.88.0.249
+matchbox_volume_size_mb: 7680
