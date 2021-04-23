@@ -57,6 +57,14 @@ masters_dev:
     mac_addresses:
       - a0:1d:48:b5:1d:84
       - a0:1d:48:b5:1d:85
+  - ip_address: 10.88.0.68
+    mac_addresses:
+      - a0:1d:48:b5:1e:6a
+      - a0:1d:48:b5:1e:6b
+  - ip_address: 10.88.0.69
+    mac_addresses:
+      - a0:1d:48:b5:47:f0
+      - a0:1d:48:b5:47:f1
 
 workers_dev:
   - ip_address: 10.88.0.128
@@ -139,6 +147,70 @@ workers_dev:
     mac_addresses:
       - ec:eb:b8:a4:bf:e2
       - ec:eb:b8:a4:bf:e3
+  - ip_address: 10.88.0.148
+    mac_addresses:
+      - ec:eb:b8:a5:43:b2
+      - ec:eb:b8:a5:43:b3
+  - ip_address: 10.88.0.149
+    mac_addresses:
+      - ec:eb:b8:a5:94:a2
+      - ec:eb:b8:a5:94:a3
+  - ip_address: 10.88.0.150
+    mac_addresses:
+      - ec:eb:b8:a5:82:42
+      - ec:eb:b8:a5:82:43
+  - ip_address: 10.88.0.151
+    mac_addresses:
+      - ec:eb:b8:a5:83:a2
+      - ec:eb:b8:a5:83:a3
+  - ip_address: 10.88.0.152
+    mac_addresses:
+      - ec:eb:b8:a5:d2:22
+      - ec:eb:b8:a5:d2:23
+  - ip_address: 10.88.0.153
+    mac_addresses:
+      - ec:eb:b8:a5:83:72
+      - ec:eb:b8:a5:83:73
+  - ip_address: 10.88.0.154
+    mac_addresses:
+      - ec:eb:b8:a5:25:02
+      - ec:eb:b8:a5:25:03
+  - ip_address: 10.88.0.155
+    mac_addresses:
+      - ec:eb:b8:a5:55:32
+      - ec:eb:b8:a5:55:33
+  - ip_address: 10.88.0.156
+    mac_addresses:
+      - ec:eb:b8:a5:d2:32
+      - ec:eb:b8:a5:d2:33
+  - ip_address: 10.88.0.157
+    mac_addresses:
+      - ec:eb:b8:a5:c2:f2
+      - ec:eb:b8:a5:c2:f3
+  - ip_address: 10.88.0.158
+    mac_addresses:
+      - ec:eb:b8:a5:44:a2
+      - ec:eb:b8:a5:44:a3
+  - ip_address: 10.88.0.159
+    mac_addresses:
+      - ec:eb:b8:a5:15:d2
+      - ec:eb:b8:a5:15:d3
+  - ip_address: 10.88.0.160
+    mac_addresses:
+      - ec:eb:b8:a5:c3:02
+      - ec:eb:b8:a5:c3:03
+  - ip_address: 10.88.0.161
+    mac_addresses:
+      - ec:eb:b8:a5:b2:22
+      - ec:eb:b8:a5:b2:23
+  - ip_address: 10.88.0.162
+    mac_addresses:
+      - ec:eb:b8:a5:44:72
+      - ec:eb:b8:a5:44:73
+  - ip_address: 10.88.0.163
+    mac_addresses:
+      - ec:eb:b8:a5:a2:52
+      - ec:eb:b8:a5:a2:53
 
 matchbox_dev:
   - ip_address: 10.88.0.248
