@@ -60,7 +60,7 @@ masters_dev:
   - ip_address: 10.88.0.68
     mac_addresses:
       - a0:1d:48:b5:1e:6a
-      - a0:1d:48:b5:1e:6a
+      - a0:1d:48:b5:1e:6b
   - ip_address: 10.88.0.69
     mac_addresses:
       - a0:1d:48:b5:47:f0
