@@ -4,19 +4,9 @@ cfssl:
       - fc:15:b4:22:d6:42
       - fc:15:b4:22:d6:43
 
-gobgp:
-  - ip_address: 10.88.0.12
-    mac_addresses:
-      - fc:15:b4:22:07:a4
-      - fc:15:b4:22:07:a5
-  - ip_address: 10.88.0.13
-    mac_addresses:
-      - fc:15:b4:22:d6:44
-      - fc:15:b4:22:d6:45
-  - ip_address: 10.88.0.14
-    mac_addresses:
-      - fc:15:b4:24:7f:d4
-      - fc:15:b4:24:7f:d5
+# Empty until we decommission prod gobgps as well, and remove from the dhcp
+# configuration template.
+gobgp: []
 
 etcd:
   - ip_address: 10.88.0.32
