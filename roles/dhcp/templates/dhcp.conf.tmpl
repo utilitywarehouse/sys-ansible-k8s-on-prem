@@ -156,7 +156,7 @@ host exp-wiresteward-{{ wiresteward_count }}-{{ loop.index }} {
 {% endfor %}
 {% for c in exp_cfssl %}
 {% for mac_address in c.mac_addresses %}
-host cfssl-{{ loop.index }} {
+host exp-cfssl-{{ loop.index }} {
   option host-name "cfssl.{{ exp_domain_name }}";
   hardware ethernet {{ mac_address }};
   fixed-address {{ c.ip_address }};
@@ -171,7 +171,7 @@ host cfssl-{{ loop.index }} {
 {% for e in exp_etcd %}
 {% set etcd_count = loop.index-1 %}
 {% for mac_address in e.mac_addresses %}
-host etcd-{{ etcd_count }}-{{ loop.index }} {
+host exp-etcd-{{ etcd_count }}-{{ loop.index }} {
   option host-name "etcd-{{ etcd_count }}.{{ exp_domain_name }}";
   hardware ethernet {{ mac_address }};
   fixed-address {{ e.ip_address }};
@@ -182,7 +182,7 @@ host etcd-{{ etcd_count }}-{{ loop.index }} {
 {% for m in vars["exp_masters_" + env] %}
 {% set master_count = loop.index-1 %}
 {% for mac_address in m.mac_addresses %}
-host master-{{ master_count }}-{{ loop.index }} {
+host exp-master-{{ master_count }}-{{ loop.index }} {
   option host-name "master-{{ master_count }}.{{ exp_domain_name }}";
   hardware ethernet {{ mac_address }};
   fixed-address {{ m.ip_address }};
@@ -193,7 +193,7 @@ host master-{{ master_count }}-{{ loop.index }} {
 {% for w in vars["exp_workers_" + env] %}
 {% set worker_count = loop.index-1 %}
 {% for mac_address in w.mac_addresses %}
-host worker-{{ worker_count }}-{{ loop.index }} {
+host exp-worker-{{ worker_count }}-{{ loop.index }} {
   option host-name "worker-{{ worker_count }}.{{ exp_domain_name }}";
   hardware ethernet {{ mac_address }};
   fixed-address {{ w.ip_address }};
