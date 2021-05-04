@@ -7,7 +7,7 @@ netmask: 255.255.255.0
 router: 10.88.0.1
 domain_name: dev.merit.uw.systems
 dns: 1.1.1.1,1.0.0.1
-exp_domain_name: exp.merit.uw.systems
+exp_domain_name: exp-1.merit.uw.systems
 
 # matchbox address
 dhcp_matchbox: 'http://matchbox.dev.merit.uw.systems:80/boot.ipxe'
