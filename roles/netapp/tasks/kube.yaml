@@ -5,10 +5,11 @@
     aggr_list: "{{ kube_aggregate_list }}"
     allowed_protocols:
     - iscsi
-    ipspace: "{{ env }}_ipspace"
+    ipspace: "{{ ipspace_name }}"
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 - name: Create iscsi service on {{ env }} kube SVM
   na_ontap_iscsi:
@@ -18,6 +19,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 - name: create route for {{ env }} kube outgoing traffic
   na_ontap_net_routes:
@@ -28,6 +30,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 - name: Create {{ env }} kube vserver data lif on controller {{ node_1 }}
   na_ontap_interface:
@@ -44,6 +47,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 - name: Create {{ env }} kube vserver data lif on controller {{ node_2 }}
   na_ontap_interface:
@@ -60,6 +64,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 # https://library.netapp.com/ecmdocs/ECMP1804825/html/GUID-0FF33AC9-33B0-4878-9162-A46D3075D775.html
 - name: Create {{ env }} kube vserver management lif
@@ -78,6 +83,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 # Trident user
 # https://netapp-trident.readthedocs.io/en/stable-v18.07/docker/install/ndvp_ontap_config.html#user-permissions
@@ -92,6 +98,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 # grant common Trident permissions
 - name: Grant {{ env }} trident role "event generate-autosupport-log" all permissions
@@ -104,6 +111,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 - name: Grant {{ env }} trident role "network interface" readonly permissions
   na_ontap_user_role:
@@ -115,6 +123,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 - name: Grant {{ env }} trident role "version" readonly permissions
   na_ontap_user_role:
@@ -126,6 +135,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 - name: Grant {{ env }} trident role "vserver" readonly permissions
   na_ontap_user_role:
@@ -137,6 +147,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 - name: Grant {{ env }} trident role "vserver nfs show" readonly permissions
   na_ontap_user_role:
@@ -148,6 +159,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 - name: Grant {{ env }} trident role "volume" all permissions
   na_ontap_user_role:
@@ -159,6 +171,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 - name: Grant {{ env }} trident role "snapmirror" all permissions
   na_ontap_user_role:
@@ -170,6 +183,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 # grant ontap-san Trident permissions
 - name: Grant {{ env }} trident role "vserver iscsi show" readonly permissions
@@ -182,6 +196,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 - name: Grant {{ env }} trident role "lun" all permissions
   na_ontap_user_role:
@@ -193,6 +208,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 # grant ontap-nas-economy Trident permissions
 - name: Grant {{ env }} trident role "vserver export-policy create" all permissions
@@ -205,6 +221,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 - name: Grant {{ env }} trident role "vserver export-policy rule create" all permissions
   na_ontap_user_role:
@@ -216,6 +233,7 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube
 
 # create a new Trident user with Trident role
 - name: Create {{ env }} trident user
@@ -230,3 +248,4 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+  tags: kube

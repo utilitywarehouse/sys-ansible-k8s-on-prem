@@ -4,7 +4,7 @@
     aggr_list: "{{ nfs_aggregate_list }}"
     allowed_protocols:
     - nfs
-    ipspace: "{{ env }}_ipspace"
+    ipspace: "{{ ipspace_name }}"
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"

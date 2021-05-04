@@ -138,7 +138,7 @@ host nat-{{ nat_count }}-{{ loop.index }} {
 {% endfor %}
 {% endfor %}
 
-## Exp Wiresteward
+## Exp Nodes
 {% for w in vars["exp_wiresteward_" + env] %}
 {% set wiresteward_count = loop.index-1 %}
 {% for mac_address in w.mac_addresses %}
@@ -150,6 +150,57 @@ host exp-wiresteward-{{ wiresteward_count }}-{{ loop.index }} {
     filename "{{ dhcp_matchbox }}";
   } else {
     filename "ipxe.pxe";
+  }
+}
+{% endfor %}
+{% endfor %}
+{% for c in exp_cfssl %}
+{% for mac_address in c.mac_addresses %}
+host exp-cfssl-{{ loop.index }} {
+  option host-name "cfssl.{{ exp_domain_name }}";
+  hardware ethernet {{ mac_address }};
+  fixed-address {{ c.ip_address }};
+  if exists user-class and option user-class = "iPXE" {
+    filename "{{ exp_dhcp_matchbox_external }}";
+  } else {
+    filename "ipxe.pxe";
+  }
+}
+{% endfor %}
+{% endfor %}
+{% for e in exp_etcd %}
+{% set etcd_count = loop.index-1 %}
+{% for mac_address in e.mac_addresses %}
+host exp-etcd-{{ etcd_count }}-{{ loop.index }} {
+  option host-name "etcd-{{ etcd_count }}.{{ exp_domain_name }}";
+  hardware ethernet {{ mac_address }};
+  fixed-address {{ e.ip_address }};
+  filename "{{ exp_dhcp_matchbox_external }}";
+}
+{% endfor %}
+{% endfor %}
+{% for m in vars["exp_masters_" + env] %}
+{% set master_count = loop.index-1 %}
+{% for mac_address in m.mac_addresses %}
+host exp-master-{{ master_count }}-{{ loop.index }} {
+  option host-name "master-{{ master_count }}.{{ exp_domain_name }}";
+  hardware ethernet {{ mac_address }};
+  fixed-address {{ m.ip_address }};
+  filename "{{ exp_dhcp_matchbox_external }}";
+}
+{% endfor %}
+{% endfor %}
+{% for w in vars["exp_workers_" + env] %}
+{% set worker_count = loop.index-1 %}
+{% for mac_address in w.mac_addresses %}
+host exp-worker-{{ worker_count }}-{{ loop.index }} {
+  option host-name "worker-{{ worker_count }}.{{ exp_domain_name }}";
+  hardware ethernet {{ mac_address }};
+  fixed-address {{ w.ip_address }};
+  if exists user-class and option user-class = "iPXE" {
+    filename "{{ exp_dhcp_matchbox_external }}";
+  } else {
+    filename "ipxe.efi";
   }
 }
 {% endfor %}

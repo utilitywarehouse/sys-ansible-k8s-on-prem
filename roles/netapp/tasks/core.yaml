@@ -43,7 +43,7 @@
 - name: Create {{ env }} dedicated ipspace
   na_ontap_ipspace:
     state: present
-    name: "{{ env }}_ipspace"
+    name: "{{ ipspace_name }}"
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -54,7 +54,7 @@
     state: present
     name: "{{ env }}_domain"
     mtu: "{{ default_mtu }}"
-    ipspace: "{{ env }}_ipspace"
+    ipspace: "{{ ipspace_name }}"
     ports:
       - "{{ node_1 }}:{{ vlan_port_1 }}"
       - "{{ node_1 }}:{{ vlan_port_2 }}"

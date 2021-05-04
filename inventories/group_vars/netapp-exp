@@ -1,0 +1,36 @@
+# Exp netapp deployment should only configure cfssl and kube svms and should use
+# the existing dev network.
+env: "exp"
+netapp_username: "admin"
+netapp_password: "{{vault_netapp_admin_pass}}"
+node_1: system-01
+node_2: system-02
+vlan_port_1: e0c-2000
+vlan_port_2: e0d-2000
+ipspace_name: "dev_ipspace"
+
+# cfssl
+cfssl_aggregate_list:
+  - system_01_SSD_1
+  - system_02_SSD_1
+cfssl_volume_aggregate: system_01_SSD_1
+cfssl_network_gateway: 10.20.50.1
+cfssl_lif_netmask: 255.255.255.0
+cfssl_data_lif_1_address: 10.20.50.44
+cfssl_data_lif_2_address: 10.20.50.45
+cfssl_chap_password: "{{vault_cfssl_chap_password_exp}}"
+cfssl_igroup_initiator: "iqn.2005-03.org.open-iscsi:exp-cfssl"
+cfssl_initiator_ip: 10.88.10.8
+
+# kube
+kube_aggregate_list:
+  - system_01_SSD_1
+  - system_02_SSD_1
+kube_network_gateway: 10.20.50.1
+kube_lif_netmask: 255.255.255.0
+kube_data_lif_1_address: 10.20.50.34
+kube_data_lif_2_address: 10.20.50.35
+kube_mgmt_lif_address: 10.20.50.36
+
+kube_trident_user: trident_user
+kube_trident_password: "{{vault_kube_trident_password_exp}}"
