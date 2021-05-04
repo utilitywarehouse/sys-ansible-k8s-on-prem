@@ -3,7 +3,7 @@ dhcp_listen_interface: vlan188
 dhcp_vrf_name: dev
 
 subnet: 10.88.0.0
-netmask: 255.255.255.0
+netmask: 255.255.0.0
 router: 10.88.0.1
 domain_name: dev.merit.uw.systems
 dns: 1.1.1.1,1.0.0.1
