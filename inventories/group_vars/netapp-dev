@@ -9,6 +9,7 @@ vlan_port_1: e0c-2000
 vlan_parent_interface_2: e0d
 vlan_port_2: e0d-2000
 default_mtu: "9000"
+ipspace_name: "dev_ipspace"
 
 # cfssl
 cfssl_aggregate_list:

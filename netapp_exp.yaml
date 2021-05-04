@@ -1,0 +1,10 @@
+- hosts: netapp
+  collections:
+    - netapp.ontap
+  roles:
+    - netapp
+  vars_files:
+    - inventories/group_vars/netapp-exp
+    - inventories/group_vars/vault
+  vars:
+    ansible_connection: local

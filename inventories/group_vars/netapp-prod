@@ -9,6 +9,7 @@ vlan_port_1: e1a-1000
 vlan_parent_interface_2: e1b
 vlan_port_2: e1b-1000
 default_mtu: "9000"
+ipspace_name: "prod_ipspace"
 
 # cfssl
 cfssl_aggregate_list:
