@@ -100,7 +100,7 @@ iface bond-mer-mer
 auto bond-hp-m1-dev
 iface bond-hp-m1-dev
     bond-slaves swp30
-    bridge-vids 188 189
+    bridge-vids 188 189 1188
     clag-id 30
     mtu 9216
 
@@ -116,7 +116,7 @@ iface bond-hp-m1-prod
 auto bond-hp-m0-dev
 iface bond-hp-m0-dev
     bond-slaves swp31
-    bridge-vids 188 189 388 389
+    bridge-vids 188 189 388 389 1188
     clag-id 31
     mtu 9216
 
@@ -124,7 +124,7 @@ iface bond-hp-m0-dev
 auto bridge
 iface bridge
     bridge-ports peerlink bond-hp-m0-dev bond-hp-m1-dev bond-hp-m1-prod bond-mer-mer swp5 swp6 swp28 swp29
-    bridge-vids 2 88 89 188 189 288 289 388 389 1000 2000
+    bridge-vids 2 88 89 188 189 288 289 388 389 1000 1188 2000
     bridge-vlan-aware yes
     mstpctl-treeprio 8192
     mtu 9216
@@ -178,6 +178,16 @@ iface vlan188
     address {{ vlan_188_address }}
     address-virtual 00:00:5E:00:01:01 10.88.0.1/24
     vlan-id 188
+    vlan-raw-device bridge
+    vrf dev
+    mtu 9216
+
+#EXP Internal VLAN - where the nodes live
+auto vlan1188
+iface vlan1188
+    address {{ vlan_1188_address }}
+    address-virtual 00:00:5E:00:01:01 10.88.10.1/24
+    vlan-id 1188
     vlan-raw-device bridge
     vrf dev
     mtu 9216
