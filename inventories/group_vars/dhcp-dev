@@ -1,19 +1,16 @@
 # interfaces
 dhcp_listen_interface: vlan188
 dhcp_vrf_name: dev
+dhcp_role_name: dev
 
 subnet: 10.88.0.0
 netmask: 255.255.255.0
 router: 10.88.0.1
 domain_name: dev.merit.uw.systems
 dns: 1.1.1.1,1.0.0.1
-exp_domain_name: exp-1.merit.uw.systems
 
 # matchbox address
 dhcp_matchbox: 'http://matchbox.dev.merit.uw.systems:80/boot.ipxe'
 # actual matchbox local hosts cannot be relying on themselves to boot so we need
 # an external matchbox server that will be able to boot those.
 dhcp_matchbox_external: 'http://matchbox.dev.gcp.uw.systems:80/boot.ipxe'
-# For the exp cluster let's just use an external matchbox deployment under
-# the respective exp gcp cluster.
-exp_dhcp_matchbox_external: 'http://matchbox.exp-1.gcp.uw.systems:80/boot.ipxe'

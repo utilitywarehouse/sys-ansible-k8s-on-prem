@@ -4,16 +4,6 @@ cfssl:
       - fc:15:b4:22:d6:42
       - fc:15:b4:22:d6:43
 
-exp_cfssl:
-  - ip_address: 10.88.10.8
-    mac_addresses:
-      - fc:15:b4:22:d6:44
-      - fc:15:b4:22:d6:45
-
-# Empty until we decommission prod gobgps as well, and remove from the dhcp
-# configuration template.
-gobgp: []
-
 etcd:
   - ip_address: 10.88.0.32
     mac_addresses:
@@ -27,20 +17,6 @@ etcd:
     mac_addresses:
       - a0:1d:48:b5:4b:58
       - a0:1d:48:b5:4b:59
-
-exp_etcd:
-  - ip_address: 10.88.10.32
-    mac_addresses:
-      - fc:15:b4:22:07:a2
-      - fc:15:b4:22:07:a3
-  - ip_address: 10.88.10.33
-    mac_addresses:
-      - fc:15:b4:22:07:a4
-      - fc:15:b4:22:07:a5
-  - ip_address: 10.88.10.34
-    mac_addresses:
-      - fc:15:b4:22:07:a6
-      - fc:15:b4:22:07:a7
 
 # Suffix masters and workers with environment so that we can use them via:
 # `vars["workers_" + env]` on roles where we do separate runs for dev and prod,
@@ -261,19 +237,3 @@ exp_wiresteward_dev:
     mac_addresses:
       - fc:15:b4:22:e6:9a
       - fc:15:b4:22:e6:9b
-
-exp_masters_dev:
-  - ip_address: 10.88.10.64
-    mac_addresses:
-      - a0:1d:48:b5:47:4c
-      - a0:1d:48:b5:47:4d
-
-exp_workers_dev:
-  - ip_address: 10.88.10.128
-    mac_addresses:
-      - a0:1d:48:b5:1d:74
-      - a0:1d:48:b5:1d:75
-  - ip_address: 10.88.10.129
-    mac_addresses:
-      - a0:1d:48:b5:1e:02
-      - a0:1d:48:b5:1e:03

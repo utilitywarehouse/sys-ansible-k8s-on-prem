@@ -27,6 +27,7 @@ host cfssl-{{ loop.index }} {
 {% endfor %}
 {% endfor %}
 
+{% if gobgp is defined %}
 ## GoBgp
 {% for g in gobgp %}
 {% set gobgp_count = loop.index-1 %}
@@ -43,6 +44,7 @@ host gobgp-{{ gobgp_count }}-{{ loop.index }} {
 }
 {% endfor %}
 {% endfor %}
+{% endif %}
 
 ## Etcd
 {% for e in etcd %}
@@ -87,6 +89,7 @@ host worker-{{ worker_count }}-{{ loop.index }} {
 {% endfor %}
 {% endfor %}
 
+{% if ("matchbox_" + env) in vars %}
 ## Matchbox
 {% for m in vars["matchbox_" + env] %}
 {% set matchbox_count = loop.index-1 %}
@@ -103,7 +106,9 @@ host matchbox-{{ matchbox_count }}-{{ loop.index }} {
 }
 {% endfor %}
 {% endfor %}
+{% endif %}
 
+{% if ("wiresteward_" + env) in vars %}
 ## Wiresteward
 {% for w in vars["wiresteward_" + env] %}
 {% set wiresteward_count = loop.index-1 %}
@@ -120,7 +125,9 @@ host wiresteward-{{ wiresteward_count }}-{{ loop.index }} {
 }
 {% endfor %}
 {% endfor %}
+{% endif %}
 
+{% if ("nat_" + env) in vars %}
 ## NAT boxes
 {% for n in vars["nat_" + env] %}
 {% set nat_count = loop.index-1 %}
@@ -137,8 +144,10 @@ host nat-{{ nat_count }}-{{ loop.index }} {
 }
 {% endfor %}
 {% endfor %}
+{% endif %}
 
-## Exp Nodes
+{% if ("exp_wiresteward_" + env) in vars %}
+## Exp Wiresteward
 {% for w in vars["exp_wiresteward_" + env] %}
 {% set wiresteward_count = loop.index-1 %}
 {% for mac_address in w.mac_addresses %}
@@ -154,54 +163,4 @@ host exp-wiresteward-{{ wiresteward_count }}-{{ loop.index }} {
 }
 {% endfor %}
 {% endfor %}
-{% for c in exp_cfssl %}
-{% for mac_address in c.mac_addresses %}
-host exp-cfssl-{{ loop.index }} {
-  option host-name "cfssl.{{ exp_domain_name }}";
-  hardware ethernet {{ mac_address }};
-  fixed-address {{ c.ip_address }};
-  if exists user-class and option user-class = "iPXE" {
-    filename "{{ exp_dhcp_matchbox_external }}";
-  } else {
-    filename "ipxe.pxe";
-  }
-}
-{% endfor %}
-{% endfor %}
-{% for e in exp_etcd %}
-{% set etcd_count = loop.index-1 %}
-{% for mac_address in e.mac_addresses %}
-host exp-etcd-{{ etcd_count }}-{{ loop.index }} {
-  option host-name "etcd-{{ etcd_count }}.{{ exp_domain_name }}";
-  hardware ethernet {{ mac_address }};
-  fixed-address {{ e.ip_address }};
-  filename "{{ exp_dhcp_matchbox_external }}";
-}
-{% endfor %}
-{% endfor %}
-{% for m in vars["exp_masters_" + env] %}
-{% set master_count = loop.index-1 %}
-{% for mac_address in m.mac_addresses %}
-host exp-master-{{ master_count }}-{{ loop.index }} {
-  option host-name "master-{{ master_count }}.{{ exp_domain_name }}";
-  hardware ethernet {{ mac_address }};
-  fixed-address {{ m.ip_address }};
-  filename "{{ exp_dhcp_matchbox_external }}";
-}
-{% endfor %}
-{% endfor %}
-{% for w in vars["exp_workers_" + env] %}
-{% set worker_count = loop.index-1 %}
-{% for mac_address in w.mac_addresses %}
-host exp-worker-{{ worker_count }}-{{ loop.index }} {
-  option host-name "worker-{{ worker_count }}.{{ exp_domain_name }}";
-  hardware ethernet {{ mac_address }};
-  fixed-address {{ w.ip_address }};
-  if exists user-class and option user-class = "iPXE" {
-    filename "{{ exp_dhcp_matchbox_external }}";
-  } else {
-    filename "ipxe.efi";
-  }
-}
-{% endfor %}
-{% endfor %}
+{% endif %}

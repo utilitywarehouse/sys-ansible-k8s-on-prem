@@ -1,0 +1,9 @@
+- hosts: dhcp-dev
+  user: cumulus
+  connection: ssh
+  roles:
+    - dhcp
+  vars_files:
+    - inventories/group_vars/dhcp-exp
+    - inventories/group_vars/hosts-exp
+  become: yes
