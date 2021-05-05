@@ -1,6 +1,7 @@
 # interfaces
 dhcp_listen_interface: vlan189
 dhcp_vrf_name: prod
+dhcp_role_name: prod
 
 subnet: 10.89.0.0
 netmask: 255.255.255.0
@@ -13,6 +14,3 @@ dhcp_matchbox: 'http://matchbox.prod.merit.uw.systems:80/boot.ipxe'
 # actual matchbox local hosts cannot be relying on themselves to boot so we need
 # an external matchbox server that will be able to boot those.
 dhcp_matchbox_external: 'http://matchbox.prod.gcp.uw.systems:80/boot.ipxe'
-# Empty exp variables, so that the dhcp template doesn't complain
-exp_domain_name: ''
-exp_dhcp_matchbox_external: ''

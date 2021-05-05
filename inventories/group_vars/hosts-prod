@@ -121,10 +121,3 @@ nat_prod:
     mac_addresses:
       - fc:15:b4:24:3f:32
       - fc:15:b4:24:3f:33
-
-# Null all exps so that we can work with the same templates for dev and prod
-exp_wiresteward_prod: []
-exp_masters_prod: []
-exp_workers_prod: []
-exp_cfssl: []
-exp_etcd: []

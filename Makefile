@@ -12,6 +12,9 @@ check-test:
 dhcp-dev:
 	ansible-playbook -i inventories/hosts dhcp_dev.yaml --diff $(check_flag) $(ARGS)
 
+dhcp-exp:
+	ansible-playbook -i inventories/hosts dhcp_exp.yaml --diff $(check_flag) $(ARGS)
+
 dhcp-prod:
 	ansible-playbook -i inventories/hosts dhcp_prod.yaml --diff $(check_flag) $(ARGS)
 

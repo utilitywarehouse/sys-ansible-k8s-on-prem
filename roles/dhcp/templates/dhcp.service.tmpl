@@ -4,10 +4,10 @@ Documentation=man:dhcpd(8) man:dhcpd.conf(5)
 After=network-online.target networking.service syslog.service
 
 [Service]
-ExecStartPre=mkdir -p /etc/dhcp-{{ dhcp_vrf_name }}
-ExecStartPre=mkdir -p /var/lib/dhcp-{{ dhcp_vrf_name }}
-ExecStartPre=touch /var/lib/dhcp-{{ dhcp_vrf_name }}/dhcpd.leases
-ExecStart=/usr/sbin/ip vrf exec {{ dhcp_vrf_name }} /usr/sbin/dhcpd -p 67 -cf /etc/dhcp-{{ dhcp_vrf_name }}/dhcp.conf -lf /var/lib/dhcp-{{ dhcp_vrf_name }}/dhcpd.leases -pf /var/run/dhcp-{{ dhcp_vrf_name }}.pid  -d {{ dhcp_listen_interface }}
+ExecStartPre=mkdir -p /etc/dhcp-{{ dhcp_role_name }}
+ExecStartPre=mkdir -p /var/lib/dhcp-{{ dhcp_role_name }}
+ExecStartPre=touch /var/lib/dhcp-{{ dhcp_role_name }}/dhcpd.leases
+ExecStart=/usr/sbin/ip vrf exec {{ dhcp_vrf_name }} /usr/sbin/dhcpd -p 67 -cf /etc/dhcp-{{ dhcp_role_name }}/dhcp.conf -lf /var/lib/dhcp-{{ dhcp_role_name }}/dhcpd.leases -pf /var/run/dhcp-{{ dhcp_role_name }}.pid -d {{ dhcp_listen_interface }}
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
