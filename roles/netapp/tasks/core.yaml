@@ -74,3 +74,25 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+
+# Enable autosupport for controllers
+# https://docs.netapp.com/ontap-9/index.jsp?topic=%2Fcom.netapp.doc.dot-cm-sag%2FGUID-91C43742-E563-442E-8161-17D5C5DA8C19.html
+- name: Ensure AutoSupport is enabled and configured for technical support to receive messages on {{ node_1 }}
+  na_ontap_autosupport:
+    state: present
+    node_name: "{{ node_1 }}"
+    transport: https
+    support: True
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+- name: Ensure AutoSupport is enabled and configured for technical support to receive messages on {{ node_2 }}
+  na_ontap_autosupport:
+    state: present
+    node_name: "{{ node_2 }}"
+    transport: https
+    support: True
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
