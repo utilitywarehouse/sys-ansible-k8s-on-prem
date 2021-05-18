@@ -96,3 +96,17 @@
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
+
+# Autosupport traffic is sent using the node mgmt lifs and uses node svm dns
+# settings to resolve. For us the management/node svm is system so we need to
+# configure it to resolve netapp addresses.
+# https://community.netapp.com/t5/ONTAP-Discussions/Configuring-Autosupport-Resolve-DNS/m-p/116019/highlight/true#M24743
+- name: Configure dns on system vserver to be able to resolve autosupport traffic
+  na_ontap_dns:
+    state: present
+    vserver: system
+    domains: netapp.com
+    nameservers: 1.1.1.1,1.0.0.1
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
