@@ -18,11 +18,15 @@ host cfssl-{{ loop.index }} {
   option host-name "cfssl.{{ domain_name }}";
   hardware ethernet {{ mac_address }};
   fixed-address {{ c.ip_address }};
+{% if c.ipxe_binary is defined %}
   if exists user-class and option user-class = "iPXE" {
     filename "{{ dhcp_matchbox }}";
   } else {
-    filename "ipxe.pxe";
+    filename "{{ c.ipxe_binary }}";
   }
+{% else %}
+  filename "{{ dhcp_matchbox }}";
+{% endif %}
 }
 {% endfor %}
 {% endfor %}
@@ -36,11 +40,15 @@ host gobgp-{{ gobgp_count }}-{{ loop.index }} {
   option host-name "gobgp-{{ gobgp_count }}.{{ domain_name }}";
   hardware ethernet {{ mac_address }};
   fixed-address {{ g.ip_address }};
+{% if g.ipxe_binary is defined %}
   if exists user-class and option user-class = "iPXE" {
     filename "{{ dhcp_matchbox }}";
   } else {
-    filename "ipxe.pxe";
+    filename "{{ g.ipxe_binary }}";
   }
+{% else %}
+  filename "{{ dhcp_matchbox }}";
+{% endif %}
 }
 {% endfor %}
 {% endfor %}
@@ -54,7 +62,15 @@ host etcd-{{ etcd_count }}-{{ loop.index }} {
   option host-name "etcd-{{ etcd_count }}.{{ domain_name }}";
   hardware ethernet {{ mac_address }};
   fixed-address {{ e.ip_address }};
+{% if e.ipxe_binary is defined %}
+  if exists user-class and option user-class = "iPXE" {
+    filename "{{ dhcp_matchbox }}";
+  } else {
+    filename "{{ e.ipxe_binary }}";
+  }
+{% else %}
   filename "{{ dhcp_matchbox }}";
+{% endif %}
 }
 {% endfor %}
 {% endfor %}
@@ -67,7 +83,15 @@ host master-{{ master_count }}-{{ loop.index }} {
   option host-name "master-{{ master_count }}.{{ domain_name }}";
   hardware ethernet {{ mac_address }};
   fixed-address {{ m.ip_address }};
+{% if m.ipxe_binary is defined %}
+  if exists user-class and option user-class = "iPXE" {
+    filename "{{ dhcp_matchbox }}";
+  } else {
+    filename "{{ m.ipxe_binary }}";
+  }
+{% else %}
   filename "{{ dhcp_matchbox }}";
+{% endif %}
 }
 {% endfor %}
 {% endfor %}
@@ -80,11 +104,15 @@ host worker-{{ worker_count }}-{{ loop.index }} {
   option host-name "worker-{{ worker_count }}.{{ domain_name }}";
   hardware ethernet {{ mac_address }};
   fixed-address {{ w.ip_address }};
+{% if w.ipxe_binary is defined %}
   if exists user-class and option user-class = "iPXE" {
     filename "{{ dhcp_matchbox }}";
   } else {
-    filename "ipxe.efi";
+    filename "{{ w.ipxe_binary }}";
   }
+{% else %}
+  filename "{{ dhcp_matchbox }}";
+{% endif %}
 }
 {% endfor %}
 {% endfor %}

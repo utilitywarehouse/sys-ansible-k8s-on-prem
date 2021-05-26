@@ -1,12 +1,12 @@
 - name: restart dhcp
   service:
-    name: "dhcp-{{ dhcp_vrf_name }}"
+    name: "dhcp-{{ dhcp_role_name }}"
     state: restarted
   become: yes
 
 - name: restart atftp
   service:
-    name: "atftp-{{ dhcp_vrf_name }}"
+    name: "atftp-{{ dhcp_role_name }}"
     state: restarted
   become: yes
 
