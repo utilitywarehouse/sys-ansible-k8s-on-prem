@@ -40,33 +40,42 @@
     name: atftpd
     state: present
     update_cache: yes
-  tags: dhcp
+  tags: tftp
 
 - name: Create /etc/tftpboot-{{ dhcp_role_name }}
   file:
     path: /etc/tftpboot-{{ dhcp_role_name }}
     state: directory
-  tags: dhcp
+  tags: tftp
 
 # Ideally we want to fetch this directly on the target host via get_url from
 # our bucket roles/dhcp/files/ipxe.pxe. The problem here is that we need to
 # specify a vrf on cumulus to be able to talk to the internet and this is not
-# available via the ansible command. Thus we include ipxe.pxe in the repo and
-# use a simple copy to put it in place.
-- name: Copy ipxe file into cumulus
+# available via the ansible command. Thus we include ipxe binaries in the repo
+# and use a simple copy to put it in place.
+# ipxe.pxe is built from https://github.com/utilitywarehouse/sys-ipxe and
+# contains a custom boot script to retry dhcp mulpiple times. This is needed by
+# m700 nodes, where we noticed that dhcp responses could get lost and nodes
+# might fail to boot.
+- name: Copy ipxe.pxe file into cumulus
   copy:
     src: roles/dhcp/files/ipxe.pxe
     dest: "/etc/tftpboot-{{ dhcp_role_name }}/ipxe.pxe"
     mode: 0644
-  tags: dhcp
+  notify:
+    - restart atftp
+  tags: tftp
 
-# Same as above for ipxe.efi, needed by m510 cartridges
-- name: Copy ipxe file into cumulus
+# ipxe.efi fetched from upstream: http://boot.ipxe.org/, needed by m510
+# cartridges
+- name: Copy ipxe.efi file into cumulus
   copy:
     src: roles/dhcp/files/ipxe.efi
     dest: "/etc/tftpboot-{{ dhcp_role_name }}/ipxe.efi"
     mode: 0644
-  tags: dhcp
+  notify:
+    - restart atftp
+  tags: tftp
 
 - name: Copy atftp system unit file
   template:
@@ -75,7 +84,7 @@
   notify:
     - daemon-reload
     - restart atftp
-  tags: dhcp
+  tags: tftp
 
 - name: Make sure atftp is running and enabled
   service:
