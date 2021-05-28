@@ -1,9 +1,15 @@
 SHELL := /bin/bash
 
+export DOCKER_BUILDKIT=1
+
 check_flag=
 ifeq ($(DRY_RUN),true)
 check_flag := "--check"
 endif
+
+build-ipxe-binaries:
+	mkdir -p roles/dhcp/files/ipxe
+	docker build -t sys-ipxe -o roles/dhcp/files/ipxe ipxe/
 
 check-test:
 	echo $(check_flag)
