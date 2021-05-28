@@ -48,29 +48,19 @@
     state: directory
   tags: tftp
 
-# Ideally we want to fetch this directly on the target host via get_url from
-# our bucket roles/dhcp/files/ipxe.pxe. The problem here is that we need to
-# specify a vrf on cumulus to be able to talk to the internet and this is not
-# available via the ansible command. Thus we include ipxe binaries in the repo
-# and use a simple copy to put it in place.
-# ipxe.pxe is built from https://github.com/utilitywarehouse/sys-ipxe and
-# contains a custom boot script to retry dhcp mulpiple times. This is needed by
-# m700 nodes, where we noticed that dhcp responses could get lost and nodes
-# might fail to boot.
+# pxe binaries built using make build-ipxe-binaries
 - name: Copy ipxe.pxe file into cumulus
   copy:
-    src: roles/dhcp/files/ipxe.pxe
+    src: roles/dhcp/files/ipxe/ipxe.pxe
     dest: "/etc/tftpboot-{{ dhcp_role_name }}/ipxe.pxe"
     mode: 0644
   notify:
     - restart atftp
   tags: tftp
 
-# ipxe.efi fetched from upstream: http://boot.ipxe.org/, needed by m510
-# cartridges
 - name: Copy ipxe.efi file into cumulus
   copy:
-    src: roles/dhcp/files/ipxe.efi
+    src: roles/dhcp/files/ipxe/ipxe.efi
     dest: "/etc/tftpboot-{{ dhcp_role_name }}/ipxe.efi"
     mode: 0644
   notify:
