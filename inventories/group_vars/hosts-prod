@@ -5,23 +5,6 @@ cfssl:
       - fc:15:b4:24:af:29
     ipxe_binary: ipxe.pxe
 
-gobgp:
-  - ip_address: 10.89.0.12
-    mac_addresses:
-      - fc:15:b4:24:af:2c
-      - fc:15:b4:24:af:2d
-    ipxe_binary: ipxe.pxe
-  - ip_address: 10.89.0.13
-    mac_addresses:
-      - fc:15:b4:24:3f:20
-      - fc:15:b4:24:3f:21
-    ipxe_binary: ipxe.pxe
-  - ip_address: 10.89.0.14
-    mac_addresses:
-      - fc:15:b4:24:7f:a0
-      - fc:15:b4:24:7f:a1
-    ipxe_binary: ipxe.pxe
-
 etcd:
   - ip_address: 10.89.0.32
     mac_addresses:

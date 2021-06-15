@@ -31,29 +31,6 @@ host cfssl-{{ loop.index }} {
 {% endfor %}
 {% endfor %}
 
-{% if gobgp is defined %}
-## GoBgp
-{% for g in gobgp %}
-{% set gobgp_count = loop.index-1 %}
-{% for mac_address in g.mac_addresses %}
-host gobgp-{{ gobgp_count }}-{{ loop.index }} {
-  option host-name "gobgp-{{ gobgp_count }}.{{ domain_name }}";
-  hardware ethernet {{ mac_address }};
-  fixed-address {{ g.ip_address }};
-{% if g.ipxe_binary is defined %}
-  if exists user-class and option user-class = "iPXE" {
-    filename "{{ dhcp_matchbox }}";
-  } else {
-    filename "{{ g.ipxe_binary }}";
-  }
-{% else %}
-  filename "{{ dhcp_matchbox }}";
-{% endif %}
-}
-{% endfor %}
-{% endfor %}
-{% endif %}
-
 ## Etcd
 {% for e in etcd %}
 {% set etcd_count = loop.index-1 %}
