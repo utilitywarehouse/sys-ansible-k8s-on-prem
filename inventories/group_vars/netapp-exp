@@ -34,3 +34,16 @@ kube_mgmt_lif_address: 10.20.50.36
 
 kube_trident_user: trident_user
 kube_trident_password: "{{vault_kube_trident_password_exp}}"
+
+# nfs
+nfs_aggregate_list:
+  - system_01_SSD_1
+  - system_02_SSD_1
+nfs_network_gateway: 10.20.50.1
+nfs_lif_netmask: 255.255.255.0
+nfs_data_lif_1_address: 10.20.50.54
+
+# minio
+minio_volume_aggregate: system_02_SSD_1
+minio_ips: 10.88.10.128/25
+minio_volume_size_gb: 20
