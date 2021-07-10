@@ -12,8 +12,8 @@ build-ipxe-binaries:
 	docker build -t sys-ipxe -o roles/dhcp/files/ipxe ipxe/
 
 check-test:
-	echo $(check_flag)
-	echo $(DRY_RUN)
+	@echo check_flat=$(check_flag)
+	@echo DRY_RUN=$(DRY_RUN)
 
 dhcp-dev:
 	ansible-playbook -i inventories/hosts dhcp_dev.yaml --diff $(check_flag) $(ARGS)
