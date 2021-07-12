@@ -28,6 +28,14 @@
     - restart frr
   tags: frr
 
+- name: Enable BGP and PBR
+  template:
+    src:  daemons.tmpl
+    dest: "/etc/frr/daemons"
+  notify:
+    - restart frr
+  tags: frr
+
 - name: Ensure /opt/bin directory exists
   file:
     path: /opt/bin
