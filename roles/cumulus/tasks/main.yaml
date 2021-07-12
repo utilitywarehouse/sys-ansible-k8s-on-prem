@@ -28,9 +28,9 @@
     - restart frr
   tags: frr
 
-- name: Enable BGP and PBR
+- name: Enable BGP and PBR 
   template:
-    src:  daemons.tmpl
+    src:  files/daemons
     dest: "/etc/frr/daemons"
   notify:
     - restart frr
