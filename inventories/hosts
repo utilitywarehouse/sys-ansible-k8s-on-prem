@@ -21,7 +21,7 @@ vlan_1000_address=10.10.50.253/24
 vlan_1188_address=10.88.10.253/24
 vlan_2000_address=10.20.50.253/24
 
-# Comment out cumulus-2 until we re-add it to the custer.
+# Comment out cumulus-2 until we re-add it to the cluster.
 #[cumulus-2]
 #10.91.5.105
 #[cumulus-2:vars]
