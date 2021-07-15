@@ -70,7 +70,9 @@ router bgp 64512 vrf dev
   neighbor 172.30.88.1 prefix-list private-dev out
   neighbor 172.30.88.2 prefix-list private-dev out
   neighbor 192.168.88.1 prefix-list public-dev out
+  neighbor 192.168.88.1 prefix-list rm-default-route in
   neighbor 192.168.88.2 prefix-list public-dev out
+  neighbor 192.168.88.2 prefix-list rm-default-route in
   maximum-paths ibgp 10
  exit-address-family
 !
@@ -102,7 +104,9 @@ router bgp 64512 vrf prod
   neighbor 172.30.89.1 prefix-list private-prod out
   neighbor 172.30.89.2 prefix-list private-prod out
   neighbor 192.168.89.1 prefix-list public-prod out
+  neighbor 192.168.89.1 prefix-list rm-default-route in
   neighbor 192.168.89.2 prefix-list public-prod out
+  neighbor 192.168.89.2 prefix-list rm-default-route in
   maximum-paths ibgp 10
  exit-address-family
 !
@@ -110,6 +114,8 @@ ip prefix-list private-dev seq 5 permit 10.88.0.0/16
 ip prefix-list private-prod seq 5 permit 10.89.0.0/16
 ip prefix-list public-dev seq 5 permit 85.91.50.0/24
 ip prefix-list public-prod seq 5 permit 85.91.53.0/24
+ip prefix-list rm-default-route seq 5 deny 0.0.0.0/0
+ip prefix-list rm-default-route seq 10 permit 0.0.0.0/0 le 32
 !
 pbr-map pbr-dev seq 1
  match src-ip 85.91.50.0/24
