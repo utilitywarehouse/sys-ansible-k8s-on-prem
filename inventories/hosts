@@ -1,5 +1,6 @@
 [cumulus:children]
 cumulus-1
+cumulus-2
 
 [cumulus-1]
 10.91.5.95
