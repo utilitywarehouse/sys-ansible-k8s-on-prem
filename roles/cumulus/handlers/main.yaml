@@ -23,3 +23,8 @@
     name: node-exporter.service
     state: restarted
   become: yes
+
+- name: update timezone
+  command:
+    cmd: "ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime"
+  become: yes

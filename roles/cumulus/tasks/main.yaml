@@ -1,3 +1,33 @@
+# We need to run ntp service on management vrf, so that it can be able to reach
+# the internet and connect to ntp servers
+- name: disable default ntp service
+  service:
+    name: ntp
+    state: stopped
+    enabled: no
+  tags: date
+
+- name: enable ntp service on management vrf
+  service:
+    name: ntp@mgmt
+    state: started
+    enabled: yes
+  tags: date
+
+- name: copy timezone file
+  copy:
+    src: "files/timezone"
+    dest: "/etc/timezone"
+  notify:
+    - update timezone
+  tags: date
+
+- name: Update repositories cache and install certificates package
+  apt:
+    name: ca-certificates
+    update_cache: yes
+  tags: certs
+
 - name: copy authorized_keys file
   copy:
     src: "files/authorized_keys"
