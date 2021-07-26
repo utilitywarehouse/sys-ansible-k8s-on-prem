@@ -5,14 +5,14 @@
     name: ntp
     state: stopped
     enabled: no
-  tags: date
+  tags: ntp
 
 - name: enable ntp service on management vrf
   service:
     name: ntp@mgmt
     state: started
     enabled: yes
-  tags: date
+  tags: ntp
 
 - name: copy timezone file
   copy:
@@ -20,7 +20,7 @@
     dest: "/etc/timezone"
   notify:
     - update timezone
-  tags: date
+  tags: timezone
 
 - name: Update repositories cache and install certificates package
   apt:
