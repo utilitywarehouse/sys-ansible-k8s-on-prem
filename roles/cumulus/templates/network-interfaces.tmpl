@@ -126,7 +126,8 @@ iface bridge
     bridge-ports peerlink bond-hp-m0-dev bond-hp-m1-dev bond-hp-m1-prod bond-mer-mer swp5 swp6 swp28 swp29
     bridge-vids 2 88 89 188 189 288 289 388 389 1000 1188 2000
     bridge-vlan-aware yes
-    mstpctl-treeprio 8192
+    mstpctl-treeprio 32768
+    bridge-bridgeprio 32768 
     mtu 9216
 
 #PeerLink bond for MLAG setup
