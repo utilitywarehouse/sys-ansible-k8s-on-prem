@@ -2,3 +2,8 @@ core_network_bgp_password: "{{vault_core_network_bgp_password}}"
 
 # Node exporter
 node_exporter_version: 1.0.1
+
+# ssh-key-agent
+ssh_key_agent_vesion: 1.0.12
+ssh_key_agent_ska_key_uri: https://s3-eu-west-1.amazonaws.com/uw-prod-authorized-keys-cache/authmap
+ssh_key_agent_ska_groups: "ssh-kube@utilitywarehouse.co.uk"

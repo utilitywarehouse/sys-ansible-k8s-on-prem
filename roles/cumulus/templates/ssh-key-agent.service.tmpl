@@ -1,0 +1,19 @@
+[Unit]
+Description=ssh-key-agent
+After=network-online.target
+Wants=network-online.target
+[Service]
+Restart=on-failure
+RestartSec=10
+ExecStartPre=-/usr/bin/mkdir -p /home/cumulus/.ssh
+ExecStartPre=-/usr/bin/touch /home/cumulus/.ssh/authorized_keys
+ExecStartPre=-/usr/bin/chown -R "cumulus":"cumulus" /home/cumulus/.ssh
+ExecStartPre=-/usr/bin/chmod 700 /home/cumulus/.ssh
+ExecStartPre=-/usr/bin/chmod 644 /home/cumulus/.ssh/authorized_keys
+Environment="SKA_KEY_URI={{ssh_key_agent_ska_key_uri}}"
+Environment="SKA_GROUPS={{ssh_key_agent_ska_groups}}"
+Environment="SKA_AKF_LOC=/home/cumulus/.ssh/authorized_keys"
+Environment="SKA_INTERVAL=60"
+ExecStart=/bin/ip vrf exec %i /opt/bin/ssh-key-agent
+[Install]
+WantedBy=multi-user.target
