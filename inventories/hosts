@@ -6,12 +6,14 @@ exp-cumulus-2
 10.91.5.104
 [exp-cumulus-1:vars]
 hostname=exp-cumulus-1
+router_id=10.254.254.253
 vlan_1188_address=10.88.10.253/24
 
 [exp-cumulus-2]
 10.91.5.131
 [exp-cumulus-2:vars]
 hostname=exp-cumulus-2
+router_id=10.254.254.254
 vlan_1188_address=10.88.10.254/24
 
 [cumulus:children]
