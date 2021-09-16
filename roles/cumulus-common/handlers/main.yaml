@@ -1,0 +1,14 @@
+- name: update timezone
+  command:
+    cmd: "ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime"
+  become: yes
+
+- name: restart node-exporter
+  service:
+    name: node-exporter.service
+    state: restarted
+  become: yes
+
+- name: daemon-reload
+  systemd:
+    daemon_reload: yes

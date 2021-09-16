@@ -1,0 +1,80 @@
+# We need to run ntp service on management vrf, so that it can be able to reach
+# the internet and connect to ntp servers
+- name: disable default ntp service
+  service:
+    name: ntp
+    state: stopped
+    enabled: no
+  tags: ntp
+
+- name: enable ntp service on management vrf
+  service:
+    name: ntp@mgmt
+    state: started
+    enabled: yes
+  tags: ntp
+
+- name: copy timezone file
+  copy:
+    src: "files/timezone"
+    dest: "/etc/timezone"
+  notify:
+    - update timezone
+  tags: timezone
+
+- name: Update repositories cache and install certificates package
+  apt:
+    name: ca-certificates
+    update_cache: yes
+  tags: certs
+
+- name: copy authorized_keys file
+  copy:
+    src: "files/authorized_keys"
+    dest: "/home/cumulus/.ssh/authorized_keys"
+  tags: ssh_authorized_keys
+
+- name: Ensure /opt/bin directory exists
+  file:
+    path: /opt/bin
+    state: directory
+  tags: node-exporter
+
+- name: Download, extract and copy node-exporter binary
+  unarchive:
+    src: "https://github.com/prometheus/node_exporter/releases/download/v{{node_exporter_version}}/node_exporter-{{node_exporter_version}}.linux-amd64.tar.gz"
+    dest: /opt/bin
+    remote_src: yes
+  tags: node-exporter
+
+- name: Ensure prometheus text collectors directory exists
+  file:
+    path: /etc/node-exporter/prom-text-collectors
+    state: directory
+  tags: node-exporter
+
+- name: copy static prometheus metrics
+  copy:
+    src: files/machine_role.prom
+    dest: /etc/node-exporter/prom-text-collectors/machine_role.prom
+  notify:
+    - restart node-exporter
+  tags: node-exporter
+
+- name: Copy node-exporter systemd service unit file
+  template:
+    src:  node-exporter.service.tmpl
+    dest: /etc/systemd/system/node-exporter.service
+  notify:
+    - daemon-reload
+    - restart node-exporter
+  tags: node-exporter
+
+- name: Make sure node-exporter is enabled and running
+  service:
+    name: node-exporter
+    state: started
+    enabled: yes
+  tags: node-exporter
+
+

@@ -1,6 +1,22 @@
+[exp-cumulus:children]
+exp-cumulus-1
+exp-cumulus-2
+
+[exp-cumulus-1]
+10.91.5.104
+[exp-cumulus-1:vars]
+hostname=exp-cumulus-1
+vlan_1188_address=10.88.10.253/24
+
+[exp-cumulus-2]
+10.91.5.131
+[exp-cumulus-2:vars]
+hostname=exp-cumulus-2
+vlan_1188_address=10.88.10.254/24
+
 [cumulus:children]
 cumulus-1
-cumulus-2
+#cumulus-2
 
 [cumulus-1]
 10.91.5.95
@@ -19,7 +35,7 @@ vlan_289_address=192.168.89.253/24
 vlan_388_address=85.91.50.252/28
 vlan_389_address=85.91.53.252/28
 vlan_1000_address=10.10.50.253/24
-vlan_1188_address=10.88.10.253/24
+vlan_1188_address=10.88.10.253/24 # Exp vlan - TBD
 vlan_2000_address=10.20.50.253/24
 
 [cumulus-2]
@@ -41,8 +57,11 @@ vlan_289_address=192.168.89.254/24
 vlan_388_address=85.91.50.253/28
 vlan_389_address=85.91.53.253/28
 vlan_1000_address=10.10.50.254/24
-vlan_1188_address=10.88.10.254/24
+vlan_1188_address=10.88.10.254/24 # Exp vlan - TBD
 vlan_2000_address=10.20.50.254/24
+
+[dhcp-exp:children]
+exp-cumulus
 
 [dhcp-dev:children]
 cumulus

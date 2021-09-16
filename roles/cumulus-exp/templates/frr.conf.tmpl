@@ -1,0 +1,128 @@
+frr version 7.0+cl4u3
+frr defaults datacenter
+hostname {{ hostname }}
+log syslog informational
+service integrated-vtysh-config
+!
+vrf dev
+ ip route 10.10.51.0/24 Null0
+ ip route 10.88.0.0/16 Null0
+ ip route 10.89.0.0/16 Null0
+ ip route 85.91.50.0/24 Null0
+ ip route 85.91.53.0/24 Null0
+ ip route 0.0.0.0/0 172.30.88.3 254
+ exit-vrf
+!
+vrf prod
+ ip route 10.10.50.0/24 Null0
+ ip route 10.88.0.0/16 Null0
+ ip route 10.89.0.0/16 Null0
+ ip route 85.91.50.0/24 Null0
+ ip route 85.91.53.0/24 Null0
+ ip route 0.0.0.0/0 172.30.89.3 254
+ exit-vrf
+!
+interface vlan188 vrf dev
+ pbr-policy pbr-dev
+interface vlan388 vrf dev
+ pbr-policy pbr-dev
+interface vlan1188 vrf dev
+ pbr-policy pbr-dev
+!
+interface vlan189 vrf prod
+ pbr-policy pbr-prod
+interface vlan389 vrf prod
+ pbr-policy pbr-prod
+!
+router-id {{ router_id }}
+!
+router bgp 64512 vrf dev
+{% for m in masters_dev %}
+ neighbor {{ m.ip_address }} remote-as 64512
+{% endfor %}
+{% for w in workers_dev %}
+ neighbor {{ w.ip_address }} remote-as 64512
+{% endfor %}
+{% for m in matchbox_dev %}
+ neighbor {{ m.ip_address }} remote-as 64512
+{% endfor %}
+{% for n in nat_dev %}
+ neighbor {{ n.ip_address }} remote-as 64512
+{% endfor %}
+{% for me in masters_exp %}
+ neighbor {{ me.ip_address }} remote-as 64513
+{% endfor %}
+{% for we in workers_exp %}
+ neighbor {{ we.ip_address }} remote-as 64513
+{% endfor %}
+ neighbor 172.30.88.1 remote-as 51553
+ neighbor 172.30.88.1 password {{ core_network_bgp_password }}
+ neighbor 172.30.88.2 remote-as 51553
+ neighbor 172.30.88.2 password {{ core_network_bgp_password }}
+ neighbor 192.168.88.1 remote-as 51553
+ neighbor 192.168.88.1 password {{ core_network_bgp_password }}
+ neighbor 192.168.88.2 remote-as 51553
+ neighbor 192.168.88.2 password {{ core_network_bgp_password }}
+ !
+ address-family ipv4 unicast
+  network 10.88.0.0/16
+  network 85.91.50.0/24
+  neighbor 172.30.88.1 prefix-list private-dev out
+  neighbor 172.30.88.2 prefix-list private-dev out
+  neighbor 192.168.88.1 prefix-list public-dev out
+  neighbor 192.168.88.1 prefix-list rm-default-route in
+  neighbor 192.168.88.2 prefix-list public-dev out
+  neighbor 192.168.88.2 prefix-list rm-default-route in
+  maximum-paths ibgp 10
+ exit-address-family
+!
+router bgp 64512 vrf prod
+{% for m in masters_prod %}
+ neighbor {{ m.ip_address }} remote-as 64512
+{% endfor %}
+{% for w in workers_prod %}
+ neighbor {{ w.ip_address }} remote-as 64512
+{% endfor %}
+{% for m in matchbox_prod %}
+ neighbor {{ m.ip_address }} remote-as 64512
+{% endfor %}
+{% for n in nat_prod %}
+ neighbor {{ n.ip_address }} remote-as 64512
+{% endfor %}
+ neighbor 172.30.89.1 remote-as 51553
+ neighbor 172.30.89.1 password {{ core_network_bgp_password }}
+ neighbor 172.30.89.2 remote-as 51553
+ neighbor 172.30.89.2 password {{ core_network_bgp_password }}
+ neighbor 192.168.89.1 remote-as 51553
+ neighbor 192.168.89.1 password {{ core_network_bgp_password }}
+ neighbor 192.168.89.2 remote-as 51553
+ neighbor 192.168.89.2 password {{ core_network_bgp_password }}
+ !
+ address-family ipv4 unicast
+  network 10.89.0.0/16
+  network 85.91.53.0/24
+  neighbor 172.30.89.1 prefix-list private-prod out
+  neighbor 172.30.89.2 prefix-list private-prod out
+  neighbor 192.168.89.1 prefix-list public-prod out
+  neighbor 192.168.89.1 prefix-list rm-default-route in
+  neighbor 192.168.89.2 prefix-list public-prod out
+  neighbor 192.168.89.2 prefix-list rm-default-route in
+  maximum-paths ibgp 10
+ exit-address-family
+!
+ip prefix-list private-dev seq 5 permit 10.88.0.0/16
+ip prefix-list private-prod seq 5 permit 10.89.0.0/16
+ip prefix-list public-dev seq 5 permit 85.91.50.0/24
+ip prefix-list public-prod seq 5 permit 85.91.53.0/24
+ip prefix-list rm-default-route seq 5 deny 0.0.0.0/0
+ip prefix-list rm-default-route seq 10 permit 0.0.0.0/0 le 32
+!
+pbr-map pbr-dev seq 1
+ match src-ip 85.91.50.0/24
+ set nexthop 192.168.88.3 vlan288 nexthop-vrf dev
+!
+pbr-map pbr-prod seq 1
+ match src-ip 85.91.53.0/24
+ set nexthop 192.168.89.3 vlan289 nexthop-vrf prod
+line vty
+!
