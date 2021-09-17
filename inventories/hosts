@@ -7,14 +7,22 @@ exp-cumulus-2
 [exp-cumulus-1:vars]
 hostname=exp-cumulus-1
 router_id=10.254.254.253
+clagd_backup_ip=10.252.254.254
+clagd_priority=1000
 vlan_1188_address=10.88.10.253/24
+vlan_500_address=192.168.220.2/24
+swp_port=swp15
 
 [exp-cumulus-2]
 10.91.5.131
 [exp-cumulus-2:vars]
 hostname=exp-cumulus-2
 router_id=10.254.254.254
+clagd_backup_ip=10.252.254.253
+clagd_priority=2000
 vlan_1188_address=10.88.10.254/24
+vlan_500_address=192.168.220.3/24
+swp_port=swp16
 
 [cumulus:children]
 cumulus-1

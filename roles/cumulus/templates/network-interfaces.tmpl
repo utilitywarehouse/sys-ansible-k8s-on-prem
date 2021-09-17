@@ -72,6 +72,16 @@ iface swp29
     bridge-vids 2000
     mtu 9216
 
+#Link to Cumulus-lab-1
+auto swp15
+iface swp15
+    mtu 9126
+
+#Link to Cumulus-lab-2
+auto swp16
+iface swp16
+    mtu 9126
+
 #Link to Moonshoot 1 (New one - DEV)
 auto swp30
 iface swp30
@@ -100,7 +110,7 @@ iface bond-mer-mer
 auto bond-hp-m1-dev
 iface bond-hp-m1-dev
     bond-slaves swp30
-    bridge-vids 188 189 1188
+    bridge-vids 188 189
     clag-id 30
     mtu 9216
 
@@ -116,15 +126,23 @@ iface bond-hp-m1-prod
 auto bond-hp-m0-dev
 iface bond-hp-m0-dev
     bond-slaves swp31
-    bridge-vids 188 189 388 389 1188
+    bridge-vids 188 189 388 389
     clag-id 31
+    mtu 9216
+
+#PO to Lab1/Lab2
+auto bond-to-lab
+iface bond-to-lab
+    bond-slaves swp15 swp16
+    bond-mode balance-xor
+    bridge-vids 500
     mtu 9216
 
 #Brigde interface (All L2 Interfaces)
 auto bridge
 iface bridge
     bridge-ports peerlink bond-hp-m0-dev bond-hp-m1-dev bond-hp-m1-prod bond-mer-mer swp5 swp6 swp28 swp29
-    bridge-vids 2 88 89 188 189 288 289 388 389 1000 1188 2000
+    bridge-vids 2 88 89 188 189 288 289 388 389 500 1000 2000
     bridge-vlan-aware yes
     mstpctl-treeprio 8192
     mtu 9216
@@ -182,15 +200,16 @@ iface vlan188
     vrf dev
     mtu 9216
 
+#Removing 1188 from Prod and moving it to LAB for testing purposes 
 #EXP Internal VLAN - where the nodes live
-auto vlan1188
-iface vlan1188
-    address {{ vlan_1188_address }}
-    address-virtual 00:00:5E:00:01:01 10.88.10.1/24
-    vlan-id 1188
-    vlan-raw-device bridge
-    vrf dev
-    mtu 9216
+#auto vlan1188
+#iface vlan1188
+#    address {{ vlan_1188_address }}
+#    address-virtual 00:00:5E:00:01:01 10.88.10.1/24
+#    vlan-id 1188
+#    vlan-raw-device bridge
+#    vrf dev
+#    mtu 9216
 
 #PROD Internal VLAN - where the nodes live
 auto vlan189
@@ -256,6 +275,15 @@ iface vlan2000
    address {{ vlan_2000_address }}
    address-virtual 00:00:5E:00:01:04 10.20.50.1/24
    vlan-id 2000
+   vlan-raw-device bridge
+   vrf dev
+   mtu 9216
+
+#This is the L3 vlan that will connect PROD and LAB Switches
+auto vlan500
+iface vlan500
+   address 192.168.220.4/24
+   vlan-id 500
    vlan-raw-device bridge
    vrf dev
    mtu 9216

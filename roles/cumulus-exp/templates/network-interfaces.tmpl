@@ -20,3 +20,68 @@ iface mgmt
     address 127.0.0.1/8
     address ::1/128
     vrf-table auto
+
+#Link between Lab1/Lab2 swiches
+Auto {{ swp_port }}
+iface {{ swp_port }}
+    mtu 9126
+
+#PO to Cumulus-Prod
+auto bond-to-cumulus-prod
+iface bond-to-cumulus-prod
+    bond-slaves {{ swp_port }}
+    bridge-vids 500
+    clag-id 40
+    mtu 9216
+
+#Link to Moonshot-0 - EXP
+auto swp27
+iface swp27
+    mtu 9216
+
+#PO to Moonshoot-0 - EXP
+auto bond-hp-m0-exp
+iface bond-hp-m0-exp
+    bond-slaves swp27
+    bridge-vids 1188
+    clag-id 27
+    mtu 9216
+
+auto bridge
+iface bridge
+    bridge-ports peerlink bond-hp-m0-exp bond-to-cumulus-prod
+    bridge-vids 2 500 1188
+    bridge-vlan-aware yes
+    mstpctl-treeprio 8192
+    mtu 9216
+
+#PeerLink bond for MLAG setup
+auto peerlink
+iface peerlink
+    bond-slaves swp1 swp2
+    mtu 9216
+
+auto peerlink.4094
+iface peerlink.4094
+    clagd-peer-ip linklocal
+    clagd-backup-ip {{ clagd_backup_ip }}
+    clagd-priority {{ clagd_priority }}
+    clagd-sys-mac 44:38:39:FF:01:01
+
+#This is an standard vlan created for CLAG-Backup LINK
+auto vlan2
+iface vlan2
+   address {{ vlan_2_address }}
+   vlan-id 2
+   vlan-raw-device bridge
+   mtu 9216
+
+#This is the L3 vlan that will connect LAB and PROD Switches
+auto vlan500
+iface vlan500
+   address {{ vlan_500_address }}
+   address-virtual 00:00:5E:00:01:01 192.168.220.1/24
+   vlan-id 500
+   vlan-raw-device bridge
+   vrf exp
+   mtu 9216

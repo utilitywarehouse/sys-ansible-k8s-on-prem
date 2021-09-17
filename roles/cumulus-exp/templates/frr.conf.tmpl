@@ -6,6 +6,7 @@ service integrated-vtysh-config
 !
 vrf exp
  ip route 10.88.10.0/25 Null0
+ ip route 0.0.0.0/0 192.168.220.4
  exit-vrf
 !
 interface vlan1188 vrf exp
