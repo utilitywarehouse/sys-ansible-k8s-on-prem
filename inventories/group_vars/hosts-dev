@@ -52,6 +52,18 @@ masters_dev:
     mac_addresses:
       - a0:1d:48:b5:47:f0
       - a0:1d:48:b5:47:f1
+  - ip_address: 10.88.0.70
+    mac_addresses:
+      - a0:1d:48:b5:1b:1c 
+      - a0:1d:48:b5:1b:1d
+  - ip_address: 10.88.0.71
+    mac_addresses:
+      - a0:1d:48:b5:1c:06
+      - a0:1d:48:b5:1c:07
+  - ip_address: 10.88.0.72
+    mac_addresses:
+      - a0:1d:48:b5:1a:a0
+      - a0:1d:48:b5:1a:a1
 
 workers_dev:
   - ip_address: 10.88.0.128
@@ -234,6 +246,66 @@ workers_dev:
       - ec:eb:b8:a5:a2:52
       - ec:eb:b8:a5:a2:53
     ipxe_binary: ipxe.efi
+  - ip_address: 10.88.0.164
+    mac_addresses:
+      - f4:03:43:fd:56:95
+      - f4:03:43:fd:56:96
+  - ip_address: 10.88.0.165
+    mac_addresses:
+      - 00:fd:45:50:f7:09
+      - 00:fd:45:50:f7:0a
+  - ip_address: 10.88.0.166
+    mac_addresses:
+      - f4:03:43:fd:67:6d
+      - f4:03:43:fd:67:6e
+  - ip_address: 10.88.0.167
+    mac_addresses:
+      - f4:03:43:fd:63:3d
+      - f4:03:43:fd:63:3e
+  - ip_address: 10.88.0.168
+    mac_addresses:
+      - f4:03:43:fd:4f:31
+      - f4:03:43:fd:4f:32
+  - ip_address: 10.88.0.169
+    mac_addresses:
+      - f4:03:43:fd:58:bd
+      - f4:03:43:fd:58:be
+  - ip_address: 10.88.0.170
+    mac_addresses:
+      - f4:03:43:fd:67:e1
+      - f4:03:43:fd:67:e2
+  - ip_address: 10.88.0.171
+    mac_addresses:
+      - f4:03:43:fd:55:e9
+      - f4:03:43:fd:55:ea
+  - ip_address: 10.88.0.172
+    mac_addresses:
+      - f4:03:43:fd:5a:79
+      - f4:03:43:fd:5a:7a
+  - ip_address: 10.88.0.173
+    mac_addresses:
+      - f4:03:43:fd:63:39
+      - f4:03:43:fd:63:3a
+  - ip_address: 10.88.0.174
+    mac_addresses:
+      - f4:03:43:fd:62:21
+      - f4:03:43:fd:62:22
+  - ip_address: 10.88.0.175
+    mac_addresses:
+      - f4:03:43:fd:60:15
+      - f4:03:43:fd:60:16
+  - ip_address: 10.88.0.176
+    mac_addresses:
+      - f4:03:43:fd:30:41
+      - f4:03:43:fd:30:42
+  - ip_address: 10.88.0.177
+    mac_addresses:
+      - f4:03:43:fd:63:09
+      - f4:03:43:fd:63:0a
+  - ip_address: 10.88.0.178
+    mac_addresses:
+      - f4:03:43:fd:62:5d
+      - f4:03:43:fd:62:5e
 
 matchbox_dev:
   - ip_address: 10.88.0.248
