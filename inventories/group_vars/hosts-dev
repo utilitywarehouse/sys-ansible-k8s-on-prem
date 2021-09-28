@@ -250,62 +250,77 @@ workers_dev:
     mac_addresses:
       - f4:03:43:fd:56:95
       - f4:03:43:fd:56:96
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.165
     mac_addresses:
       - 00:fd:45:50:f7:09
       - 00:fd:45:50:f7:0a
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.166
     mac_addresses:
       - f4:03:43:fd:67:6d
       - f4:03:43:fd:67:6e
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.167
     mac_addresses:
       - f4:03:43:fd:63:3d
       - f4:03:43:fd:63:3e
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.168
     mac_addresses:
       - f4:03:43:fd:4f:31
       - f4:03:43:fd:4f:32
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.169
     mac_addresses:
       - f4:03:43:fd:58:bd
       - f4:03:43:fd:58:be
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.170
     mac_addresses:
       - f4:03:43:fd:67:e1
       - f4:03:43:fd:67:e2
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.171
     mac_addresses:
       - f4:03:43:fd:55:e9
       - f4:03:43:fd:55:ea
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.172
     mac_addresses:
       - f4:03:43:fd:5a:79
       - f4:03:43:fd:5a:7a
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.173
     mac_addresses:
       - f4:03:43:fd:63:39
       - f4:03:43:fd:63:3a
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.174
     mac_addresses:
       - f4:03:43:fd:62:21
       - f4:03:43:fd:62:22
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.175
     mac_addresses:
       - f4:03:43:fd:60:15
       - f4:03:43:fd:60:16
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.176
     mac_addresses:
       - f4:03:43:fd:30:41
       - f4:03:43:fd:30:42
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.177
     mac_addresses:
       - f4:03:43:fd:63:09
       - f4:03:43:fd:63:0a
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.178
     mac_addresses:
       - f4:03:43:fd:62:5d
       - f4:03:43:fd:62:5e
+    ipxe_binary: ipxe.efi
 
 matchbox_dev:
   - ip_address: 10.88.0.248
