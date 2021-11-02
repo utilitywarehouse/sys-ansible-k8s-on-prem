@@ -93,6 +93,11 @@ auto swp32
 iface swp32
     mtu 9216
 
+# Link to Moonshot 3
+auto swp25
+iface swp25
+    mtu 9216
+
 #PO to Merit-network-VPC
 auto bond-mer-mer
 iface bond-mer-mer
@@ -133,10 +138,18 @@ iface bond-hp-m2-dev
     clag-id 32
     mtu 9216
 
+#PO to Moonshoot 3 - One iface per SW in MLAG
+auto bond-hp-m3-dev
+iface bond-hp-m3-dev
+    bond-slaves swp25
+    bridge-vids 188 189 388 389 1188
+    clag-id 25
+    mtu 9216
+
 #Brigde interface (All L2 Interfaces)
 auto bridge
 iface bridge
-    bridge-ports peerlink bond-hp-m0-dev bond-hp-m1-dev bond-hp-m1-prod bond-hp-m2-dev bond-mer-mer swp5 swp6 swp28 swp29
+    bridge-ports peerlink bond-hp-m0-dev bond-hp-m1-dev bond-hp-m1-prod bond-hp-m2-dev bond-hp-m3-dev bond-mer-mer swp5 swp6 swp28 swp29
     bridge-vids 2 88 89 188 189 288 289 388 389 1000 1188 2000
     bridge-vlan-aware yes
     mstpctl-treeprio 8192
