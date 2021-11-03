@@ -144,7 +144,7 @@ host nat-{{ nat_count }}-{{ loop.index }} {
   if exists user-class and option user-class = "iPXE" {
     filename "{{ dhcp_matchbox }}";
   } else {
-    filename "ipxe.pxe";
+    filename "{{ n.ipxe_binary }}";
   }
 }
 {% endfor %}

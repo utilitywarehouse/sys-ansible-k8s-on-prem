@@ -345,12 +345,14 @@ wiresteward_dev:
 nat_dev:
   - ip_address: 10.88.0.250
     mac_addresses:
-      - fc:15:b4:22:56:00
-      - fc:15:b4:22:56:01
+      - f4:03:43:fd:5d:c5
+      - f4:03:43:fd:5d:c6
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.251
     mac_addresses:
-      - fc:15:b4:24:3f:30
-      - fc:15:b4:24:3f:31
+      - f4:03:43:fd:51:e1
+      - f4:03:43:fd:51:e2
+    ipxe_binary: ipxe.efi
 
 exp_wiresteward_dev:
   - ip_address: 10.88.0.244
