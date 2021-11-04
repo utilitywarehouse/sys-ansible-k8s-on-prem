@@ -8,16 +8,19 @@ cfssl:
 etcd:
   - ip_address: 10.88.0.32
     mac_addresses:
-      - a0:1d:48:b5:4d:98
-      - a0:1d:48:b5:4d:99
+      - ec:eb:b8:a5:44:72
+      - ec:eb:b8:a5:44:73
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.33
     mac_addresses:
-      - a0:1d:48:b5:4e:30
-      - a0:1d:48:b5:4e:31
+      - f4:03:43:fd:4f:f9
+      - f4:03:43:fd:4f:fa
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.34
     mac_addresses:
-      - a0:1d:48:b5:4b:58
-      - a0:1d:48:b5:4b:59
+      - f4:03:43:fd:61:71
+      - f4:03:43:fd:61:72
+    ipxe_binary: ipxe.efi
 
 # Suffix masters and workers with environment so that we can use them via:
 # `vars["workers_" + env]` on roles where we do separate runs for dev and prod,
@@ -30,40 +33,49 @@ env: dev
 masters_dev:
   - ip_address: 10.88.0.64
     mac_addresses:
-      - a0:1d:48:b5:48:10
-      - a0:1d:48:b5:48:11
+      - ec:eb:b8:a5:44:a2
+      - ec:eb:b8:a5:44:a3
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.65
     mac_addresses:
-      - a0:1d:48:b5:4e:04
-      - a0:1d:48:b5:4e:05
+      - ec:eb:b8:a5:15:d2
+      - ec:eb:b8:a5:15:d3
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.66
     mac_addresses:
-      - a0:1d:48:b5:48:c4
-      - a0:1d:48:b5:48:c5
+      - ec:eb:b8:a5:c3:02
+      - ec:eb:b8:a5:c3:03
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.67
     mac_addresses:
-      - a0:1d:48:b5:1d:84
-      - a0:1d:48:b5:1d:85
+      - f4:03:43:fd:54:4d
+      - f4:03:43:fd:54:4e
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.68
     mac_addresses:
-      - a0:1d:48:b5:1e:6a
-      - a0:1d:48:b5:1e:6b
+      - f4:03:43:fd:65:85
+      - f4:03:43:fd:65:86
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.69
     mac_addresses:
-      - a0:1d:48:b5:47:f0
-      - a0:1d:48:b5:47:f1
+      - f4:03:43:fd:60:5d
+      - f4:03:43:fd:60:5e
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.70
     mac_addresses:
-      - a0:1d:48:b5:1b:1c 
-      - a0:1d:48:b5:1b:1d
+      - f4:03:43:fd:5b:99 
+      - f4:03:43:fd:5b:9a
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.71
     mac_addresses:
-      - a0:1d:48:b5:1c:06
-      - a0:1d:48:b5:1c:07
+      - f4:03:43:fd:63:c5
+      - f4:03:43:fd:63:c6
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.72
     mac_addresses:
-      - a0:1d:48:b5:1a:a0
-      - a0:1d:48:b5:1a:a1
+      - f4:03:43:fd:63:c9
+      - f4:03:43:fd:63:ca
+    ipxe_binary: ipxe.efi
 
 workers_dev:
   - ip_address: 10.88.0.128
@@ -218,33 +230,33 @@ workers_dev:
     ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.158
     mac_addresses:
-      - ec:eb:b8:a5:44:a2
-      - ec:eb:b8:a5:44:a3
+      - f4:03:43:fd:5d:e1
+      - f4:03:43:fd:5d:e2
     ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.159
     mac_addresses:
-      - ec:eb:b8:a5:15:d2
-      - ec:eb:b8:a5:15:d3
+      - f4:03:43:fd:57:81
+      - f4:03:43:fd:57:82
     ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.160
     mac_addresses:
-      - ec:eb:b8:a5:c3:02
-      - ec:eb:b8:a5:c3:03
+      - f4:03:43:fd:5f:6d
+      - f4:03:43:fd:5f:6e
     ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.161
     mac_addresses:
-      - ec:eb:b8:a5:b2:22
-      - ec:eb:b8:a5:b2:23
+      - f4:03:43:fd:6e:01
+      - f4:03:43:fd:6e:02
     ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.162
     mac_addresses:
-      - ec:eb:b8:a5:44:72
-      - ec:eb:b8:a5:44:73
+      - f4:03:43:fd:64:f9
+      - f4:03:43:fd:64:fa
     ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.163
     mac_addresses:
-      - ec:eb:b8:a5:a2:52
-      - ec:eb:b8:a5:a2:53
+      - f4:03:43:fd:5f:45
+      - f4:03:43:fd:5f:46
     ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.164
     mac_addresses:
