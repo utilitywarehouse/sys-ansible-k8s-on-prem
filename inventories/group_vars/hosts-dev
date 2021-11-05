@@ -8,8 +8,8 @@ cfssl:
 etcd:
   - ip_address: 10.88.0.32
     mac_addresses:
-      - ec:eb:b8:a5:44:72
-      - ec:eb:b8:a5:44:73
+      - f4:03:43:fd:69:2d
+      - f4:03:43:fd:69:2e
     ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.33
     mac_addresses:

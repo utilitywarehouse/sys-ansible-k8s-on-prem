@@ -8,16 +8,19 @@ cfssl:
 etcd:
   - ip_address: 10.89.0.32
     mac_addresses:
-      - a0:1d:48:b5:1d:34
-      - a0:1d:48:b5:1d:35
+      - f4:03:43:fd:62:61
+      - f4:03:43:fd:62:62
+    ipxe_binary: ipxe.efi
   - ip_address: 10.89.0.33
     mac_addresses:
-      - a0:1d:48:b5:4b:d8
-      - a0:1d:48:b5:4b:d9
+      - f4:03:43:fd:50:89
+      - f4:03:43:fd:50:8a
+    ipxe_binary: ipxe.efi
   - ip_address: 10.89.0.34
     mac_addresses:
-      - a0:1d:48:b5:47:40
-      - a0:1d:48:b5:47:41
+      - f4:03:43:fd:5e:d1
+      - f4:03:43:fd:5e:d2
+    ipxe_binary: ipxe.efi
 
 # Suffix masters and workers with environment so that we can use them via:
 # `vars["workers_" + env]` on roles where we do separate runs for dev and prod,
@@ -30,16 +33,19 @@ env: prod
 masters_prod:
   - ip_address: 10.89.0.64
     mac_addresses:
-      - a0:1d:48:b5:3d:64
-      - a0:1d:48:b5:3d:65
+      - ec:eb:b8:a5:b2:22
+      - ec:eb:b8:a5:b2:23
+    ipxe_binary: ipxe.efi
   - ip_address: 10.89.0.65
     mac_addresses:
-      - a0:1d:48:b5:47:ec
-      - a0:1d:48:b5:47:ed
+      - f4:03:43:fd:5f:e5
+      - f4:03:43:fd:5f:e6
+    ipxe_binary: ipxe.efi
   - ip_address: 10.89.0.66
     mac_addresses:
-      - a0:1d:48:b5:48:48
-      - a0:1d:48:b5:48:49
+      - f4:03:43:fd:63:c1
+      - f4:03:43:fd:63:c2
+    ipxe_binary: ipxe.efi
 
 workers_prod:
   - ip_address: 10.89.0.128
