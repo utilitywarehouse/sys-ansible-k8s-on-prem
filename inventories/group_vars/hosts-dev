@@ -1,9 +1,9 @@
 cfssl:
   - ip_address: 10.88.0.8
     mac_addresses:
-      - fc:15:b4:22:d6:42
-      - fc:15:b4:22:d6:43
-    ipxe_binary: ipxe.pxe
+      - f4:03:43:fd:63:55
+      - f4:03:43:fd:63:56
+    ipxe_binary: ipxe.efi
 
 etcd:
   - ip_address: 10.88.0.32
@@ -337,22 +337,26 @@ workers_dev:
 matchbox_dev:
   - ip_address: 10.88.0.248
     mac_addresses:
-      - fc:15:b4:24:7f:d0
-      - fc:15:b4:24:7f:d1
+      - f4:03:43:fd:64:61
+      - f4:03:43:fd:64:62
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.249
     mac_addresses:
-      - fc:15:b4:22:07:a0
-      - fc:15:b4:22:07:a1
+      - f4:03:43:fd:69:a5
+      - f4:03:43:fd:69:a6
+    ipxe_binary: ipxe.efi
 
 wiresteward_dev:
   - ip_address: 10.88.0.246
     mac_addresses:
-      - fc:15:b4:22:d6:40
-      - fc:15:b4:22:d6:41
+      - f4:03:43:fd:64:3d
+      - f4:03:43:fd:64:3e
+    ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.247
     mac_addresses:
-      - fc:15:b4:24:7f:d2
-      - fc:15:b4:24:7f:d3
+      - f4:03:43:fd:69:0d
+      - f4:03:43:fd:69:0e
+    ipxe_binary: ipxe.efi
 
 nat_dev:
   - ip_address: 10.88.0.250
