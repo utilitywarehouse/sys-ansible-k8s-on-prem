@@ -255,8 +255,8 @@
   na_ontap_qos_policy_group:
     state: present
     name: "{{ env }}-pvc-fixed"
-    max_throughput: 15000iops
-    min_throughput: 3000iops
+    max_throughput: "{{ kube_pvc_qos_max_throughput }}"
+    min_throughput: "{{ kube_pvc_qos_min_throughput }}"
     is_shared: false
     vserver: "{{ env }}_kube"
     hostname: "{{ inventory_hostname }}"
