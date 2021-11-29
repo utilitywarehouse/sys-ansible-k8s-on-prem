@@ -76,7 +76,6 @@ vlan_187_address=10.87.0.254/24
 vlan_287_address=192.168.87.254/24
 vlan_3000_address=10.30.50.254/24
 
-
 [dhcp-dev:children]
 cumulus-dev-prod
 
