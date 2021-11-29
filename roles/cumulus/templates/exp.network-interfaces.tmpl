@@ -1,0 +1,144 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+source /etc/network/interfaces.d/*.intf
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto eth0
+iface eth0 inet dhcp
+    vrf mgmt
+
+auto exp
+iface exp
+    vrf-table auto
+
+auto mgmt
+iface mgmt
+    address 127.0.0.1/8
+    address ::1/128
+    vrf-table auto
+
+#PeerLink Bond interace
+auto swp1
+iface swp1
+    mtu 9216
+    link-speed 400000
+
+auto swp2
+iface swp2
+    mtu 9216
+    link-speed 400000
+
+#Link to Merit-Network-VPC
+auto swp3
+iface swp3
+     mtu 9216
+
+#EXP - Link to Netapp Controller "A" ( No Bond interface is supported by NetApp)
+auto swp6
+iface swp6
+    alias swp6 dev-netapp-ctrl-a
+    bridge-vids 3000
+    mtu 9216
+
+#Link to Moonshoot 0 (EXP)
+auto swp30
+iface swp30
+    mtu 9216
+
+#PO to Merit-network-VPC
+auto bond-mer-mer
+iface bond-mer-mer
+    bond-slaves swp3
+    bridge-vids 1 87 287
+    mtu 9216
+    clag-id 3
+
+#PO to moonshot-0 - One iface per SW in MLAG
+auto bond-hp-m0
+iface bond-hp-m0
+    bond-slaves swp30
+    bridge-vids 187 387
+    clag-id 30
+    mtu 9216
+
+#Brigde interface (All L2 Interfaces)
+auto bridge
+iface bridge
+    bridge-ports peerlink bond-hp-m0 bond-mer-mer sw6
+    bridge-vids 2 87 187 287 387 3000
+    bridge-vlan-aware yes
+    mstpctl-treeprio 8192
+    mtu 9216
+
+#PeerLink bond for MLAG setup
+auto peerlink
+iface peerlink
+    bond-slaves swp1 swp2
+    mtu 9216
+
+auto peerlink.4094
+iface peerlink.4094
+    clagd-peer-ip linklocal
+    clagd-backup-ip {{ clagd_backup_ip }}
+    clagd-priority {{ clagd_priority }}
+    clagd-sys-mac 44:38:39:FF:01:01
+
+#This is an standard vlan created for CLAG-Backup LINK
+auto vlan2
+iface vlan2
+   address {{ vlan_2_address }}
+   vlan-id 2
+   vlan-raw-device bridge
+   mtu 9216
+
+#EXP- VLAN in use to PEER with Main Network - VRF internal
+auto vlan87
+iface vlan87
+    address {{ vlan_87_address }}
+    vlan-id 87
+    vlan-raw-device bridge
+    vrf exp
+    mtu 9216
+
+#EXP Internal VLAN - where the nodes live
+auto vlan187
+iface vlan187
+    address {{ vlan_187_address }}
+    address-virtual 00:00:5E:00:01:01 10.87.0.1/24
+    vlan-id 187
+    vlan-raw-device bridge
+    vrf exp
+    mtu 9216
+
+#EXP VLAN in use to PEER with Main Network - VRF Public
+auto vlan287
+iface vlan287
+    address {{ vlan_287_address }}
+    vlan-id 287
+    vlan-raw-device bridge
+    vrf exp
+    mtu 9216
+
+#EXP VLAN in use for public ip addresses - VRF Public
+auto vlan387
+iface vlan387
+    address {{ vlan_387_address }}
+    address-virtual 00:00:5E:00:01:02 85.91.54.254/28
+    vlan-id 387
+    vlan-raw-device bridge
+    vrf exp
+    mtu 9216
+
+#PROD Vlan in use for NETAPP (Storage)
+auto vlan3000
+iface vlan3000
+   address {{ vlan_3000_address }}
+   address-virtual 00:00:5E:00:01:04 10.30.50.1/24
+   vlan-id 3000
+   vlan-raw-device bridge
+   vrf exp
+   mtu 9216

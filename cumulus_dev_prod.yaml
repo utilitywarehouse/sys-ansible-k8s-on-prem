@@ -3,10 +3,12 @@
   connection: ssh
   roles:
     - cumulus
+  vars:
+    - network_templates: dev-prod
+    - frr_templates: dev-prod
   vars_files:
     - inventories/group_vars/cumulus
     - inventories/group_vars/vault
     - inventories/group_vars/hosts-dev
-    - inventories/group_vars/hosts-exp
     - inventories/group_vars/hosts-prod
   become: yes

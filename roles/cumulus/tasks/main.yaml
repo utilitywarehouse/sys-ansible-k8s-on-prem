@@ -52,7 +52,7 @@
 
 - name: Copy frr configuration
   template:
-    src:  frr.conf.tmpl
+    src:  "{{ frr_templates }}.frr.conf.tmpl"
     dest: "/etc/frr/frr.conf"
   notify:
     - restart frr
@@ -111,7 +111,7 @@
 
 - name: Copy network interfaces configuration
   template:
-    src: network-interfaces.tmpl
+    src: "{{ network_templates }}.network-interfaces.tmpl"
     dest: "/etc/network/interfaces"
   notify:
     - reload network interfaces

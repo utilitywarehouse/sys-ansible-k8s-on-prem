@@ -59,6 +59,7 @@ vlan_2_address=10.254.254.253/30
 vlan_87_address=172.30.87.253/24
 vlan_187_address=10.87.0.253/24
 vlan_287_address=192.168.87.253/24
+vlan_387_address=85.91.54.252/28
 vlan_3000_address=10.30.50.253/24
 
 [cumulus-2-exp]
@@ -74,6 +75,7 @@ vlan_2_address=10.254.254.254/30
 vlan_87_address=172.30.87.254/24
 vlan_187_address=10.87.0.254/24
 vlan_287_address=192.168.87.254/24
+vlan_387_address=85.91.54.253/28
 vlan_3000_address=10.30.50.254/24
 
 [dhcp-dev:children]

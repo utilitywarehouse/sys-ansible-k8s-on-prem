@@ -1,42 +1,77 @@
 cfssl:
-  - ip_address: 10.88.10.8
+  - ip_address: 10.87.0.8
     mac_addresses:
-      - fc:15:b4:22:d6:44
-      - fc:15:b4:22:d6:45
-    ipxe_binary: ipxe.pxe
+      - f4:03:43:fd:63:00
+      - f4:03:43:fd:63:00
+    ipxe_binary: ipxe.efi
 
 etcd:
-  - ip_address: 10.88.10.32
+  - ip_address: 10.87.0.32
     mac_addresses:
-      - fc:15:b4:22:07:a2
-      - fc:15:b4:22:07:a3
-    ipxe_binary: ipxe.pxe
-  - ip_address: 10.88.10.33
+      - f4:03:43:fd:69:00
+      - f4:03:43:fd:69:00
+    ipxe_binary: ipxe.efi
+  - ip_address: 10.87.0.33
     mac_addresses:
-      - fc:15:b4:22:07:a4
-      - fc:15:b4:22:07:a5
-    ipxe_binary: ipxe.pxe
-  - ip_address: 10.88.10.34
-    mac_addresses:
-      - fc:15:b4:22:07:a6
-      - fc:15:b4:22:07:a7
-    ipxe_binary: ipxe.pxe
+      - f4:03:43:fd:4f:00
+      - f4:03:43:fd:4f:00
+    ipxe_binary: ipxe.efi
+# (for example for /etc/frr/frr.conf)
 
 env: exp
 
 masters_exp:
-  - ip_address: 10.88.10.64
+  - ip_address: 10.87.0.64
     mac_addresses:
-      - a0:1d:48:b5:47:4c
-      - a0:1d:48:b5:47:4d
+      - ec:eb:b8:a5:44:00
+      - ec:eb:b8:a5:44:00
+    ipxe_binary: ipxe.efi
+  - ip_address: 10.87.0.65
+    mac_addresses:
+      - ec:eb:b8:a5:15:00
+      - ec:eb:b8:a5:15:00
+    ipxe_binary: ipxe.efi
 
 workers_exp:
-  - ip_address: 10.88.10.128
+  - ip_address: 10.87.0.128
     mac_addresses:
-      - a0:1d:48:b5:1d:74
-      - a0:1d:48:b5:1d:75
+      - ec:eb:b8:a5:75:00
+      - ec:eb:b8:a5:75:00
+    ipxe_binary: ipxe.efi
+  - ip_address: 10.87.0.129
+    mac_addresses:
+      - ec:eb:b8:a5:c3:22
+      - ec:eb:b8:a5:c3:23
+    ipxe_binary: ipxe.efi
 
-  - ip_address: 10.88.10.129
+matchbox_exp:
+  - ip_address: 10.87.0.248
     mac_addresses:
-      - a0:1d:48:b5:1e:02
-      - a0:1d:48:b5:1e:03
+      - f4:03:43:fd:64:00
+      - f4:03:43:fd:64:00
+    ipxe_binary: ipxe.efi
+
+wiresteward_exp:
+  - ip_address: 10.87.0.246
+    mac_addresses:
+      - fc:15:b4:22:e6:98
+      - fc:15:b4:22:e6:99
+    ipxe_binary: ipxe.efi
+  - ip_address: 10.87.0.247
+    mac_addresses:
+      - fc:15:b4:22:e6:9a
+      - fc:15:b4:22:e6:9b
+    ipxe_binary: ipxe.efi
+
+nat_exp:
+  - ip_address: 10.87.0.250
+    mac_addresses:
+      - f4:03:43:fd:5d:00
+      - f4:03:43:fd:5d:00
+    ipxe_binary: ipxe.efi
+  - ip_address: 10.87.0.251
+    mac_addresses:
+      - f4:03:43:fd:51:00
+      - f4:03:43:fd:51:00
+    ipxe_binary: ipxe.efi
+
