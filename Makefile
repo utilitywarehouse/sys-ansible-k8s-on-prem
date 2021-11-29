@@ -36,8 +36,11 @@ netapp-dev:
 netapp-prod:
 	ansible-playbook -i inventories/hosts netapp_prod.yaml --diff $(check_flag) $(ARGS) --skip-tags=minio,qos
 
-cumulus:
-	ansible-playbook -i inventories/hosts cumulus.yaml --diff $(check_flag) $(ARGS)
+cumulus-dev-prod:
+	ansible-playbook -i inventories/hosts cumulus_dev_prod.yaml --diff $(check_flag) $(ARGS)
+
+cumulus-exp:
+	ansible-playbook -i inventories/hosts cumulus_exp.yaml --diff $(check_flag) $(ARGS)
 
 netapp-collections-install:
 	ansible-galaxy collection install netapp.ontap
