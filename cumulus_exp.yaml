@@ -6,6 +6,7 @@
   vars:
     - network_templates: exp
     - frr_templates: exp
+    - ports_templates: exp
   vars_files:
     - inventories/group_vars/cumulus-exp
     - inventories/group_vars/vault

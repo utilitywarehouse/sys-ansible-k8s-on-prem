@@ -33,13 +33,13 @@ iface swp2
     link-speed 400000
 
 #Link to Merit-Network-VPC
-auto swp3
-iface swp3
+auto swp3s0
+iface swp3s0
      mtu 9216
 
 #EXP - Link to Netapp Controller "A" ( No Bond interface is supported by NetApp)
-auto swp6
-iface swp6
+auto swp6s0
+iface swp6s0
     alias swp6 exp-netapp-ctrl-a
     bridge-vids 3000
     mtu 9216
@@ -52,7 +52,7 @@ iface swp30
 #PO to Merit-network-VPC
 auto bond-mer-mer
 iface bond-mer-mer
-    bond-slaves swp3
+    bond-slaves swp3s0
     bridge-vids 1 87 287
     mtu 9216
     clag-id 3
@@ -68,7 +68,7 @@ iface bond-hp-m0
 #Brigde interface (All L2 Interfaces)
 auto bridge
 iface bridge
-    bridge-ports peerlink bond-hp-m0 bond-mer-mer swp6
+    bridge-ports peerlink bond-hp-m0 bond-mer-mer swp6s0
     bridge-vids 2 87 187 287 387 3000
     bridge-vlan-aware yes
     mstpctl-treeprio 8192

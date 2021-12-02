@@ -109,6 +109,14 @@
     enabled: yes
   tags: node-exporter
 
+- name: Copy ports mapping configuration
+  template:
+    src: "{{ ports_templates }}.ports.tmpl"
+    dest: "/etc/cumulus/ports.conf"
+  notify:
+    - reload network interfaces
+  tags: network
+
 - name: Copy network interfaces configuration
   template:
     src: "{{ network_templates }}.network-interfaces.tmpl"
