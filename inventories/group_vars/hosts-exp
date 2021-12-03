@@ -1,4 +1,4 @@
-env: exp
+ev: exp
 
 cfssl:
   - ip_address: 10.87.0.8
@@ -29,19 +29,16 @@ masters_exp:
     mac_addresses:
       - a0:1d:48:b5:47:4c
       - a0:1d:48:b5:47:4d
-    ipxe_binary: ipxe.efi
 
 workers_exp:
   - ip_address: 10.87.0.128
     mac_addresses:
       - a0:1d:48:b5:1d:74
       - a0:1d:48:b5:1d:75
-    ipxe_binary: ipxe.efi
   - ip_address: 10.87.0.129
     mac_addresses:
       - a0:1d:48:b5:1e:02
       - a0:1d:48:b5:1e:03
-    ipxe_binary: ipxe.efi
 
 wiresteward_exp:
   - ip_address: 10.87.0.246
