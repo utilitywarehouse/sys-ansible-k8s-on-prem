@@ -19,10 +19,7 @@ dhcp-dev:
 	ansible-playbook -i inventories/hosts dhcp_dev.yaml --diff $(check_flag) $(ARGS)
 
 dhcp-exp:
-	@echo "ATTENTION - This updates only the dhcp and not tftp, as the latter listens on all vrf interfaces.\
-	Thus we only need to configure this once for dev vrf. If needed run \
-	make dhcp-dev ARGS=\"--tags=tftp\" to configure dev tftp server only"
-	ansible-playbook -i inventories/hosts dhcp_exp.yaml --diff $(check_flag) --tags=dhcp $(ARGS)
+	ansible-playbook -i inventories/hosts dhcp_exp.yaml --diff $(check_flag) $(ARGS)
 
 dhcp-prod:
 	ansible-playbook -i inventories/hosts dhcp_prod.yaml --diff $(check_flag) $(ARGS)
