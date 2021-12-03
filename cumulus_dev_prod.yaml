@@ -6,6 +6,7 @@
   vars:
     - network_templates: dev-prod
     - frr_templates: dev-prod
+    - ports_templates: dev-prod
   vars_files:
     - inventories/group_vars/cumulus
     - inventories/group_vars/vault
