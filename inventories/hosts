@@ -84,5 +84,8 @@ cumulus-dev-prod
 [dhcp-prod:children]
 cumulus-dev-prod
 
+[dhcp-exp:children]
+cumulus-exp
+
 [netapp]
 10.91.5.200
