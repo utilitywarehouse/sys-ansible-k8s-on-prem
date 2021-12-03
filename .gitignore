@@ -1,3 +1,2 @@
 *.retry
 roles/dhcp/files/ipxe/
-ansible.cfg
