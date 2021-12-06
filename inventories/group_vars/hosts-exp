@@ -45,10 +45,9 @@ wiresteward_exp:
     mac_addresses:
       - fc:15:b4:22:e6:98
       - fc:15:b4:22:e6:99
-    ipxe_binary: ipxe.efi
+    ipxe_binary: ipxe.pxe
   - ip_address: 10.87.0.247
     mac_addresses:
       - fc:15:b4:22:e6:9a
       - fc:15:b4:22:e6:9b
-    ipxe_binary: ipxe.efi
-
+    ipxe_binary: ipxe.pxe
