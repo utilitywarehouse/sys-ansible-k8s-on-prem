@@ -1,13 +1,15 @@
-# Exp netapp deployment should only configure cfssl and kube svms and should use
-# the existing dev network.
 env: "exp"
 netapp_username: "admin"
 netapp_password: "{{vault_netapp_admin_pass}}"
 node_1: system-01
 node_2: system-02
+vlan_id: "3000"
+vlan_parent_interface_1: e0e
 vlan_port_1: e0e-3000
-vlan_port_2: e0e-3000
-ipspace_name: "dev_ipspace"
+vlan_parent_interface_2: e0f
+vlan_port_2: e0f-3000
+default_mtu: "9000"
+ipspace_name: "exp_ipspace"
 kube_pvc_qos_max_throughput: 15000iops
 kube_pvc_qos_min_throughput: 3000iops
 

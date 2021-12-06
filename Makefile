@@ -25,7 +25,7 @@ dhcp-prod:
 	ansible-playbook -i inventories/hosts dhcp_prod.yaml --diff $(check_flag) $(ARGS)
 
 netapp-exp:
-	ansible-playbook -i inventories/hosts netapp_exp.yaml --diff $(check_flag) --tags=cfssl,kube,nfs,minio
+	ansible-playbook -i inventories/hosts netapp_exp.yaml --diff $(check_flag)
 
 netapp-dev:
 	ansible-playbook -i inventories/hosts netapp_dev.yaml --diff $(check_flag) $(ARGS) --skip-tags=minio
