@@ -5,7 +5,7 @@ cfssl:
     mac_addresses:
       - fc:15:b4:22:d6:44
       - fc:15:b4:22:d6:45
-    ipxe_binary: ipxe.efi
+    ipxe_binary: ipxe.pxe
 
 etcd:
   - ip_address: 10.87.0.32
