@@ -37,11 +37,19 @@ auto swp3s0
 iface swp3s0
      mtu 9216
 
-#EXP - Link to Netapp Controller "A" ( No Bond interface is supported by NetApp)
+#EXP - Link to Netapp Controller "A" ( Primary interface - No Bond interface is supported by NetApp)
 auto swp6s0
 iface swp6s0
     alias swp6 exp-netapp-ctrl-a
     bridge-vids 3000
+    mtu 9216
+
+#EXP - Link to Netapp Controller "A" ( Secondary interface- No Bond interface is supported by NetApp)
+auto swp6s1
+iface swp6s1
+    alias swp6 exp-netapp-ctrl-a
+    bridge-vids 3000
+    link-down yes
     mtu 9216
 
 #Link to Moonshoot 0 (EXP)
