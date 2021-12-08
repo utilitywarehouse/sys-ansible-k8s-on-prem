@@ -1,4 +1,4 @@
-- hosts: cumulus
+- hosts: cumulus-dev-prod
   user: cumulus
   connection: ssh
   roles:
@@ -8,7 +8,7 @@
     - frr_templates: dev-prod
     - ports_templates: dev-prod
   vars_files:
-    - inventories/group_vars/cumulus
+    - inventories/group_vars/cumulus-dev-prod
     - inventories/group_vars/vault
     - inventories/group_vars/hosts-dev
     - inventories/group_vars/hosts-prod
