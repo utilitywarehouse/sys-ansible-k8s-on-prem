@@ -7,6 +7,8 @@
     - network_templates: dev-prod
     - frr_templates: dev-prod
     - ports_templates: dev-prod
+    - public_addresses_rules_templates: dev-prod
+    - ssh_templates: dev-prod
   vars_files:
     - inventories/group_vars/cumulus-dev-prod
     - inventories/group_vars/vault
