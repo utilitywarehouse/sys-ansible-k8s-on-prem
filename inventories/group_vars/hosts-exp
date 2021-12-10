@@ -29,6 +29,10 @@ masters_exp:
     mac_addresses:
       - a0:1d:48:b5:47:4c
       - a0:1d:48:b5:47:4d
+  - ip_address: 10.87.0.65
+    mac_addresses:
+      - a0:1d:48:b5:4b:58
+      - a0:1d:48:b5:4b:59
 
 workers_exp:
   - ip_address: 10.87.0.128
@@ -39,6 +43,22 @@ workers_exp:
     mac_addresses:
       - a0:1d:48:b5:1e:02
       - a0:1d:48:b5:1e:03
+  - ip_address: 10.87.0.130
+    mac_addresses:
+      - a0:1d:48:b5:48:10
+      - a0:1d:48:b5:48:11
+  - ip_address: 10.87.0.131
+    mac_addresses:
+      - a0:1d:48:b5:1c:06
+      - a0:1d:48:b5:1c:07
+  - ip_address: 10.87.0.132
+    mac_addresses:
+      - a0:1d:48:b5:4e:04
+      - a0:1d:48:b5:4e:05
+  - ip_address: 10.87.0.133
+    mac_addresses:
+      - a0:1d:48:b5:48:c4
+      - a0:1d:48:b5:48:c5
 
 wiresteward_exp:
   - ip_address: 10.87.0.246
