@@ -1,0 +1,17 @@
+- hosts: cumulus-dev-prod
+  user: cumulus
+  connection: ssh
+  roles:
+    - cumulus
+  vars:
+    - network_templates: dev-prod
+    - frr_templates: dev-prod
+    - ports_templates: dev-prod
+    - public_addresses_rules_templates: dev-prod
+    - ssh_templates: dev-prod
+  vars_files:
+    - inventories/group_vars/cumulus-dev-prod
+    - inventories/group_vars/vault
+    - inventories/group_vars/hosts-dev
+    - inventories/group_vars/hosts-prod
+  become: yes

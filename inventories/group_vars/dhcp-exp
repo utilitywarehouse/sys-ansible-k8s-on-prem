@@ -1,11 +1,11 @@
 # interfaces
-dhcp_listen_interface: vlan1188
-dhcp_vrf_name: dev
+dhcp_listen_interface: vlan187
+dhcp_vrf_name: exp
 dhcp_role_name: exp
 
-subnet: 10.88.10.0
+subnet: 10.87.0.0
 netmask: 255.255.255.0
-router: 10.88.10.1
+router: 10.87.0.1
 domain_name: exp-1.merit.uw.systems
 dns: 1.1.1.1,1.0.0.1
 

@@ -1,10 +1,10 @@
-[cumulus:children]
-cumulus-1
-cumulus-2
+[cumulus-dev-prod:children]
+cumulus-1-dev-prod
+cumulus-2-dev-prod
 
-[cumulus-1]
+[cumulus-1-dev-prod]
 10.91.5.95
-[cumulus-1:vars]
+[cumulus-1-dev-prod:vars]
 hostname=mer-cumulus-1
 router_id=10.254.254.253
 clagd_backup_ip=10.254.254.254
@@ -22,9 +22,9 @@ vlan_1000_address=10.10.50.253/24
 vlan_1188_address=10.88.10.253/24
 vlan_2000_address=10.20.50.253/24
 
-[cumulus-2]
+[cumulus-2-dev-prod]
 10.91.5.126
-[cumulus-2:vars]
+[cumulus-2-dev-prod:vars]
 hostname=mer-cumulus-2
 router_id=10.254.254.254
 clagd_backup_ip=10.254.254.253
@@ -44,11 +44,48 @@ vlan_1000_address=10.10.50.254/24
 vlan_1188_address=10.88.10.254/24
 vlan_2000_address=10.20.50.254/24
 
+[cumulus-exp:children]
+cumulus-1-exp
+cumulus-2-exp
+
+[cumulus-1-exp]
+10.91.5.104
+[cumulus-1-exp:vars]
+hostname=mer-cumulus-1-exp
+router_id=10.254.254.253
+clagd_backup_ip=10.254.254.254
+clagd_priority=1000
+vlan_2_address=10.254.254.253/30
+vlan_87_address=172.30.87.253/24
+vlan_187_address=10.87.0.253/24
+vlan_287_address=192.168.87.253/24
+vlan_387_address=85.91.54.252/28
+vlan_3000_address=10.30.50.253/24
+
+[cumulus-2-exp]
+10.91.5.131
+[cumulus-2-exp:vars]
+hostname=mer-cumulus-2
+router_id=10.254.254.254
+clagd_backup_ip=10.254.254.253
+## We need higher priority value than cumulus-1:
+## https://docs.cumulusnetworks.com/cumulus-linux-41/Layer-2/Multi-Chassis-Link-Aggregation-MLAG/
+clagd_priority=2000
+vlan_2_address=10.254.254.254/30
+vlan_87_address=172.30.87.254/24
+vlan_187_address=10.87.0.254/24
+vlan_287_address=192.168.87.254/24
+vlan_387_address=85.91.54.253/28
+vlan_3000_address=10.30.50.254/24
+
 [dhcp-dev:children]
-cumulus
+cumulus-dev-prod
 
 [dhcp-prod:children]
-cumulus
+cumulus-dev-prod
+
+[dhcp-exp:children]
+cumulus-exp
 
 [netapp]
 10.91.5.200

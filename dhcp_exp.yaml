@@ -1,4 +1,4 @@
-- hosts: dhcp-dev
+- hosts: dhcp-exp
   user: cumulus
   connection: ssh
   roles:

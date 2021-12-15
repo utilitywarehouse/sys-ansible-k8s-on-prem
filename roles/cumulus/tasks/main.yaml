@@ -36,7 +36,7 @@
 
 - name: copy 10ssh.rules
   copy:
-    src: "files/10ssh.rules"
+    src: "files/{{ ssh_templates }}.10ssh.rules"
     dest: "/etc/cumulus/acl/policy.d/10ssh.rules"
   notify:
     - "install ACL rules"
@@ -44,7 +44,7 @@
 
 - name: copy 11public_addresses.rules
   copy:
-    src: "files/11public_addresses.rules"
+    src: "files/{{public_addresses_rules_templates }}.11public_addresses.rules"
     dest: "/etc/cumulus/acl/policy.d/11public_addresses.rules"
   notify:
     - "install ACL rules"
@@ -52,7 +52,7 @@
 
 - name: Copy frr configuration
   template:
-    src:  frr.conf.tmpl
+    src:  "{{ frr_templates }}.frr.conf.tmpl"
     dest: "/etc/frr/frr.conf"
   notify:
     - restart frr
@@ -109,9 +109,17 @@
     enabled: yes
   tags: node-exporter
 
+- name: Copy ports mapping configuration
+  template:
+    src: "{{ ports_templates }}.ports.tmpl"
+    dest: "/etc/cumulus/ports.conf"
+  notify:
+    - reload network interfaces
+  tags: network
+
 - name: Copy network interfaces configuration
   template:
-    src: network-interfaces.tmpl
+    src: "{{ network_templates }}.network-interfaces.tmpl"
     dest: "/etc/network/interfaces"
   notify:
     - reload network interfaces
