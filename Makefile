@@ -31,7 +31,7 @@ netapp-dev:
 	ansible-playbook -i inventories/hosts netapp_dev.yaml --diff $(check_flag) $(ARGS) --skip-tags=minio
 
 netapp-prod:
-	ansible-playbook -i inventories/hosts netapp_prod.yaml --diff $(check_flag) $(ARGS) --skip-tags=minio,qos
+	ansible-playbook -i inventories/hosts netapp_prod.yaml --diff $(check_flag) $(ARGS) --skip-tags=minio
 
 cumulus-dev-prod:
 	ansible-playbook -i inventories/hosts cumulus_dev_prod.yaml --diff $(check_flag) $(ARGS)
