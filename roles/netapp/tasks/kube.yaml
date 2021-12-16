@@ -249,3 +249,17 @@
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
   tags: kube
+
+# Create a policy group to be used for kubernetes volumes.
+- name: create qos policy group for kube volumes
+  na_ontap_qos_policy_group:
+    state: present
+    name: "{{ env }}-pvc-fixed"
+    max_throughput: "{{ kube_pvc_qos_max_throughput }}"
+    min_throughput: "{{ kube_pvc_qos_min_throughput }}"
+    is_shared: false
+    vserver: "{{ env }}_kube"
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+  tags: kube,qos

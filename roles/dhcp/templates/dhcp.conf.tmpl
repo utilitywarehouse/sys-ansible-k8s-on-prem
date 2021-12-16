@@ -103,11 +103,15 @@ host matchbox-{{ matchbox_count }}-{{ loop.index }} {
   option host-name "matchbox-{{ matchbox_count }}.{{ domain_name }}";
   hardware ethernet {{ mac_address }};
   fixed-address {{ m.ip_address }};
+{% if m.ipxe_binary is defined %}
   if exists user-class and option user-class = "iPXE" {
     filename "{{ dhcp_matchbox_external }}";
   } else {
-    filename "ipxe.pxe";
+    filename "{{ m.ipxe_binary }}";
   }
+{% else %}
+  filename "{{ dhcp_matchbox_external }}";
+{% endif %}
 }
 {% endfor %}
 {% endfor %}
@@ -122,11 +126,15 @@ host wiresteward-{{ wiresteward_count }}-{{ loop.index }} {
   option host-name "wiresteward-{{ wiresteward_count }}.{{ domain_name }}";
   hardware ethernet {{ mac_address }};
   fixed-address {{ w.ip_address }};
+{% if w.ipxe_binary is defined %}
   if exists user-class and option user-class = "iPXE" {
     filename "{{ dhcp_matchbox }}";
   } else {
-    filename "ipxe.pxe";
+    filename "{{ w.ipxe_binary }}";
   }
+{% else %}
+  filename "{{ dhcp_matchbox }}";
+{% endif %}
 }
 {% endfor %}
 {% endfor %}
@@ -144,7 +152,7 @@ host nat-{{ nat_count }}-{{ loop.index }} {
   if exists user-class and option user-class = "iPXE" {
     filename "{{ dhcp_matchbox }}";
   } else {
-    filename "ipxe.pxe";
+    filename "{{ n.ipxe_binary }}";
   }
 }
 {% endfor %}

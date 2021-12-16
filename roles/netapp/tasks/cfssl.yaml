@@ -119,6 +119,7 @@
     size: 2
     size_unit: gb
     ostype: linux
+    space_allocation: yes # enables support for the SCSI Thin Provisioning features, allows discard
     vserver: "{{ env }}_cfssl"
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"

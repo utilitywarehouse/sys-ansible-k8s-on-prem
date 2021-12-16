@@ -1,42 +1,73 @@
+env: exp
+
 cfssl:
-  - ip_address: 10.88.10.8
+  - ip_address: 10.87.0.8
     mac_addresses:
       - fc:15:b4:22:d6:44
       - fc:15:b4:22:d6:45
     ipxe_binary: ipxe.pxe
 
 etcd:
-  - ip_address: 10.88.10.32
+  - ip_address: 10.87.0.32
     mac_addresses:
       - fc:15:b4:22:07:a2
       - fc:15:b4:22:07:a3
     ipxe_binary: ipxe.pxe
-  - ip_address: 10.88.10.33
+  - ip_address: 10.87.0.33
     mac_addresses:
       - fc:15:b4:22:07:a4
       - fc:15:b4:22:07:a5
     ipxe_binary: ipxe.pxe
-  - ip_address: 10.88.10.34
+  - ip_address: 10.87.0.34
     mac_addresses:
       - fc:15:b4:22:07:a6
       - fc:15:b4:22:07:a7
     ipxe_binary: ipxe.pxe
 
-env: exp
-
 masters_exp:
-  - ip_address: 10.88.10.64
+  - ip_address: 10.87.0.64
     mac_addresses:
       - a0:1d:48:b5:47:4c
       - a0:1d:48:b5:47:4d
+  - ip_address: 10.87.0.65
+    mac_addresses:
+      - a0:1d:48:b5:4b:58
+      - a0:1d:48:b5:4b:59
 
 workers_exp:
-  - ip_address: 10.88.10.128
+  - ip_address: 10.87.0.128
     mac_addresses:
       - a0:1d:48:b5:1d:74
       - a0:1d:48:b5:1d:75
-
-  - ip_address: 10.88.10.129
+  - ip_address: 10.87.0.129
     mac_addresses:
       - a0:1d:48:b5:1e:02
       - a0:1d:48:b5:1e:03
+  - ip_address: 10.87.0.130
+    mac_addresses:
+      - a0:1d:48:b5:48:10
+      - a0:1d:48:b5:48:11
+  - ip_address: 10.87.0.131
+    mac_addresses:
+      - a0:1d:48:b5:1c:06
+      - a0:1d:48:b5:1c:07
+  - ip_address: 10.87.0.132
+    mac_addresses:
+      - a0:1d:48:b5:4e:04
+      - a0:1d:48:b5:4e:05
+  - ip_address: 10.87.0.133
+    mac_addresses:
+      - a0:1d:48:b5:48:c4
+      - a0:1d:48:b5:48:c5
+
+wiresteward_exp:
+  - ip_address: 10.87.0.246
+    mac_addresses:
+      - fc:15:b4:22:e6:98
+      - fc:15:b4:22:e6:99
+    ipxe_binary: ipxe.pxe
+  - ip_address: 10.87.0.247
+    mac_addresses:
+      - fc:15:b4:22:e6:9a
+      - fc:15:b4:22:e6:9b
+    ipxe_binary: ipxe.pxe

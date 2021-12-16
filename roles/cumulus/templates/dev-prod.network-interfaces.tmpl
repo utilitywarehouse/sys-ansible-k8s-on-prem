@@ -88,6 +88,16 @@ auto swp31
 iface swp31
     mtu 9216
 
+#Link to Moonshoot 2
+auto swp32
+iface swp32
+    mtu 9216
+
+# Link to Moonshot 3
+auto swp25
+iface swp25
+    mtu 9216
+
 #PO to Merit-network-VPC
 auto bond-mer-mer
 iface bond-mer-mer
@@ -100,7 +110,7 @@ iface bond-mer-mer
 auto bond-hp-m1-dev
 iface bond-hp-m1-dev
     bond-slaves swp30
-    bridge-vids 188 189 1188
+    bridge-vids 188 189
     clag-id 30
     mtu 9216
 
@@ -116,17 +126,34 @@ iface bond-hp-m1-prod
 auto bond-hp-m0-dev
 iface bond-hp-m0-dev
     bond-slaves swp31
-    bridge-vids 188 189 388 389 1188
+    bridge-vids 188 189 388 389
     clag-id 31
+    mtu 9216
+
+#PO to Moonshoot 2- One iface per SW in MLAG
+auto bond-hp-m2-dev
+iface bond-hp-m2-dev
+    bond-slaves swp32
+    bridge-vids 188 189 388 389
+    clag-id 32
+    mtu 9216
+
+#PO to Moonshoot 3 - One iface per SW in MLAG
+auto bond-hp-m3-dev
+iface bond-hp-m3-dev
+    bond-slaves swp25
+    bridge-vids 188 189 388 389
+    clag-id 25
     mtu 9216
 
 #Brigde interface (All L2 Interfaces)
 auto bridge
 iface bridge
-    bridge-ports peerlink bond-hp-m0-dev bond-hp-m1-dev bond-hp-m1-prod bond-mer-mer swp5 swp6 swp28 swp29
-    bridge-vids 2 88 89 188 189 288 289 388 389 1000 1188 2000
+    bridge-ports peerlink bond-hp-m0-dev bond-hp-m1-dev bond-hp-m1-prod bond-hp-m2-dev bond-hp-m3-dev bond-mer-mer swp5 swp6 swp28 swp29
+    bridge-vids 2 88 89 188 189 288 289 388 389 1000 2000
     bridge-vlan-aware yes
-    mstpctl-treeprio 8192
+    mstpctl-treeprio 32768
+    bridge-bridgeprio 32768 
     mtu 9216
 
 #PeerLink bond for MLAG setup
@@ -178,16 +205,6 @@ iface vlan188
     address {{ vlan_188_address }}
     address-virtual 00:00:5E:00:01:01 10.88.0.1/24
     vlan-id 188
-    vlan-raw-device bridge
-    vrf dev
-    mtu 9216
-
-#EXP Internal VLAN - where the nodes live
-auto vlan1188
-iface vlan1188
-    address {{ vlan_1188_address }}
-    address-virtual 00:00:5E:00:01:01 10.88.10.1/24
-    vlan-id 1188
     vlan-raw-device bridge
     vrf dev
     mtu 9216
