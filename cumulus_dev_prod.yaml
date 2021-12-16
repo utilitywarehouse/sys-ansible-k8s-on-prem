@@ -10,7 +10,7 @@
     - public_addresses_rules_templates: dev-prod
     - ssh_templates: dev-prod
   vars_files:
-    - inventories/group_vars/cumulus-dev-prod
+    - inventories/group_vars/cumulus
     - inventories/group_vars/vault
     - inventories/group_vars/hosts-dev
     - inventories/group_vars/hosts-prod
