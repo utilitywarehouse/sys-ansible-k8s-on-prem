@@ -84,9 +84,9 @@ workers_prod:
       - f4:03:43:fd:64:fa
     ipxe_binary: ipxe.efi
   - ip_address: 10.89.0.135
+    mac_addresses:
       - f4:03:43:fd:5f:45
       - f4:03:43:fd:5f:46
-   mac_addresses:
     ipxe_binary: ipxe.efi
   - ip_address: 10.89.0.136
     mac_addresses:
