@@ -80,18 +80,63 @@ workers_prod:
     ipxe_binary: ipxe.efi
   - ip_address: 10.89.0.134
     mac_addresses:
-      - ec:eb:b8:a5:d4:12
-      - ec:eb:b8:a5:d4:13
+      - f4:03:43:fd:64:f9
+      - f4:03:43:fd:64:fa
     ipxe_binary: ipxe.efi
   - ip_address: 10.89.0.135
-    mac_addresses:
-      - ec:eb:b8:a5:72:72
-      - ec:eb:b8:a5:72:73
+      - f4:03:43:fd:5f:45
+      - f4:03:43:fd:5f:46
+   mac_addresses:
     ipxe_binary: ipxe.efi
   - ip_address: 10.89.0.136
     mac_addresses:
-      - ec:eb:b8:a5:03:a2
-      - ec:eb:b8:a5:03:a3
+      - f4:03:43:fd:5c:9d
+      - f4:03:43:fd:5c:9e
+    ipxe_binary: ipxe.efi
+  - ip_address: 10.89.0.137
+    mac_addresses:
+      - f4:03:43:fd:6b:bd
+      - f4:03:43:fd:6b:be
+    ipxe_binary: ipxe.efi
+  - ip_address: 10.89.0.138
+    mac_addresses:
+      - f4:03:43:fd:55:8d
+      - f4:03:43:fd:55:8e
+    ipxe_binary: ipxe.efi
+  - ip_address: 10.89.0.139
+    mac_addresses:
+      - f4:03:43:fd:5d:ed
+      - f4:03:43:fd:5d:ee
+    ipxe_binary: ipxe.efi
+  - ip_address: 10.89.0.140
+    mac_addresses:
+      - f4:03:43:fd:5a:ed
+      - f4:03:43:fd:5a:ee
+    ipxe_binary: ipxe.efi
+  - ip_address: 10.89.0.141
+    mac_addresses:
+      - f4:03:43:fd:46:e9
+      - f4:03:43:fd:46:ea
+    ipxe_binary: ipxe.efi
+  - ip_address: 10.89.0.142
+    mac_addresses:
+      - f4:03:43:fd:58:c9
+      - f4:03:43:fd:58:ca
+    ipxe_binary: ipxe.efi
+  - ip_address: 10.89.0.143
+    mac_addresses:
+      - f4:03:43:fd:68:f9
+      - f4:03:43:fd:68:fa
+    ipxe_binary: ipxe.efi
+  - ip_address: 10.89.0.144
+    mac_addresses:
+      - f4:03:43:fd:68:dd
+      - f4:03:43:fd:68:de
+    ipxe_binary: ipxe.efi
+  - ip_address: 10.89.0.145
+    mac_addresses:
+      - f4:03:43:fd:67:fd
+      - f4:03:43:fd:67:fe
     ipxe_binary: ipxe.efi
 
 matchbox_prod:

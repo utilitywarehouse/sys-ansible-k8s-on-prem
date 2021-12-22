@@ -250,13 +250,13 @@ workers_dev:
     ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.162
     mac_addresses:
-      - f4:03:43:fd:64:f9
-      - f4:03:43:fd:64:fa
+      - ec:eb:b8:a5:d4:12
+      - ec:eb:b8:a5:d4:13
     ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.163
     mac_addresses:
-      - f4:03:43:fd:5f:45
-      - f4:03:43:fd:5f:46
+      - ec:eb:b8:a5:72:72
+      - ec:eb:b8:a5:72:73
     ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.164
     mac_addresses:
