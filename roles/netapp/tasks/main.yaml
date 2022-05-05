@@ -1,3 +1,6 @@
+- name: Ensure Cluster Management Interface is properly set
+  include: cluster-mgmt.yaml
+
 - name: Create core network connectivity
   include: core.yaml
 
