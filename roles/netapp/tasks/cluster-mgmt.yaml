@@ -1,0 +1,26 @@
+# This will ensure that we have configured a failover group and policy for our
+# cluster management lif, so that it will only migrate to controller's e0M ports
+# which are connected to the management network.
+# Unfortunately, ansible modules do not seem to offer a way to create failover
+# groups, so we need to run the following command manual:
+# system::> network interface failover-groups create -vserver system -failover-group mgmt_failover -targets system-01:e0M,system-02:e0M
+
+# Next we need to configure the cluster management lif to use the above failover
+# group. Equivalent netapp cli command:
+# system::> network interface modify -vserver system -lif cluster_mgmt_lif -failover-policy system-defined -failover-group mgmt_failover
+- name: Ensure Cluster Management interface failover group
+  netapp.ontap.na_ontap_interface:
+    state: present
+    interface_name: cluster_mgmt_lif
+    home_port: e0M
+    home_node: system-01
+    role: cluster-mgmt
+    admin_status: up
+    failover_policy: system-defined
+    failover_group: mgmt_failover
+    firewall_policy: mgmt
+    vserver: system
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+  tags: cluster
