@@ -158,22 +158,3 @@ host nat-{{ nat_count }}-{{ loop.index }} {
 {% endfor %}
 {% endfor %}
 {% endif %}
-
-{% if ("exp_wiresteward_" + env) in vars %}
-## Exp Wiresteward
-{% for w in vars["exp_wiresteward_" + env] %}
-{% set wiresteward_count = loop.index-1 %}
-{% for mac_address in w.mac_addresses %}
-host exp-wiresteward-{{ wiresteward_count }}-{{ loop.index }} {
-  option host-name "{{ wiresteward_count }}.exp-wiresteward.{{ domain_name }}";
-  hardware ethernet {{ mac_address }};
-  fixed-address {{ w.ip_address }};
-  if exists user-class and option user-class = "iPXE" {
-    filename "{{ dhcp_matchbox }}";
-  } else {
-    filename "ipxe.pxe";
-  }
-}
-{% endfor %}
-{% endfor %}
-{% endif %}
