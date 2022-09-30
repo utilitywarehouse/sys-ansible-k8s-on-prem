@@ -141,3 +141,46 @@
   notify:
     - reload network interfaces
   tags: network
+
+# Install Promtail to push journal logs to Loki. Following instructions from:
+# https://sbcode.net/grafana/install-promtail-service/
+- name: Install unzip
+  apt: pkg=unzip
+  tags: promtail
+
+- name: Download promtail
+  unarchive:
+    src: "https://github.com/grafana/loki/releases/download/{{promtail_version}}/promtail-linux-amd64.zip"
+    dest: /opt/bin
+    remote_src: yes
+  tags: promtail
+
+- name: Ensure promtail configuration directory exists
+  file:
+    path: /etc/promtail
+    state: directory
+  tags: promtail
+
+- name: Copy promtail configuration file
+  template:
+    src: config-promtail.yml.tmpl
+    dest: /etc/promtail/config-promtail.yml
+  notify:
+    - restart promtail
+  tags: promtail
+
+- name: Copy promtail systemd service unit file
+  copy:
+    src:  files/promtail.service
+    dest: /etc/systemd/system/promtail@.service
+  notify:
+    - daemon-reload
+    - restart promtail
+  tags: promtail
+
+- name: enable promtail service on management vrf
+  service:
+    name: promtail@mgmt.service
+    state: started
+    enabled: yes
+  tags: promtail

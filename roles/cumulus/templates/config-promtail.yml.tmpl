@@ -1,0 +1,21 @@
+server:
+  http_listen_port: 0
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+client:
+  url: https://{{ loki_address }}/api/prom/push
+
+# https://github.com/grafana/loki/blob/main/docs/sources/clients/promtail/scraping.md#journal-scraping-linux-only
+scrape_configs:
+  - job_name: journal
+    journal:
+      json: false
+      max_age: 12h
+      labels:
+        job: cumulus-systemd-journal
+    relabel_configs:
+      - source_labels: ['__journal__systemd_unit']
+        target_label: 'unit'
