@@ -30,6 +30,12 @@
     state: restarted
   become: yes
 
+- name: restart promtail
+  service:
+    name: promtail@mgmt.service
+    state: restarted
+  become: yes
+
 - name: update timezone
   command:
     cmd: "ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime"

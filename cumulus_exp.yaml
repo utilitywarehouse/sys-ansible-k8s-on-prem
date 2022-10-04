@@ -13,4 +13,5 @@
     - inventories/group_vars/cumulus
     - inventories/group_vars/vault
     - inventories/group_vars/hosts-exp
+    - inventories/group_vars/promtail-exp
   become: yes
