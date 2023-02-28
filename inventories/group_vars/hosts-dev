@@ -150,8 +150,8 @@ workers_dev:
     ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.142
     mac_addresses:
-      - ec:eb:b8:a5:e3:f2
-      - ec:eb:b8:a5:e3:f3
+      - 94:18:82:70:fa:c2
+      - 94:18:82:70:fa:c3
     ipxe_binary: ipxe.efi
   - ip_address: 10.88.0.143
     mac_addresses:
