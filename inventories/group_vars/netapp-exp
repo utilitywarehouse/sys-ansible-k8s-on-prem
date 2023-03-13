@@ -1,6 +1,5 @@
 env: "exp"
 netapp_username: "admin"
-netapp_password: "{{vault_netapp_admin_pass}}"
 node_1: system-01
 node_2: system-02
 vlan_id: "3000"
@@ -22,7 +21,6 @@ cfssl_network_gateway: 10.30.50.1
 cfssl_lif_netmask: 255.255.255.0
 cfssl_data_lif_1_address: 10.30.50.44
 cfssl_data_lif_2_address: 10.30.50.45
-cfssl_chap_password: "{{vault_cfssl_chap_password_exp}}"
 cfssl_igroup_initiator: "iqn.2005-03.org.open-iscsi:exp-cfssl"
 cfssl_initiator_ip: 10.87.0.8
 
@@ -37,7 +35,6 @@ kube_data_lif_2_address: 10.30.50.35
 kube_mgmt_lif_address: 10.30.50.36
 
 kube_trident_user: trident_user
-kube_trident_password: "{{vault_kube_trident_password_exp}}"
 
 # nfs
 nfs_aggregate_list:

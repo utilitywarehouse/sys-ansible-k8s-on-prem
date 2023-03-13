@@ -5,6 +5,7 @@
     - netapp
   vars_files:
     - inventories/group_vars/netapp-exp
-    - inventories/group_vars/vault
+    - inventories/group_vars/secrets/netapp-common
+    - inventories/group_vars/secrets/netapp-exp
   vars:
     ansible_connection: local
