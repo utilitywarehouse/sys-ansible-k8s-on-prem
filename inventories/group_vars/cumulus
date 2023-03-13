@@ -1,5 +1,3 @@
-core_network_bgp_password: "{{vault_core_network_bgp_password}}"
-
 # Node exporter
 node_exporter_version: 1.3.1
 

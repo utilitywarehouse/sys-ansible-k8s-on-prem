@@ -11,8 +11,8 @@
     - ssh_templates: dev-prod
   vars_files:
     - inventories/group_vars/cumulus
-    - inventories/group_vars/vault
     - inventories/group_vars/hosts-dev
     - inventories/group_vars/hosts-prod
     - inventories/group_vars/promtail-dev-prod
+    - inventories/group_vars/secrets/cumulus
   become: yes
