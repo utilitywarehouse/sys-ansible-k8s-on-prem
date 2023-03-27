@@ -7,7 +7,7 @@
     name: metrics-exporter
     applications: ontapi
     authentication_method: password
-    set_password: "{{ vault_metrics_exporter_password }}"
+    set_password: "{{ metrics_exporter_password }}"
     role_name: readonly
     vserver: system
     hostname: "{{ inventory_hostname }}"
