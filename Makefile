@@ -28,10 +28,10 @@ netapp-exp:
 	ansible-playbook -i inventories/hosts netapp_exp.yaml --diff $(check_flag) --skip-tags=matchbox,cluster
 
 netapp-dev:
-	ansible-playbook -i inventories/hosts netapp_dev.yaml --diff $(check_flag) $(ARGS) --skip-tags=minio,cluster
+	ansible-playbook -i inventories/hosts netapp_dev.yaml --diff $(check_flag) $(ARGS) --skip-tags=cluster
 
 netapp-prod:
-	ansible-playbook -i inventories/hosts netapp_prod.yaml --diff $(check_flag) $(ARGS) --skip-tags=minio,cluster
+	ansible-playbook -i inventories/hosts netapp_prod.yaml --diff $(check_flag) $(ARGS) --skip-tags=cluster
 
 netapp-cluster:
 	ansible-playbook -i inventories/hosts netapp_prod.yaml --diff $(check_flag) $(ARGS) --tags=cluster
