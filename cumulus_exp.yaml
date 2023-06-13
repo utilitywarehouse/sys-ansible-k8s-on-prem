@@ -4,11 +4,11 @@
   roles:
     - cumulus
   vars:
-    - network_templates: exp
-    - frr_templates: exp
-    - ports_templates: exp
-    - public_addresses_rules_templates: exp
-    - ssh_templates: exp
+    network_templates: exp
+    frr_templates: exp
+    ports_templates: exp
+    public_addresses_rules_templates: exp
+    ssh_templates: exp
   vars_files:
     - inventories/group_vars/cumulus
     - inventories/group_vars/hosts-exp
