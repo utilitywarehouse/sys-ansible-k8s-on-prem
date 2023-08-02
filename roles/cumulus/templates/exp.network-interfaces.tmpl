@@ -8,7 +8,9 @@ iface lo inet loopback
 
 # The primary network interface
 auto eth0
-iface eth0 inet dhcp
+iface eth0 inet static
+    address {{ ansible_eth0.ipv4.address }}/24
+    gateway 10.71.5.1
     vrf mgmt
 
 auto exp
