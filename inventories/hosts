@@ -51,7 +51,7 @@ cumulus-2-exp
 [cumulus-1-exp]
 10.71.5.11
 [cumulus-1-exp:vars]
-hostname=mer-cumulus-1-exp
+hostname=edc-cumulus-1-exp
 router_id=10.254.254.253
 clagd_backup_ip=10.254.254.254
 clagd_priority=1000
@@ -65,7 +65,7 @@ vlan_3000_address=10.30.50.253/24
 [cumulus-2-exp]
 10.71.5.12
 [cumulus-2-exp:vars]
-hostname=mer-cumulus-2
+hostname=edc-cumulus-2
 router_id=10.254.254.254
 clagd_backup_ip=10.254.254.253
 ## We need higher priority value than cumulus-1:
