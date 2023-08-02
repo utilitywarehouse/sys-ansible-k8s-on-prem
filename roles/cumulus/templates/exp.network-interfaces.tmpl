@@ -8,7 +8,9 @@ iface lo inet loopback
 
 # The primary network interface
 auto eth0
-iface eth0 inet dhcp
+iface eth0 inet static
+    address {{ ansible_eth0.ipv4.address }}/24
+    gateway 10.71.5.1
     vrf mgmt
 
 auto exp
@@ -32,51 +34,45 @@ iface swp2
     mtu 9216
     link-speed 400000
 
-#Link to Merit-Network-VPC
-auto swp3s0
-iface swp3s0
-     mtu 9216
-
-#EXP - Link to Netapp Controller "A" ( Primary interface - No Bond interface is supported by NetApp)
-auto swp6s0
-iface swp6s0
-    alias swp6s0 exp-netapp-ctrl-a-pri
-    bridge-vids 3000
+#Link to Equinix-Network-VPC
+auto swp3
+iface swp3
     mtu 9216
+    link-speed 400000
 
-#EXP - Link to Netapp Controller "A" ( Secondary interface- No Bond interface is supported by NetApp)
-auto swp6s1
-iface swp6s1
-    alias swp6s1 exp-netapp-ctrl-a-sec
-    bridge-vids 3000
-    link-down yes
+#Link to Equinix-Network-VPC
+auto swp4
+iface swp4
     mtu 9216
+    link-speed 400000
 
-#Link to Moonshoot 0 (EXP)
-auto swp30
-iface swp30
-    mtu 9216
+##EXP - Link to Netapp Controller "A" ( Primary interface - No Bond interface is supported by NetApp)
+#auto swp6s0
+#iface swp6s0
+#    alias swp6s0 exp-netapp-ctrl-a-pri
+#    bridge-vids 3000
+#    mtu 9216
+#
+##EXP - Link to Netapp Controller "A" ( Secondary interface- No Bond interface is supported by NetApp)
+#auto swp6s1
+#iface swp6s1
+#    alias swp6s1 exp-netapp-ctrl-a-sec
+#    bridge-vids 3000
+#    link-down yes
+#    mtu 9216
 
 #Link to Moonshoot 4 (EXP)
 auto swp32
 iface swp32
     mtu 9216
 
-#PO to Merit-network-VPC
-auto bond-mer-mer
-iface bond-mer-mer
-    bond-slaves swp3s0
+#PO to Equinix-Network-VPC
+auto bond-edc-edc
+iface bond-edc-edc
+    bond-slaves swp3 swp4
     bridge-vids 1 87 287
     mtu 9216
     clag-id 3
-
-#PO to moonshot-0 - One iface per SW in MLAG
-auto bond-hp-m0
-iface bond-hp-m0
-    bond-slaves swp30
-    bridge-vids 187 387
-    clag-id 30
-    mtu 9216
 
 #PO to moonshot-4 - One iface per SW in MLAG
 auto bond-hp-m4
@@ -89,7 +85,7 @@ iface bond-hp-m4
 #Brigde interface (All L2 Interfaces)
 auto bridge
 iface bridge
-    bridge-ports peerlink bond-hp-m0 bond-hp-m4 bond-mer-mer swp6s0
+    bridge-ports peerlink bond-hp-m4 bond-edc-edc
     bridge-vids 2 87 187 287 387 3000
     bridge-vlan-aware yes
     mstpctl-treeprio 32768
