@@ -33,9 +33,16 @@ iface swp2
     link-speed 400000
 
 #Link to Merit-Network-VPC
-auto swp3s0
-iface swp3s0
-     mtu 9216
+auto swp3
+iface swp3
+    mtu 9216
+    link-speed 400000
+
+#Link to Merit-Network-VPC
+auto swp4
+iface swp4
+    mtu 9216
+    link-speed 400000
 
 #EXP - Link to Netapp Controller "A" ( Primary interface - No Bond interface is supported by NetApp)
 auto swp6s0
@@ -52,11 +59,6 @@ iface swp6s1
     link-down yes
     mtu 9216
 
-#Link to Moonshoot 0 (EXP)
-auto swp30
-iface swp30
-    mtu 9216
-
 #Link to Moonshoot 4 (EXP)
 auto swp32
 iface swp32
@@ -65,18 +67,10 @@ iface swp32
 #PO to Merit-network-VPC
 auto bond-mer-mer
 iface bond-mer-mer
-    bond-slaves swp3s0
+    bond-slaves swp3 swp4
     bridge-vids 1 87 287
     mtu 9216
     clag-id 3
-
-#PO to moonshot-0 - One iface per SW in MLAG
-auto bond-hp-m0
-iface bond-hp-m0
-    bond-slaves swp30
-    bridge-vids 187 387
-    clag-id 30
-    mtu 9216
 
 #PO to moonshot-4 - One iface per SW in MLAG
 auto bond-hp-m4
