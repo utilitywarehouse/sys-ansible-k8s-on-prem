@@ -26,16 +26,19 @@ auto swp1
 iface swp1
     mtu 9216
     link-speed 400000
+    link-down yes
 
 auto swp2
 iface swp2
     mtu 9216
     link-speed 400000
+    link-down yes
 
 #Link to Merit-Network-VPC
 auto swp3s0
 iface swp3s0
-     mtu 9216
+    mtu 9216
+    link-down yes
 
 #EXP - Link to Netapp Controller "A" ( Primary interface - No Bond interface is supported by NetApp)
 auto swp6s0
@@ -43,6 +46,7 @@ iface swp6s0
     alias swp6s0 exp-netapp-ctrl-a-pri
     bridge-vids 3000
     mtu 9216
+    link-down yes
 
 #EXP - Link to Netapp Controller "A" ( Secondary interface- No Bond interface is supported by NetApp)
 auto swp6s1
@@ -51,16 +55,19 @@ iface swp6s1
     bridge-vids 3000
     link-down yes
     mtu 9216
+    link-down yes
 
 #Link to Moonshoot 0 (EXP)
 auto swp30
 iface swp30
     mtu 9216
+    link-down yes
 
 #Link to Moonshoot 4 (EXP)
 auto swp32
 iface swp32
     mtu 9216
+    link-down yes
 
 #PO to Merit-network-VPC
 auto bond-mer-mer
