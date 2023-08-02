@@ -8,7 +8,7 @@ vrf exp
  ip route 10.30.50.0/24 Null0
  ip route 10.87.0.0/16 Null0
  ip route 85.91.54.0/24 Null0
- ip route 0.0.0.0/0 172.30.87.3 254
+ ip route 0.0.0.0/0 172.30.87.1 254
  exit-vrf
 !
 interface vlan187 vrf exp
@@ -53,7 +53,7 @@ ip prefix-list rm-default-route seq 10 permit 0.0.0.0/0 le 32
 !
 pbr-map pbr-exp seq 1
  match src-ip 85.91.54.0/24
- set nexthop 192.168.87.3 vlan287 nexthop-vrf exp
+ set nexthop 192.168.87.1 vlan287 nexthop-vrf exp
 !
 line vty
 !
