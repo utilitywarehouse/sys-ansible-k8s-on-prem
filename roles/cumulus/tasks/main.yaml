@@ -28,6 +28,12 @@
     update_cache: yes
   tags: certs
 
+- name: Ensure /opt/bin directory exists
+  file:
+    path: /opt/bin
+    state: directory
+  tags: ssh-key-agent,node-exporter
+
 - name: Download ssh-key-agent {{ ssh_key_agent_vesion }} binary
   get_url:
     url: "https://github.com/utilitywarehouse/ssh-key-agent/releases/download/{{ ssh_key_agent_vesion }}/ssh-key-agent_{{ ssh_key_agent_vesion }}_linux_amd64"
@@ -82,12 +88,6 @@
   notify:
     - restart frr
   tags: frr
-
-- name: Ensure /opt/bin directory exists
-  file:
-    path: /opt/bin
-    state: directory
-  tags: node-exporter
 
 - name: Download, extract and copy node-exporter binary
   unarchive:
