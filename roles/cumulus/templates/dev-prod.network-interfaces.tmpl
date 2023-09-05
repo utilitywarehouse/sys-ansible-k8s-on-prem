@@ -24,27 +24,32 @@ iface mgmt
 #PeerLink Bond interace
 auto swp1
 iface swp1
+    link-down yes
     mtu 9216
     link-speed 400000
 
 auto swp2
 iface swp2
+    link-down yes
     mtu 9216
     link-speed 400000
 
 #Link to Merit-Network-VPC
 auto swp3
 iface swp3
-     mtu 9216
+    link-down yes
+    mtu 9216
 
 #Link to Merit-Network-VPC
 auto swp4
 iface swp4
-     mtu 9216
+    link-down yes
+    mtu 9216
 
 #PROD - Link to Netapp Controller "A" ( No Bond interface is supported by NetApp)
 auto swp5
 iface swp5
+    link-down yes
     alias swp5 prod-netapp-ctrl-a
     bridge-vids 1000
     mtu 9216
@@ -53,6 +58,7 @@ iface swp5
 #DEV - Link to Netapp Controller "A" ( No Bond interface is supported by NetApp)
 auto swp6
 iface swp6
+    link-down yes
     alias swp6 dev-netapp-ctrl-a
     bridge-vids 2000
     mtu 9216
@@ -60,6 +66,7 @@ iface swp6
 #PROD - Link to Netapp Controller "B" ( No Bond interface is supported by NetApp)
 auto swp28
 iface swp28
+    link-down yes
     alias swp28 prod-netapp-ctrl-b
     bridge-vids 1000
     mtu 9216
@@ -68,6 +75,7 @@ iface swp28
 #DEV - Link to Netapp Controller "B" ( No Bond interface is supported by NetApp)
 auto swp29
 iface swp29
+    link-down yes
     alias swp29 dev-netapp-ctrl-b
     bridge-vids 2000
     mtu 9216
@@ -75,6 +83,7 @@ iface swp29
 #Link to Moonshoot 1 (New one - DEV)
 auto swp30
 iface swp30
+    link-down yes
     mtu 9216
 
 #Link to Moonshot 1 (New one - PROD)
@@ -86,16 +95,19 @@ iface swp27
 #Link to Moonshoot 0 (Old one - DEV)
 auto swp31
 iface swp31
+    link-down yes
     mtu 9216
 
 #Link to Moonshoot 2
 auto swp32
 iface swp32
+    link-down yes
     mtu 9216
 
 # Link to Moonshot 3
 auto swp25
 iface swp25
+    link-down yes
     mtu 9216
 
 #PO to Merit-network-VPC
