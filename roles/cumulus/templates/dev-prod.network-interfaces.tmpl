@@ -24,11 +24,13 @@ iface mgmt
 #PeerLink Bond interace
 auto swp1
 iface swp1
+    link-down yes
     mtu 9216
     link-speed 400000
 
 auto swp2
 iface swp2
+    link-down yes
     mtu 9216
     link-speed 400000
 
@@ -159,6 +161,7 @@ iface bridge
 #PeerLink bond for MLAG setup
 auto peerlink
 iface peerlink
+    link-down yes
     bond-slaves swp1 swp2
     mtu 9216
 
