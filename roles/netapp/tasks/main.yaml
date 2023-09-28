@@ -1,5 +1,6 @@
 - name: Ensure Cluster Management Interface is properly set
   include_tasks: cluster-mgmt.yaml
+  tags: cluster
 
 - name: Create core network connectivity
   include_tasks: core.yaml
