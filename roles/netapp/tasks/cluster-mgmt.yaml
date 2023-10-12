@@ -31,7 +31,7 @@
   netapp.ontap.na_ontap_interface:
     state: present
     interface_name: system-01_mgmt
-    address: 10.91.5.92
+    address: 10.71.5.110
     netmask: 255.255.255.0
     vserver: system
     hostname: "{{ inventory_hostname }}"
@@ -43,7 +43,7 @@
   netapp.ontap.na_ontap_interface:
     state: present
     interface_name: system-02_mgmt
-    address: 10.91.5.98
+    address: 10.71.5.111
     netmask: 255.255.255.0
     vserver: system
     hostname: "{{ inventory_hostname }}"
