@@ -50,3 +50,18 @@
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
   tags: cluster
+
+# Ensure lldb mode is enabled for both controllers
+- name: Enable lldb on nodes
+  netapp.ontap.na_ontap_rest_cli:
+    validate_certs: false # Self signed NetApp certificate
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+    command: options
+    verb: PATCH
+    params:
+      option_name: lldp.enable
+    body:
+      option_value: "on"
+  tags: cluster
