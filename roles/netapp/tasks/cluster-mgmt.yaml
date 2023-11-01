@@ -52,6 +52,21 @@
   tags: cluster
 
 # New management interfaces for ld7 network
+# We also need to create a subnet to assign them to and specify the gateway
+- name: Create management subnet for ld7
+  netapp.ontap.na_ontap_net_subnet:
+    state: present
+    subnet: 10.71.5.0/24
+    name: mgmt-ld7
+    ip_ranges: [ '10.71.5.15', '10.71.5.109-10.71.5.112']
+    gateway: 10.71.5.1
+    ipspace: Default
+    broadcast_domain: Default
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+  tags: cluster
+
 - name: Ensure system-01_mgmt_ld7 interface address
   netapp.ontap.na_ontap_interface:
     state: present
@@ -59,6 +74,7 @@
     interface_name: system-01_mgmt_ld7
     address: 10.71.5.110
     netmask: 255.255.255.0
+    force_subnet_association: true
     broadcast_domain: Default
     ipspace: Default
     home_port: e0M
@@ -79,6 +95,7 @@
     interface_name: system-02_mgmt_ld7
     address: 10.71.5.112
     netmask: 255.255.255.0
+    force_subnet_association: true
     broadcast_domain: Default
     ipspace: Default
     home_port: e0M
@@ -99,6 +116,7 @@
     interface_name: cluster_mgmt_lif_ld7
     address: 10.71.5.15
     netmask: 255.255.255.0
+    force_subnet_association: true
     broadcast_domain: Default
     ipspace: Default
     home_port: e0M
