@@ -3,7 +3,7 @@ cumulus-1-dev-prod
 cumulus-2-dev-prod
 
 [cumulus-1-dev-prod]
-10.91.5.95
+10.71.5.120
 [cumulus-1-dev-prod:vars]
 hostname=mer-cumulus-1
 router_id=10.254.254.253
@@ -23,7 +23,7 @@ vlan_1188_address=10.88.10.253/24
 vlan_2000_address=10.20.50.253/24
 
 [cumulus-2-dev-prod]
-10.91.5.104
+10.71.5.121
 [cumulus-2-dev-prod:vars]
 hostname=mer-cumulus-2
 router_id=10.254.254.254
@@ -88,4 +88,4 @@ cumulus-dev-prod
 cumulus-exp
 
 [netapp]
-10.91.5.200
+10.71.5.15
