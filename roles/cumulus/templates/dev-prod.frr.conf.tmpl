@@ -53,20 +53,20 @@ router bgp 64512 vrf dev
  neighbor 172.30.88.2 password {{ core_network_bgp_password }}
  neighbor 172.30.88.3 remote-as 51553
  neighbor 172.30.88.3 password {{ core_network_bgp_password }}
- neighbor 192.168.88.1 remote-as 51553
- neighbor 192.168.88.1 password {{ core_network_bgp_password }}
  neighbor 192.168.88.2 remote-as 51553
  neighbor 192.168.88.2 password {{ core_network_bgp_password }}
+ neighbor 192.168.88.3 remote-as 51553
+ neighbor 192.168.88.3 password {{ core_network_bgp_password }}
  !
  address-family ipv4 unicast
   network 10.88.0.0/16
   network 85.91.50.0/24
   neighbor 172.30.88.2 prefix-list private-dev out
   neighbor 172.30.88.3 prefix-list private-dev out
-  neighbor 192.168.88.1 prefix-list public-dev out
-  neighbor 192.168.88.1 prefix-list rm-default-route in
   neighbor 192.168.88.2 prefix-list public-dev out
   neighbor 192.168.88.2 prefix-list rm-default-route in
+  neighbor 192.168.88.3 prefix-list public-dev out
+  neighbor 192.168.88.3 prefix-list rm-default-route in
   maximum-paths ibgp 10
  exit-address-family
 !
@@ -87,20 +87,20 @@ router bgp 64512 vrf prod
  neighbor 172.30.89.2 password {{ core_network_bgp_password }}
  neighbor 172.30.89.3 remote-as 51553
  neighbor 172.30.89.3 password {{ core_network_bgp_password }}
- neighbor 192.168.89.1 remote-as 51553
- neighbor 192.168.89.1 password {{ core_network_bgp_password }}
  neighbor 192.168.89.2 remote-as 51553
  neighbor 192.168.89.2 password {{ core_network_bgp_password }}
+ neighbor 192.168.89.3 remote-as 51553
+ neighbor 192.168.89.3 password {{ core_network_bgp_password }}
  !
  address-family ipv4 unicast
   network 10.89.0.0/16
   network 85.91.53.0/24
   neighbor 172.30.89.2 prefix-list private-prod out
   neighbor 172.30.89.3 prefix-list private-prod out
-  neighbor 192.168.89.1 prefix-list public-prod out
-  neighbor 192.168.89.1 prefix-list rm-default-route in
   neighbor 192.168.89.2 prefix-list public-prod out
   neighbor 192.168.89.2 prefix-list rm-default-route in
+  neighbor 192.168.89.3 prefix-list public-prod out
+  neighbor 192.168.89.3 prefix-list rm-default-route in
   maximum-paths ibgp 10
  exit-address-family
 !
@@ -113,10 +113,10 @@ ip prefix-list rm-default-route seq 10 permit 0.0.0.0/0 le 32
 !
 pbr-map pbr-dev seq 1
  match src-ip 85.91.50.0/24
- set nexthop 192.168.88.3 vlan288 nexthop-vrf dev
+ set nexthop 192.168.88.1 vlan288 nexthop-vrf dev
 !
 pbr-map pbr-prod seq 1
  match src-ip 85.91.53.0/24
- set nexthop 192.168.89.3 vlan289 nexthop-vrf prod
+ set nexthop 192.168.89.1 vlan289 nexthop-vrf prod
 line vty
 !
