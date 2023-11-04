@@ -10,7 +10,7 @@ vrf dev
  ip route 10.89.0.0/16 Null0
  ip route 85.91.50.0/24 Null0
  ip route 85.91.53.0/24 Null0
- ip route 0.0.0.0/0 172.30.88.3 254
+ ip route 0.0.0.0/0 172.30.88.1 254
  exit-vrf
 !
 vrf prod
@@ -19,7 +19,7 @@ vrf prod
  ip route 10.89.0.0/16 Null0
  ip route 85.91.50.0/24 Null0
  ip route 85.91.53.0/24 Null0
- ip route 0.0.0.0/0 172.30.89.3 254
+ ip route 0.0.0.0/0 172.30.89.1 254
  exit-vrf
 !
 interface vlan188 vrf dev
@@ -49,10 +49,10 @@ router bgp 64512 vrf dev
 {% for n in nat_dev %}
  neighbor {{ n.ip_address }} remote-as 64512
 {% endfor %}
- neighbor 172.30.88.1 remote-as 51553
- neighbor 172.30.88.1 password {{ core_network_bgp_password }}
  neighbor 172.30.88.2 remote-as 51553
  neighbor 172.30.88.2 password {{ core_network_bgp_password }}
+ neighbor 172.30.88.3 remote-as 51553
+ neighbor 172.30.88.3 password {{ core_network_bgp_password }}
  neighbor 192.168.88.1 remote-as 51553
  neighbor 192.168.88.1 password {{ core_network_bgp_password }}
  neighbor 192.168.88.2 remote-as 51553
@@ -61,8 +61,8 @@ router bgp 64512 vrf dev
  address-family ipv4 unicast
   network 10.88.0.0/16
   network 85.91.50.0/24
-  neighbor 172.30.88.1 prefix-list private-dev out
   neighbor 172.30.88.2 prefix-list private-dev out
+  neighbor 172.30.88.3 prefix-list private-dev out
   neighbor 192.168.88.1 prefix-list public-dev out
   neighbor 192.168.88.1 prefix-list rm-default-route in
   neighbor 192.168.88.2 prefix-list public-dev out
@@ -83,10 +83,10 @@ router bgp 64512 vrf prod
 {% for n in nat_prod %}
  neighbor {{ n.ip_address }} remote-as 64512
 {% endfor %}
- neighbor 172.30.89.1 remote-as 51553
- neighbor 172.30.89.1 password {{ core_network_bgp_password }}
  neighbor 172.30.89.2 remote-as 51553
  neighbor 172.30.89.2 password {{ core_network_bgp_password }}
+ neighbor 172.30.89.3 remote-as 51553
+ neighbor 172.30.89.3 password {{ core_network_bgp_password }}
  neighbor 192.168.89.1 remote-as 51553
  neighbor 192.168.89.1 password {{ core_network_bgp_password }}
  neighbor 192.168.89.2 remote-as 51553
@@ -95,8 +95,8 @@ router bgp 64512 vrf prod
  address-family ipv4 unicast
   network 10.89.0.0/16
   network 85.91.53.0/24
-  neighbor 172.30.89.1 prefix-list private-prod out
   neighbor 172.30.89.2 prefix-list private-prod out
+  neighbor 172.30.89.3 prefix-list private-prod out
   neighbor 192.168.89.1 prefix-list public-prod out
   neighbor 192.168.89.1 prefix-list rm-default-route in
   neighbor 192.168.89.2 prefix-list public-prod out
