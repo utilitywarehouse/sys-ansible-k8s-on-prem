@@ -5,6 +5,8 @@ After=network.target
 [Service]
 Type=simple
 ExecStart=/bin/ip vrf exec %i /opt/bin/promtail-linux-amd64 -config.file /etc/promtail/config-promtail.yml --client.external-labels=hostname=%H
+Restart=on-failure
+RestartSec=10
 
 [Install]
 WantedBy=multi-user.target
