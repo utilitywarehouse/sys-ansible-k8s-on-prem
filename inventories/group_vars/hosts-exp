@@ -67,3 +67,10 @@ workers_exp:
       - ec:eb:b8:a5:a3:62
       - ec:eb:b8:a5:a3:63
     ipxe_binary: ipxe.efi
+
+proxmox_exp:
+  - ip_address: 10.87.0.222
+    mac_addresses:
+      - 94:18:82:70:3b:62
+      - 94:18:82:70:3b:63
+    ipxe_binary: ipxe.efi

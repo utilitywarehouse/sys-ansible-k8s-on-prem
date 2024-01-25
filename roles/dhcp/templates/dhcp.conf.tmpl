@@ -158,3 +158,22 @@ host nat-{{ nat_count }}-{{ loop.index }} {
 {% endfor %}
 {% endfor %}
 {% endif %}
+
+{% if ("proxmox_" + env) in vars %}
+## Proxmox boxes
+{% for p in vars["proxmox_" + env] %}
+{% set proxmox_count = loop.index-1 %}
+{% for mac_address in p.mac_addresses %}
+host nat-{{ proxmox_count }}-{{ loop.index }} {
+  option host-name "proxmox-{{ proxmox_count }}.{{ domain_name }}";
+  hardware ethernet {{ mac_address }};
+  fixed-address {{ p.ip_address }};
+  if exists user-class and option user-class = "iPXE" {
+    filename "{{ dhcp_matchbox }}";
+  } else {
+    filename "{{ p.ipxe_binary }}";
+  }
+}
+{% endfor %}
+{% endfor %}
+{% endif %}
