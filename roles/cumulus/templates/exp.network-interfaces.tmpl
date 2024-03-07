@@ -60,6 +60,11 @@ iface swp6s1
     bridge-vids 3000
     mtu 9216
 
+#Link to moonshotn't-01 (EXP)
+auto swp31
+iface swp31
+    mtu 9216
+
 #Link to Moonshoot 4 (EXP)
 auto swp32
 iface swp32
@@ -73,6 +78,14 @@ iface bond-edc-edc
     mtu 9216
     clag-id 3
 
+#PO to moonshotn't-01 - One iface per SW in MLAG
+auto bond-hp-mnt1
+iface bond-hp-mnt1
+    bond-slaves swp31
+    bridge-vids 187 387
+    clag-id 31
+    mtu 9216
+
 #PO to moonshot-4 - One iface per SW in MLAG
 auto bond-hp-m4
 iface bond-hp-m4
@@ -84,7 +97,7 @@ iface bond-hp-m4
 #Brigde interface (All L2 Interfaces)
 auto bridge
 iface bridge
-    bridge-ports peerlink bond-hp-m4 bond-edc-edc swp6s0 swp6s1
+    bridge-ports peerlink bond-hp-mnt1 bond-hp-m4 bond-edc-edc swp6s0 swp6s1
     bridge-vids 2 87 187 287 387 3000
     bridge-vlan-aware yes
     mstpctl-treeprio 32768
