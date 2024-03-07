@@ -94,6 +94,17 @@ host worker-{{ worker_count }}-{{ loop.index }} {
 {% endfor %}
 {% endfor %}
 
+## Workers PVE
+{% for w in vars["workers_pve_" + env] %}
+{% set worker_count = loop.index-1 %}
+host worker-pve-{{ worker_count }} {
+  option host-name "worker-pve-{{ worker_count }}.{{ domain_name }}";
+  hardware ethernet {{ w.mac_address }};
+  fixed-address {{ w.ip_address }};
+  filename "{{ dhcp_matchbox }}";
+}
+{% endfor %}
+
 {% if ("matchbox_" + env) in vars %}
 ## Matchbox
 {% for m in vars["matchbox_" + env] %}

@@ -67,3 +67,14 @@ workers_exp:
       - ec:eb:b8:a5:a3:62
       - ec:eb:b8:a5:a3:63
     ipxe_binary: ipxe.efi
+
+# PVE control plane node subnet 10.87.3.0/24
+
+# PVE worker node subnet 10.87.4.0/24
+workers_pve_exp:
+  - ip_address: 10.87.4.1
+    mac_address: da:2f:18:ee:a6:92
+  - ip_address: 10.87.4.2
+    mac_address: a8:0e:a6:1b:dc:01
+  - ip_address: 10.87.4.3
+    mac_address: 2e:3d:ef:6e:ff:06
