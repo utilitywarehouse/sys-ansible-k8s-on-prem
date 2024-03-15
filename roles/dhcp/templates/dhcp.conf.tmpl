@@ -98,7 +98,7 @@ host worker-{{ worker_count }}-{{ loop.index }} {
 {% for w in vars["workers_pve_" + env] %}
 {% set worker_count = loop.index-1 %}
 host worker-pve-{{ worker_count }} {
-  option host-name "worker-pve-{{ worker_count }}.{{ domain_name }}";
+  option host-name "worker-{{ w.mac_address | hash('sha256') | truncate(6, True, '') }}.{{ domain_name }}";
   hardware ethernet {{ w.mac_address }};
   fixed-address {{ w.ip_address }};
   filename "{{ dhcp_matchbox }}";
