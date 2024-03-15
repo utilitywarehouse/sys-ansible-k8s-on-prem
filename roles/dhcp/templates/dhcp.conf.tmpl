@@ -94,6 +94,19 @@ host worker-{{ worker_count }}-{{ loop.index }} {
 {% endfor %}
 {% endfor %}
 
+## Workers PVE
+## Hostnames should also be calculated the same way on terraform under
+## https://github.com/utilitywarehouse/tf_kube_pve/blob/main/variables.tf
+{% for w in vars["workers_pve_" + env] %}
+{% set worker_count = loop.index-1 %}
+host worker-pve-{{ worker_count }} {
+  option host-name "worker-{{ w.mac_address | hash('sha256') | truncate(6, True, '') }}.{{ domain_name }}";
+  hardware ethernet {{ w.mac_address }};
+  fixed-address {{ w.ip_address }};
+  filename "{{ dhcp_matchbox }}";
+}
+{% endfor %}
+
 {% if ("matchbox_" + env) in vars %}
 ## Matchbox
 {% for m in vars["matchbox_" + env] %}
