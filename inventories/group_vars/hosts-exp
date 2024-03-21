@@ -78,3 +78,5 @@ workers_pve_exp:
     mac_address: a8:0e:a6:1b:dc:01
   - ip_address: 10.87.4.3
     mac_address: 2e:3d:ef:6e:ff:06
+  - ip_address: 10.87.4.4
+    mac_address: ea:0b:2a:17:53:3f
