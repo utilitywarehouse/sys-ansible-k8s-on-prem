@@ -71,12 +71,16 @@ workers_exp:
 # PVE control plane node subnet 10.87.3.0/24
 
 # PVE worker node subnet 10.87.4.0/24
+# MAC Addresses generated via:
+# printf $IP|sha256sum|sd '(..)(..)(..)(..)(..).*' '02:$1:$2:$3:$4:$5'
+# where the 02 first octet sets the "locally assigned" bit and ensure a unicast
+# address: https://serverfault.com/a/299563
 workers_pve_exp:
   - ip_address: 10.87.4.1
-    mac_address: da:2f:18:ee:a6:92
+    mac_address: 02:55:dd:72:de:15
   - ip_address: 10.87.4.2
-    mac_address: a8:0e:a6:1b:dc:01
+    mac_address: 02:e4:c5:31:55:15
   - ip_address: 10.87.4.3
-    mac_address: 2e:3d:ef:6e:ff:06
+    mac_address: 02:85:ce:54:1c:38
   - ip_address: 10.87.4.4
-    mac_address: ea:0b:2a:17:53:3f
+    mac_address: 02:3d:fc:f6:48:19
