@@ -52,6 +52,21 @@ host etcd-{{ etcd_count }}-{{ loop.index }} {
 {% endfor %}
 {% endfor %}
 
+## ETCD PVE
+## Hostnames should also be calculated the same way on terraform under
+## https://github.com/utilitywarehouse/tf_kube_pve/blob/main/variables.tf
+{% if etcd_pve is defined %}
+{% for e in etcd_pve if etcd_pve %}
+{% set etcd_count = loop.index-1 %}
+host etcd-pve-{{ etcd_count }} {
+  option host-name "etcd-{{ e.mac_address | hash('sha256') | truncate(6, True, '') }}.{{ domain_name }}";
+  hardware ethernet {{ e.mac_address }};
+  fixed-address {{ e.ip_address }};
+  filename "{{ dhcp_matchbox }}";
+}
+{% endfor %}
+{% endif %}
+
 ## Masters
 {% for m in vars["masters_" + env] %}
 {% set master_count = loop.index-1 %}
@@ -97,6 +112,7 @@ host worker-{{ worker_count }}-{{ loop.index }} {
 ## Workers PVE
 ## Hostnames should also be calculated the same way on terraform under
 ## https://github.com/utilitywarehouse/tf_kube_pve/blob/main/variables.tf
+{% if vars["workers_pve_" + env] is defined %}
 {% for w in vars["workers_pve_" + env] %}
 {% set worker_count = loop.index-1 %}
 host worker-pve-{{ worker_count }} {
@@ -106,6 +122,7 @@ host worker-pve-{{ worker_count }} {
   filename "{{ dhcp_matchbox }}";
 }
 {% endfor %}
+{% endif %}
 
 {% if ("matchbox_" + env) in vars %}
 ## Matchbox
