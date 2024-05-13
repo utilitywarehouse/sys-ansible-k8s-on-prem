@@ -25,6 +25,9 @@ router bgp 64513 vrf exp
 {% for w in workers_exp %}
  neighbor {{ w.ip_address }} remote-as 64514
 {% endfor %}
+{% for n in nat_exp %}
+ neighbor {{ n.ip_address }} remote-as 64512
+{% endfor %}
  neighbor 172.30.87.2 remote-as 51553
  neighbor 172.30.87.2 password {{ core_network_bgp_password }}
  neighbor 172.30.87.3 remote-as 51553

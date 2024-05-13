@@ -87,3 +87,11 @@ workers_pve_exp:
     mac_address: 02:85:ce:54:1c:38
   - ip_address: 10.87.4.4
     mac_address: 02:3d:fc:f6:48:19
+
+nat_exp:
+  - ip_address: 10.87.0.250
+    mac_addresses:
+      - 02:08:4d:e2:5e:c5
+  - ip_address: 10.87.0.251
+    mac_addresses:
+      - 02:ef:fc:2b:d3:78
