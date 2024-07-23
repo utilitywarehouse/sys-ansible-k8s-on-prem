@@ -3,7 +3,7 @@ cumulus-1-dev-prod
 cumulus-2-dev-prod
 
 [cumulus-1-dev-prod]
-10.91.5.95
+10.71.5.120
 [cumulus-1-dev-prod:vars]
 hostname=mer-cumulus-1
 router_id=10.254.254.253
@@ -23,7 +23,7 @@ vlan_1188_address=10.88.10.253/24
 vlan_2000_address=10.20.50.253/24
 
 [cumulus-2-dev-prod]
-10.91.5.126
+10.71.5.121
 [cumulus-2-dev-prod:vars]
 hostname=mer-cumulus-2
 router_id=10.254.254.254
@@ -49,9 +49,9 @@ cumulus-1-exp
 cumulus-2-exp
 
 [cumulus-1-exp]
-10.91.5.104
+10.71.5.11
 [cumulus-1-exp:vars]
-hostname=mer-cumulus-1-exp
+hostname=edc-cumulus-1-exp
 router_id=10.254.254.253
 clagd_backup_ip=10.254.254.254
 clagd_priority=1000
@@ -63,9 +63,9 @@ vlan_387_address=85.91.54.252/28
 vlan_3000_address=10.30.50.253/24
 
 [cumulus-2-exp]
-10.91.5.131
+10.71.5.12
 [cumulus-2-exp:vars]
-hostname=mer-cumulus-2
+hostname=edc-cumulus-2
 router_id=10.254.254.254
 clagd_backup_ip=10.254.254.253
 ## We need higher priority value than cumulus-1:
@@ -88,4 +88,4 @@ cumulus-dev-prod
 cumulus-exp
 
 [netapp]
-10.91.5.200
+10.71.5.15

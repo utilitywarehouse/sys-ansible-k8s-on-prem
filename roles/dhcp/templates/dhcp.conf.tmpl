@@ -52,6 +52,21 @@ host etcd-{{ etcd_count }}-{{ loop.index }} {
 {% endfor %}
 {% endfor %}
 
+## ETCD PVE
+## Hostnames should also be calculated the same way on terraform under
+## https://github.com/utilitywarehouse/tf_kube_pve/blob/main/variables.tf
+{% if etcd_pve is defined %}
+{% for e in etcd_pve if etcd_pve %}
+{% set etcd_count = loop.index-1 %}
+host etcd-pve-{{ etcd_count }} {
+  option host-name "etcd-{{ e.mac_address | hash('sha256') | truncate(6, True, '') }}.{{ domain_name }}";
+  hardware ethernet {{ e.mac_address }};
+  fixed-address {{ e.ip_address }};
+  filename "{{ dhcp_matchbox }}";
+}
+{% endfor %}
+{% endif %}
+
 ## Masters
 {% for m in vars["masters_" + env] %}
 {% set master_count = loop.index-1 %}
@@ -93,6 +108,21 @@ host worker-{{ worker_count }}-{{ loop.index }} {
 }
 {% endfor %}
 {% endfor %}
+
+## Workers PVE
+## Hostnames should also be calculated the same way on terraform under
+## https://github.com/utilitywarehouse/tf_kube_pve/blob/main/variables.tf
+{% if vars["workers_pve_" + env] is defined %}
+{% for w in vars["workers_pve_" + env] %}
+{% set worker_count = loop.index-1 %}
+host worker-pve-{{ worker_count }} {
+  option host-name "worker-{{ w.mac_address | hash('sha256') | truncate(6, True, '') }}.{{ domain_name }}";
+  hardware ethernet {{ w.mac_address }};
+  fixed-address {{ w.ip_address }};
+  filename "{{ dhcp_matchbox }}";
+}
+{% endfor %}
+{% endif %}
 
 {% if ("matchbox_" + env) in vars %}
 ## Matchbox
@@ -140,7 +170,7 @@ host wiresteward-{{ wiresteward_count }}-{{ loop.index }} {
 {% endfor %}
 {% endif %}
 
-{% if ("nat_" + env) in vars %}
+{% if ("nat_" + env) is defined %}
 ## NAT boxes
 {% for n in vars["nat_" + env] %}
 {% set nat_count = loop.index-1 %}
@@ -149,11 +179,15 @@ host nat-{{ nat_count }}-{{ loop.index }} {
   option host-name "nat-{{ nat_count }}.{{ domain_name }}";
   hardware ethernet {{ mac_address }};
   fixed-address {{ n.ip_address }};
+  {% if n.ipxe_binary is defined %}
   if exists user-class and option user-class = "iPXE" {
     filename "{{ dhcp_matchbox }}";
   } else {
     filename "{{ n.ipxe_binary }}";
   }
+  {% else %}
+    filename "{{ dhcp_matchbox }}";
+  {% endif %}
 }
 {% endfor %}
 {% endfor %}

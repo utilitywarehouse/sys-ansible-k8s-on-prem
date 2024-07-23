@@ -1,17 +1,18 @@
 - name: Ensure Cluster Management Interface is properly set
-  include: cluster-mgmt.yaml
+  include_tasks: cluster-mgmt.yaml
+  tags: cluster
 
 - name: Create core network connectivity
-  include: core.yaml
+  include_tasks: core.yaml
 
 - name: Create cfssl SVM and volume
-  include: cfssl.yaml
+  include_tasks: cfssl.yaml
 
 - name: Create kube SVM and trident user
-  include: kube.yaml
+  include_tasks: kube.yaml
 
 - name: Create nfs SVM and volumes
-  include: nfs.yaml
+  include_tasks: nfs.yaml
 
 - name: Create metrics exporter user
-  include: metrics-exporter.yaml
+  include_tasks: metrics-exporter.yaml

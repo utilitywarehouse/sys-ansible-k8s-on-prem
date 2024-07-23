@@ -43,8 +43,3 @@ nfs_aggregate_list:
 nfs_network_gateway: 10.30.50.1
 nfs_lif_netmask: 255.255.255.0
 nfs_data_lif_1_address: 10.30.50.54
-
-# minio
-minio_volume_aggregate: system_02_SSD_1
-minio_ips: 10.87.0.128/25
-minio_volume_size_gb: 20
