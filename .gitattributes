@@ -1,3 +1,1 @@
 inventories/group_vars/secrets/* filter=strongbox diff=strongbox
-roles/dhcp/files/ipxe.pxe filter=strongbox diff=strongbox
-roles/dhcp/files/ipxe.efi filter=strongbox diff=strongbox
