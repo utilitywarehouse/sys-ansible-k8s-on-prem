@@ -5,6 +5,8 @@
     allowed_protocols:
     - nfs
     ipspace: "{{ ipspace_name }}"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -16,6 +18,8 @@
     vserver: "{{ env }}_nfs"
     nfsv41: enabled
     nfsv3: disabled
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -33,6 +37,8 @@
     ro_rule: any
     rw_rule: any
     super_user_security: any
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -43,6 +49,8 @@
     destination: 0.0.0.0/0
     gateway: "{{ nfs_network_gateway }}"
     vserver: "{{ env }}_nfs"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -59,6 +67,8 @@
     address: "{{ nfs_data_lif_1_address }}"
     netmask: "{{ nfs_lif_netmask }}"
     vserver: "{{ env }}_nfs"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -69,6 +79,8 @@
   na_ontap_export_policy:
     name: matchbox
     vserver: "{{ env }}_nfs"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -84,6 +96,8 @@
     ro_rule: any
     rw_rule: any
     super_user_security: any
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -103,6 +117,8 @@
     is_infinite: False
     comment: "ansible created {{ env }} nfs matchbox volume"
     wait_for_completion: True
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"

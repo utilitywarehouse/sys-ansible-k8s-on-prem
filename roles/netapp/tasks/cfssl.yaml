@@ -6,6 +6,8 @@
     allowed_protocols:
     - iscsi
     ipspace: "{{ ipspace_name }}"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -16,6 +18,8 @@
     state: present
     service_state: started
     vserver: "{{ env }}_cfssl"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -27,6 +31,8 @@
     destination: 0.0.0.0/0
     gateway: "{{ cfssl_network_gateway }}"
     vserver: "{{ env }}_cfssl"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -44,6 +50,8 @@
     address: "{{ cfssl_data_lif_1_address }}"
     netmask: "{{ cfssl_lif_netmask }}"
     vserver: "{{ env }}_cfssl"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -61,6 +69,8 @@
     address: "{{ cfssl_data_lif_2_address }}"
     netmask: "{{ cfssl_lif_netmask }}"
     vserver: "{{ env }}_cfssl"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -74,6 +84,8 @@
     ostype: linux
     initiators: "{{ cfssl_igroup_initiator }}"
     vserver: "{{ env }}_cfssl"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -87,6 +99,8 @@
     count: 3
     enabled: True
     vserver: "{{ env }}_cfssl"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -106,6 +120,8 @@
     wait_for_completion: True
     comment: "ansible created {{ env }} cfssl volume"
     vserver: "{{ env }}_cfssl"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -119,8 +135,10 @@
     size: 2
     size_unit: gb
     ostype: linux
-    space_allocation: yes # enables support for the SCSI Thin Provisioning features, allows discard
+    space_allocation: true # enables support for the SCSI Thin Provisioning features, allows discard
     vserver: "{{ env }}_cfssl"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -132,6 +150,8 @@
     initiator_group_name: "{{ env }}CfsslIgroup"
     path: "/vol/{{ env }}_cfssl_vol/{{ env }}_cfssl_lun"
     vserver: "{{ env }}_cfssl"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -149,8 +169,9 @@
     auth_type: chap
     address_ranges: "{{ cfssl_initiator_ip }}"
     vserver: "{{ env }}_cfssl"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
-    validate_certs: no # collection errors when it cannot verify the server cert
   tags: cfssl

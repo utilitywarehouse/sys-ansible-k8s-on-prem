@@ -6,6 +6,8 @@
     allowed_protocols:
     - iscsi
     ipspace: "{{ ipspace_name }}"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -16,6 +18,8 @@
     state: present
     service_state: started
     vserver: "{{ env }}_kube"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -27,6 +31,8 @@
     destination: 0.0.0.0/0
     gateway: "{{ kube_network_gateway }}"
     vserver: "{{ env }}_kube"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -44,6 +50,8 @@
     address: "{{ kube_data_lif_1_address }}"
     netmask: "{{ kube_lif_netmask }}"
     vserver: "{{ env }}_kube"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -61,6 +69,8 @@
     address: "{{ kube_data_lif_2_address }}"
     netmask: "{{ kube_lif_netmask }}"
     vserver: "{{ env }}_kube"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -80,6 +90,8 @@
     address: "{{ kube_mgmt_lif_address }}"
     netmask: "{{ kube_lif_netmask }}"
     vserver: "{{ env }}_kube"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -97,6 +109,8 @@
     set_password: "{{ kube_trident_password }}"
     role_name: "vsadmin"
     vserver: "{{ env }}_kube"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -104,13 +118,16 @@
 
 # Create a policy group to be used for kubernetes volumes.
 - name: create qos policy group for kube volumes
-  na_ontap_qos_policy_group:
+  netapp.ontap.na_ontap_qos_policy_group:
     state: present
     name: "{{ env }}-pvc-fixed"
-    max_throughput: "{{ kube_pvc_qos_max_throughput }}"
-    min_throughput: "{{ kube_pvc_qos_min_throughput }}"
-    is_shared: false
+    fixed_qos_options:
+      max_throughput_iops: "{{ kube_pvc_qos_max_throughput_iops }}"
+      min_throughput_iops: "{{ kube_pvc_qos_min_throughput_iops }}"
+      capacity_shared: false
     vserver: "{{ env }}_kube"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"

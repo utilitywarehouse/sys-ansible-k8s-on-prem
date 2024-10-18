@@ -1,49 +1,10 @@
-# Assign a port on each node to each env vlan
-- name: create {{ env }} VLAN {{ vlan_id }} on {{ node_1 }} for {{ vlan_parent_interface_1 }}
-  na_ontap_net_vlan:
-    state: present
-    vlanid: "{{ vlan_id }}"
-    node: "{{ node_1 }}"
-    parent_interface: "{{ vlan_parent_interface_1 }}"
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-
-- name: create {{ env }} VLAN {{ vlan_id }} on {{ node_2 }} for {{ vlan_parent_interface_1 }}
-  na_ontap_net_vlan:
-    state: present
-    vlanid: "{{ vlan_id }}"
-    node: "{{ node_2 }}"
-    parent_interface: "{{ vlan_parent_interface_1 }}"
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-
-- name: create {{ env }} VLAN {{ vlan_id }} on {{ node_1 }} for {{ vlan_parent_interface_2 }}
-  na_ontap_net_vlan:
-    state: present
-    vlanid: "{{ vlan_id }}"
-    node: "{{ node_1 }}"
-    parent_interface: "{{ vlan_parent_interface_2 }}"
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-
-- name: create {{ env }} VLAN {{ vlan_id }} on {{ node_2 }} for {{ vlan_parent_interface_2 }}
-  na_ontap_net_vlan:
-    state: present
-    vlanid: "{{ vlan_id }}"
-    node: "{{ node_2 }}"
-    parent_interface: "{{ vlan_parent_interface_2 }}"
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-
 # Create ipscpaces for each env
 - name: Create {{ env }} dedicated ipspace
   na_ontap_ipspace:
     state: present
     name: "{{ ipspace_name }}"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -60,6 +21,65 @@
       - "{{ node_1 }}:{{ vlan_port_2 }}"
       - "{{ node_2 }}:{{ vlan_port_1 }}"
       - "{{ node_2 }}:{{ vlan_port_2 }}"
+    use_rest: always
+    validate_certs: false
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+# Assign a port on each node to each env vlan
+- name: create {{ env }} VLAN {{ vlan_id }} on {{ node_1 }} for {{ vlan_parent_interface_1 }}
+  na_ontap_net_vlan:
+    state: present
+    vlanid: "{{ vlan_id }}"
+    node: "{{ node_1 }}"
+    parent_interface: "{{ vlan_parent_interface_1 }}"
+    broadcast_domain: "{{ env }}_domain"
+    ipspace: "{{ ipspace_name }}"
+    use_rest: always
+    validate_certs: false
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+- name: create {{ env }} VLAN {{ vlan_id }} on {{ node_2 }} for {{ vlan_parent_interface_1 }}
+  na_ontap_net_vlan:
+    state: present
+    vlanid: "{{ vlan_id }}"
+    node: "{{ node_2 }}"
+    parent_interface: "{{ vlan_parent_interface_1 }}"
+    broadcast_domain: "{{ env }}_domain"
+    ipspace: "{{ ipspace_name }}"
+    use_rest: always
+    validate_certs: false
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+- name: create {{ env }} VLAN {{ vlan_id }} on {{ node_1 }} for {{ vlan_parent_interface_2 }}
+  na_ontap_net_vlan:
+    state: present
+    vlanid: "{{ vlan_id }}"
+    node: "{{ node_1 }}"
+    parent_interface: "{{ vlan_parent_interface_2 }}"
+    broadcast_domain: "{{ env }}_domain"
+    ipspace: "{{ ipspace_name }}"
+    use_rest: always
+    validate_certs: false
+    hostname: "{{ inventory_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+
+- name: create {{ env }} VLAN {{ vlan_id }} on {{ node_2 }} for {{ vlan_parent_interface_2 }}
+  na_ontap_net_vlan:
+    state: present
+    vlanid: "{{ vlan_id }}"
+    node: "{{ node_2 }}"
+    parent_interface: "{{ vlan_parent_interface_2 }}"
+    broadcast_domain: "{{ env }}_domain"
+    ipspace: "{{ ipspace_name }}"
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -71,6 +91,8 @@
     name: Default
     mtu: "{{ default_mtu }}"
     ipspace: Default
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -83,6 +105,8 @@
     node_name: "{{ node_1 }}"
     transport: https
     support: True
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -93,6 +117,8 @@
     node_name: "{{ node_2 }}"
     transport: https
     support: True
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -107,6 +133,8 @@
     vserver: system
     domains: netapp.com
     nameservers: 1.1.1.1,1.0.0.1
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"

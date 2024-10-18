@@ -10,6 +10,8 @@
     set_password: "{{ metrics_exporter_password }}"
     role_name: readonly
     vserver: system
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
