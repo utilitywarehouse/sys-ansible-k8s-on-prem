@@ -61,4 +61,4 @@ netapp-prod-execute:
 	ansible-playbook -i inventories/hosts netapp_prod.yaml --diff $(ARGS) --skip-tags=cluster
 
 netapp-collections-install:
-	ansible-galaxy collection install netapp.ontap
+	ansible-galaxy collection install --upgrade netapp.ontap

@@ -4,29 +4,13 @@
 # Unfortunately, ansible modules do not seem to offer a way to create failover
 # groups, so we need to run the following command manual:
 # system::> network interface failover-groups create -vserver system -failover-group mgmt_failover -targets system-01:e0M,system-02:e0M
-
 # Next we need to configure the cluster management lif to use the above failover
-# group. Equivalent netapp cli command:
-# system::> network interface modify -vserver system -lif cluster_mgmt_lif -failover-policy system-defined -failover-group mgmt_failover
-- name: Ensure Cluster Management interface failover group
-  netapp.ontap.na_ontap_interface:
-    state: present
-    interface_name: cluster_mgmt_lif
-    home_port: e0M
-    home_node: system-01
-    role: cluster-mgmt
-    admin_status: up
-    failover_policy: system-defined
-    failover_group: mgmt_failover
-    firewall_policy: mgmt
-    vserver: system
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-  tags: cluster
+# group.
+# system::> network interface modify -vserver system -lif cluster_mgmt_lif_ld7 -failover-policy system-defined -failover-group mgmt_failover
 
 # New management interfaces for ld7 network
 # We also need to create a subnet to assign them to and specify the gateway
+# For some reason this will always signal a change for modifying ip_ranges.
 - name: Create management subnet for ld7
   netapp.ontap.na_ontap_net_subnet:
     state: present
@@ -36,6 +20,8 @@
     gateway: 10.71.5.1
     ipspace: Default
     broadcast_domain: Default
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -46,6 +32,7 @@
     state: present
     admin_status: up
     interface_name: system-01_mgmt_ld7
+    interface_type: ip
     address: 10.71.5.110
     netmask: 255.255.255.0
     force_subnet_association: true
@@ -57,6 +44,8 @@
     firewall_policy: mgmt
     role: node-mgmt
     vserver: system
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -67,6 +56,7 @@
     state: present
     admin_status: up
     interface_name: system-02_mgmt_ld7
+    interface_type: ip
     address: 10.71.5.111
     netmask: 255.255.255.0
     force_subnet_association: true
@@ -78,37 +68,19 @@
     firewall_policy: mgmt
     role: node-mgmt
     vserver: system
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-  tags: cluster
-
-- name: Cluster Management failover interface
-  netapp.ontap.na_ontap_interface:
-    state: present
-    admin_status: up
-    interface_name: cluster_mgmt_lif_ld7
-    address: 10.71.5.15
-    netmask: 255.255.255.0
-    force_subnet_association: true
-    broadcast_domain: Default
-    ipspace: Default
-    home_port: e0M
-    home_node: system-01
-    service_policy: default-management
-    failover_policy: system-defined
-    failover_group: mgmt_failover
-    firewall_policy: mgmt
-    vserver: system
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
   tags: cluster
 
 # Ensure lldb mode is enabled for both controllers
+# Will always present a change as it needs to run options command remotely.
 - name: Enable lldb on nodes
   netapp.ontap.na_ontap_rest_cli:
-    validate_certs: false # Self signed NetApp certificate
+    use_rest: always
+    validate_certs: false
     hostname: "{{ inventory_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"

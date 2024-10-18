@@ -9,8 +9,8 @@ vlan_parent_interface_2: e1b
 vlan_port_2: e1b-1000
 default_mtu: "9000"
 ipspace_name: "prod_ipspace"
-kube_pvc_qos_max_throughput: 15000iops
-kube_pvc_qos_min_throughput: 3000iops
+kube_pvc_qos_max_throughput_iops: 15000
+kube_pvc_qos_min_throughput_iops: 3000
 
 # cfssl
 cfssl_aggregate_list:
