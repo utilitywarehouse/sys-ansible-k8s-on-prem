@@ -136,6 +136,7 @@
     size_unit: gb
     ostype: linux
     space_allocation: true # enables support for the SCSI Thin Provisioning features, allows discard
+    space_reserve: false # Do not reserve the space. This means that `volume show` and metrics will be able to show the correct usage values. It matches trident config for PVCs
     vserver: "{{ env }}_cfssl"
     use_rest: always
     validate_certs: false
