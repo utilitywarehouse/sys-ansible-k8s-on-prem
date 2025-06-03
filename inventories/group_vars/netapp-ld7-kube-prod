@@ -1,0 +1,10 @@
+env: "prod"
+mgmt_vserver: ld7-kube
+netapp_username: "admin"
+node_1: k8s-aff-a-50-01
+node_2: k8s-aff-a-50-02
+mgmt_ip_ranges: ['10.71.5.19-10.71.5.21']
+node_1_interface_name: ld7-kube-01_mgmt1
+node_1_interface_address: 10.71.5.19
+node_2_interface_name: ld7-kube-02_mgmt1
+node_2_interface_address: 10.71.5.20

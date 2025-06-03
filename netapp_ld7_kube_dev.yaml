@@ -1,0 +1,11 @@
+- hosts: netapp-ld7-kube
+  collections:
+    - netapp.ontap
+  roles:
+    - netapp
+  vars_files:
+    - inventories/group_vars/netapp-ld7-kube-dev
+    - inventories/group_vars/secrets/netapp-ld7-kube-common
+    - inventories/group_vars/secrets/netapp-dev
+  vars:
+    ansible_connection: local

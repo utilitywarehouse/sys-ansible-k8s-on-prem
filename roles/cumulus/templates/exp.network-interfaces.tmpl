@@ -60,6 +60,13 @@ iface swp6s1
     bridge-vids 3000
     mtu 9216
 
+##EXP - Link to Netapp Controller ( Primary interface - No Bond interface is supported by NetApp)
+auto swp6s3
+iface swp6s3
+    alias swp6s3 exp-netapp-ld7-kube-ctrl-pri
+    bridge-vids 3000
+    mtu 9216
+
 #Link to moonshotn't-02 (EXP)
 auto swp30
 iface swp30
@@ -110,7 +117,7 @@ iface bond-hp-m4
 #Brigde interface (All L2 Interfaces)
 auto bridge
 iface bridge
-    bridge-ports peerlink bond-hp-mnt1 bond-hp-mnt2 bond-hp-m4 bond-edc-edc swp6s0 swp6s1
+    bridge-ports peerlink bond-hp-mnt1 bond-hp-mnt2 bond-hp-m4 bond-edc-edc swp6s0 swp6s1 swp6s3
     bridge-vids 2 87 187 287 387 3000
     bridge-vlan-aware yes
     mstpctl-treeprio 32768
