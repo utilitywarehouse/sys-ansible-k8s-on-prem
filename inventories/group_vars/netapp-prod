@@ -1,7 +1,13 @@
 env: "prod"
+mgmt_vserver: system
 netapp_username: "admin"
 node_1: system-01
 node_2: system-02
+mgmt_ip_ranges: ['10.71.5.15', '10.71.5.109-10.71.5.112']
+node_1_interface_name: system-01_mgmt_ld7
+node_1_interface_address: 10.71.5.110
+node_2_interface_name: system-02_mgmt_ld7
+node_2_interface_address: 10.71.5.111
 vlan_id: "1000"
 vlan_parent_interface_1: e1a
 vlan_port_1: e1a-1000

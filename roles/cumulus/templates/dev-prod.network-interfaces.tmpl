@@ -57,6 +57,13 @@ iface swp6
     bridge-vids 2000
     mtu 9216
 
+#DEV - Link to Netapp-ld7-kube Controller "A" ( No Bond interface is supported by NetApp)
+auto swp9
+iface swp9
+    alias swp9 dev-netapp-ld7-kube-ctrl-a
+    bridge-vids 2000
+    mtu 9216
+
 #PROD - Link to Netapp Controller "B" ( No Bond interface is supported by NetApp)
 auto swp28
 iface swp28
@@ -149,7 +156,7 @@ iface bond-hp-m3-dev
 #Brigde interface (All L2 Interfaces)
 auto bridge
 iface bridge
-    bridge-ports peerlink bond-hp-m0-dev bond-hp-m1-dev bond-hp-m1-prod bond-hp-m2-dev bond-hp-m3-dev bond-mer-mer swp5 swp6 swp28 swp29
+    bridge-ports peerlink bond-hp-m0-dev bond-hp-m1-dev bond-hp-m1-prod bond-hp-m2-dev bond-hp-m3-dev bond-mer-mer swp5 swp6 swp9 swp28 swp29
     bridge-vids 2 88 89 188 189 288 289 388 389 1000 2000
     bridge-vlan-aware yes
     mstpctl-treeprio 32768

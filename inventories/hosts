@@ -89,3 +89,6 @@ cumulus-exp
 
 [netapp]
 10.71.5.15
+
+[netapp-ld7-kube]
+10.71.5.21

@@ -18,9 +18,9 @@
     ipspace: "{{ ipspace_name }}"
     ports:
       - "{{ node_1 }}:{{ vlan_port_1 }}"
-      - "{{ node_1 }}:{{ vlan_port_2 }}"
+      #- "{{ node_1 }}:{{ vlan_port_2 }}"
       - "{{ node_2 }}:{{ vlan_port_1 }}"
-      - "{{ node_2 }}:{{ vlan_port_2 }}"
+      #- "{{ node_2 }}:{{ vlan_port_2 }}"
     use_rest: always
     validate_certs: false
     hostname: "{{ inventory_hostname }}"
@@ -56,33 +56,35 @@
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
 
-- name: create {{ env }} VLAN {{ vlan_id }} on {{ node_1 }} for {{ vlan_parent_interface_2 }}
-  na_ontap_net_vlan:
-    state: present
-    vlanid: "{{ vlan_id }}"
-    node: "{{ node_1 }}"
-    parent_interface: "{{ vlan_parent_interface_2 }}"
-    broadcast_domain: "{{ env }}_domain"
-    ipspace: "{{ ipspace_name }}"
-    use_rest: always
-    validate_certs: false
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-
-- name: create {{ env }} VLAN {{ vlan_id }} on {{ node_2 }} for {{ vlan_parent_interface_2 }}
-  na_ontap_net_vlan:
-    state: present
-    vlanid: "{{ vlan_id }}"
-    node: "{{ node_2 }}"
-    parent_interface: "{{ vlan_parent_interface_2 }}"
-    broadcast_domain: "{{ env }}_domain"
-    ipspace: "{{ ipspace_name }}"
-    use_rest: always
-    validate_certs: false
-    hostname: "{{ inventory_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
+# Not applicable on the new gear where we have one fast port from each
+# controller to Cumulus switch per env.
+#- name: create {{ env }} VLAN {{ vlan_id }} on {{ node_1 }} for {{ vlan_parent_interface_2 }}
+#  na_ontap_net_vlan:
+#    state: present
+#    vlanid: "{{ vlan_id }}"
+#    node: "{{ node_1 }}"
+#    parent_interface: "{{ vlan_parent_interface_2 }}"
+#    broadcast_domain: "{{ env }}_domain"
+#    ipspace: "{{ ipspace_name }}"
+#    use_rest: always
+#    validate_certs: false
+#    hostname: "{{ inventory_hostname }}"
+#    username: "{{ netapp_username }}"
+#    password: "{{ netapp_password }}"
+#
+#- name: create {{ env }} VLAN {{ vlan_id }} on {{ node_2 }} for {{ vlan_parent_interface_2 }}
+#  na_ontap_net_vlan:
+#    state: present
+#    vlanid: "{{ vlan_id }}"
+#    node: "{{ node_2 }}"
+#    parent_interface: "{{ vlan_parent_interface_2 }}"
+#    broadcast_domain: "{{ env }}_domain"
+#    ipspace: "{{ ipspace_name }}"
+#    use_rest: always
+#    validate_certs: false
+#    hostname: "{{ inventory_hostname }}"
+#    username: "{{ netapp_username }}"
+#    password: "{{ netapp_password }}"
 
 # Use jumbo frames in the default broadcast domain
 - name: Set mtu {{ default_mtu }} for Default broadcast domain
@@ -127,10 +129,10 @@
 # settings to resolve. For us the management/node svm is system so we need to
 # configure it to resolve netapp addresses.
 # https://community.netapp.com/t5/ONTAP-Discussions/Configuring-Autosupport-Resolve-DNS/m-p/116019/highlight/true#M24743
-- name: Configure dns on system vserver to be able to resolve autosupport traffic
+- name: Configure dns on {{ vserver }} vserver to be able to resolve autosupport traffic
   na_ontap_dns:
     state: present
-    vserver: system
+    vserver: "{{ mgmt_vserver }}"
     domains: netapp.com
     nameservers: 1.1.1.1,1.0.0.1
     use_rest: always

@@ -16,7 +16,7 @@
     state: present
     subnet: 10.71.5.0/24
     name: mgmt-ld7
-    ip_ranges: [ '10.71.5.15', '10.71.5.109-10.71.5.112']
+    ip_ranges: "{{ mgmt_ip_ranges }}"
     gateway: 10.71.5.1
     ipspace: Default
     broadcast_domain: Default
@@ -27,23 +27,23 @@
     password: "{{ netapp_password }}"
   tags: cluster
 
-- name: Ensure system-01_mgmt_ld7 interface address
+- name: Ensure {{ node_1_interface_name }} interface address
   netapp.ontap.na_ontap_interface:
     state: present
     admin_status: up
-    interface_name: system-01_mgmt_ld7
+    interface_name: "{{ node_1_interface_name }}"
     interface_type: ip
-    address: 10.71.5.110
+    address: "{{ node_1_interface_address }}"
     netmask: 255.255.255.0
     force_subnet_association: true
-    broadcast_domain: Default
     ipspace: Default
+    broadcast_domain: Default
     home_port: e0M
-    home_node: system-01
+    home_node: "{{ node_1 }}"
     failover_policy: local-only
     firewall_policy: mgmt
     role: node-mgmt
-    vserver: system
+    vserver: "{{ mgmt_vserver }}"
     use_rest: always
     validate_certs: false
     hostname: "{{ inventory_hostname }}"
@@ -51,23 +51,23 @@
     password: "{{ netapp_password }}"
   tags: cluster
 
-- name: Ensure system-02_mgmt_ld7 interface address
+- name: Ensure {{ node_2_interface_name }} interface address
   netapp.ontap.na_ontap_interface:
     state: present
     admin_status: up
-    interface_name: system-02_mgmt_ld7
+    interface_name: "{{ node_2_interface_name }}"
     interface_type: ip
-    address: 10.71.5.111
+    address: "{{ node_2_interface_address }}"
     netmask: 255.255.255.0
     force_subnet_association: true
-    broadcast_domain: Default
     ipspace: Default
+    broadcast_domain: Default
     home_port: e0M
-    home_node: system-02
+    home_node: "{{ node_2 }}"
     failover_policy: local-only
     firewall_policy: mgmt
     role: node-mgmt
-    vserver: system
+    vserver: "{{ mgmt_vserver }}"
     use_rest: always
     validate_certs: false
     hostname: "{{ inventory_hostname }}"
