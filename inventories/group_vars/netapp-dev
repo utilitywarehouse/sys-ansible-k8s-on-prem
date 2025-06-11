@@ -1,4 +1,5 @@
 env: "dev"
+mgmt_vserver: system
 netapp_username: "admin"
 node_1: system-01
 node_2: system-02

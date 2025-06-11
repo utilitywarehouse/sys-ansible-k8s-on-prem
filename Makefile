@@ -55,10 +55,10 @@ netapp-dev-execute:
 	ansible-playbook -i inventories/hosts netapp_dev.yaml --diff $(ARGS) --skip-tags=cluster
 
 netapp-ld7-kube-dev:
-	ansible-playbook -i inventories/hosts netapp_ld7_kube_dev.yaml --diff --check $(ARGS) --skip-tags=matchbox,cluster
+	ansible-playbook -i inventories/hosts netapp_ld7_kube_dev.yaml --diff --check $(ARGS) --skip-tags=cluster
 
 netapp-ld7-kube-dev-execute:
-	ansible-playbook -i inventories/hosts netapp_ld7_kube_dev.yaml --diff $(ARGS) --skip-tags=matchbox,cluster
+	ansible-playbook -i inventories/hosts netapp_ld7_kube_dev.yaml --diff $(ARGS) --skip-tags=cluster
 
 netapp-exp:
 	ansible-playbook -i inventories/hosts netapp_exp.yaml --diff --check $(ARGS) --skip-tags=matchbox,cluster
@@ -77,6 +77,12 @@ netapp-prod:
 
 netapp-prod-execute:
 	ansible-playbook -i inventories/hosts netapp_prod.yaml --diff $(ARGS) --skip-tags=cluster
+
+netapp-ld7-kube-prod:
+	ansible-playbook -i inventories/hosts netapp_ld7_kube_prod.yaml --diff --check $(ARGS) --skip-tags=cluster
+
+netapp-ld7-kube-prod-execute:
+	ansible-playbook -i inventories/hosts netapp_ld7_kube_prod.yaml --diff $(ARGS) --skip-tags=cluster
 
 netapp-collections-install:
 	ansible-galaxy collection install --upgrade netapp.ontap

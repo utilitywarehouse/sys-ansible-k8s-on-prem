@@ -6,6 +6,6 @@
   vars_files:
     - inventories/group_vars/netapp-ld7-kube-prod
     - inventories/group_vars/secrets/netapp-ld7-kube-common
-    #- inventories/group_vars/secrets/netapp-prod
+    - inventories/group_vars/secrets/netapp-prod
   vars:
     ansible_connection: local
