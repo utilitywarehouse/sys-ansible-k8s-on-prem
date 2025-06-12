@@ -8,3 +8,47 @@ node_1_interface_name: ld7-kube-01_mgmt1
 node_1_interface_address: 10.71.5.19
 node_2_interface_name: ld7-kube-02_mgmt1
 node_2_interface_address: 10.71.5.20
+vlan_id: "1000"
+vlan_parent_interface_1: e4b
+vlan_port_1: e4b-1000
+default_mtu: "9000"
+ipspace_name: "prod_ipspace"
+kube_pvc_qos_max_throughput_iops: 15000
+kube_pvc_qos_min_throughput_iops: 3000
+
+# cfssl
+cfssl_aggregate_list:
+  - k8s_aff_a_50_01_SSD_1
+  - k8s_aff_a_50_02_SSD_1
+cfssl_volume_aggregate: k8s_aff_a_50_01_SSD_1
+cfssl_network_gateway: 10.10.50.1
+cfssl_lif_netmask: 255.255.255.0
+cfssl_data_lif_1_address: 10.10.50.114
+cfssl_data_lif_2_address: 10.10.50.115
+cfssl_igroup_initiator: "iqn.2005-03.org.open-iscsi:cfssl"
+cfssl_initiator_ip: 10.89.0.8
+
+# kube
+kube_aggregate_list:
+  - k8s_aff_a_50_01_SSD_1
+  - k8s_aff_a_50_02_SSD_1
+kube_network_gateway: 10.10.50.1
+kube_lif_netmask: 255.255.255.0
+kube_data_lif_1_address: 10.10.50.104
+kube_data_lif_2_address: 10.10.50.105
+kube_mgmt_lif_address: 10.10.50.106
+
+kube_trident_user: trident
+
+# nfs
+nfs_aggregate_list:
+  - k8s_aff_a_50_01_SSD_1
+  - k8s_aff_a_50_02_SSD_1
+nfs_network_gateway: 10.10.50.1
+nfs_lif_netmask: 255.255.255.0
+nfs_data_lif_1_address: 10.10.50.124
+
+# matchbox
+matchbox_volume_aggregate: k8s_aff_a_50_02_SSD_1
+matchbox_ips: 10.89.0.248,10.89.0.249
+matchbox_volume_size_mb: 20000
