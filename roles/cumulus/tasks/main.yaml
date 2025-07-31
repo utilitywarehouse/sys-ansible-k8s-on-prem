@@ -25,7 +25,7 @@
 - name: Update repositories cache and install certificates package
   apt:
     name: ca-certificates
-    update_cache: yes
+    #update_cache: yes
   tags: certs
 
 - name: Ensure /opt/bin directory exists

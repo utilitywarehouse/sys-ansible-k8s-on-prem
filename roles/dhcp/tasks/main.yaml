@@ -2,7 +2,7 @@
   apt:
     name: isc-dhcp-server
     state: present
-    update_cache: yes
+    #update_cache: yes
   tags: dhcp
 
 - name: Create /etc/dhcp-{{ dhcp_role_name }}
@@ -39,7 +39,7 @@
   apt:
     name: atftpd
     state: present
-    update_cache: yes
+    #update_cache: yes
   tags: tftp
 
 - name: Create /etc/tftpboot-{{ dhcp_role_name }}
