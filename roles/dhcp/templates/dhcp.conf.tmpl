@@ -179,15 +179,15 @@ host nat-{{ nat_count }}-{{ loop.index }} {
   option host-name "nat-{{ nat_count }}.{{ domain_name }}";
   hardware ethernet {{ mac_address }};
   fixed-address {{ n.ip_address }};
-  {% if n.ipxe_binary is defined %}
+{% if n.ipxe_binary is defined %}
   if exists user-class and option user-class = "iPXE" {
     filename "{{ dhcp_matchbox }}";
   } else {
     filename "{{ n.ipxe_binary }}";
   }
-  {% else %}
+{% else %}
     filename "{{ dhcp_matchbox }}";
-  {% endif %}
+{% endif %}
 }
 {% endfor %}
 {% endfor %}
