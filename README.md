@@ -20,8 +20,8 @@ make dhcp-dev
 will run the [dhcp-dev](./dhcp_dev.yaml) playbook against hosts specified under
 the defined [hosts](./inventories/hosts)
 
-`DRY_RUN` environment variable can be used as `DRY_RUN=true make dhcp-dev` to
-perform dry runs and check diffs before actually applying playbooks config.
+Regular targets will perfrom dry runs and check diffs, use the `-execute`
+versions to apply the playbooks config.
 
 `netapp-collections-install` is also available to install netapp library
 dependencies that do not ship with ansible by default.
