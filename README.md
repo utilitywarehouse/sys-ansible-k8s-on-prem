@@ -3,7 +3,7 @@ terraform based model.
 
 # Requirements
 
-- ansible >=2.7 local setup
+- ansible (>=2.7 and <=10.7) local setup (eg: `pipx install --include-deps ansible==10.7.0`)
 - `system` strongbox key
 - `make netapp-collections-install` to install netapp.ontap collections for ansible
 - `pip install netapp-lib requests` is also needed by ansible netapp modules to run
