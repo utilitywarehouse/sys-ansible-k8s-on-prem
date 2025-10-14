@@ -112,6 +112,205 @@ auto swp25
 iface swp25
     mtu 9216
 
+
+# Ports: ILOCZ21010KJH
+auto swp11s0
+iface swp11s0
+    description "To ILOCZ21010KJH"
+    mtu 9216
+
+auto swp11s1
+iface swp11s1
+    description "To ILOCZ21010KJH"
+    mtu 9216
+
+# Ports: ILOCZ21010KKK
+auto swp11s2
+iface swp11s2
+    description "To ILOCZ21010KKK"
+    mtu 9216
+
+auto swp11s3
+iface swp11s3
+    description "To ILOCZ21010KKK"
+    mtu 9216
+
+# Ports: ILOCZ21010N3V
+auto swp12s0
+iface swp12s0
+    description "To ILOCZ21010N3V"
+    mtu 9216
+
+auto swp12s1
+iface swp12s1
+    description "To ILOCZ21010N3V"
+    mtu 9216
+
+# Ports: ILOCZ21010KK8
+auto swp12s2
+iface swp12s2
+    description "To ILOCZ21010KK8"
+    mtu 9216
+
+auto swp12s3
+iface swp12s3
+    description "To ILOCZ21010KK8"
+    mtu 9216
+
+# Ports: ILOCZ21010N33
+auto swp13s0
+iface swp13s0
+    description "To ILOCZ21010N33"
+    mtu 9216
+
+auto swp13s1
+iface swp13s1
+    description "To ILOCZ21010N33"
+    mtu 9216
+
+# Ports: ILOCZ21010KL3
+auto swp13s2
+iface swp13s2
+    description "To ILOCZ21010KL3"
+    mtu 9216
+
+auto swp13s3
+iface swp13s3
+    description "To ILOCZ21010KL3"
+    mtu 9216
+
+# Ports: ILOCZ21010N3X
+auto swp14s0
+iface swp14s0
+    description "To ILOCZ21010N3X"
+    mtu 9216
+
+auto swp14s1
+iface swp14s1
+    description "To ILOCZ21010N3X"
+    mtu 9216
+
+# Ports: ILOCZ21010KJD
+auto swp14s2
+iface swp14s2
+    description "To ILOCZ21010KJD"
+    mtu 9216
+
+auto swp14s3
+iface swp14s3
+    description "To ILOCZ21010KJD"
+    mtu 9216
+
+# Ports: ILOCZ21010KJM
+auto swp15s0
+iface swp15s0
+    description "To ILOCZ21010KJM"
+    mtu 9216
+
+auto swp15s1
+iface swp15s1
+    description "To ILOCZ21010KJM"
+    mtu 9216
+
+# Ports: ILOCZ21010N41
+auto swp15s2
+iface swp15s2
+    description "To ILOCZ21010N41"
+    mtu 9216
+
+auto swp15s3
+iface swp15s3
+    description "To ILOCZ21010N41"
+    mtu 9216
+
+# Ports: ILOCZ21010N3Z
+auto swp16s0
+iface swp16s0
+    description "To ILOCZ21010N3Z"
+    mtu 9216
+
+auto swp16s1
+iface swp16s1
+    description "To ILOCZ21010N3Z"
+    mtu 9216
+
+# Ports: ILOCZ21010KKQ
+auto swp16s2
+iface swp16s2
+    description "To ILOCZ21010KKQ"
+    mtu 9216
+
+auto swp16s3
+iface swp16s3
+    description "To ILOCZ21010KKQ"
+    mtu 9216
+
+# Ports: ILOCZ21010N3R
+auto swp17s0
+iface swp17s0
+    description "To ILOCZ21010N3R"
+    mtu 9216
+
+auto swp17s1
+iface swp17s1
+    description "To ILOCZ21010N3R"
+    mtu 9216
+
+# Ports: ILOCZ21010KJQ
+auto swp17s2
+iface swp17s2
+    description "To ILOCZ21010KJQ"
+    mtu 9216
+
+auto swp17s3
+iface swp17s3
+    description "To ILOCZ21010KJQ"
+    mtu 9216
+
+# Ports: ILOCZ21010KJ8
+auto swp18s0
+iface swp18s0
+    description "To ILOCZ21010KJ8"
+    mtu 9216
+
+auto swp18s1
+iface swp18s1
+    description "To ILOCZ21010KJ8"
+    mtu 9216
+
+# Ports: ILOCZ21010N3W
+auto swp18s2
+iface swp18s2
+    description "To ILOCZ21010N3W"
+    mtu 9216
+
+auto swp18s3
+iface swp18s3
+    description "To ILOCZ21010N3W"
+    mtu 9216
+
+# Ports: ILOCZ21010N2X
+auto swp19s0
+iface swp19s0
+    description "To ILOCZ21010N2X"
+    mtu 9216
+
+auto swp19s1
+iface swp19s1
+    description "To ILOCZ21010N2X"
+    mtu 9216
+
+# Ports: ILOCZ21010KJN
+auto swp19s2
+iface swp19s2
+    description "To ILOCZ21010KJN"
+    mtu 9216
+
+auto swp19s3
+iface swp19s3
+    description "To ILOCZ21010KJN"
+    mtu 9216
+
 #PO to Merit-network-VPC
 auto bond-mer-mer
 iface bond-mer-mer
@@ -160,10 +359,154 @@ iface bond-hp-m3-dev
     clag-id 25
     mtu 9216
 
+# PO to - ILOCZ21010KJH - Two Interfaces per SW in MLAG
+auto bond-cz21010kjh
+iface bond-cz21010kjh
+    bond-slaves swp11s0 swp11s1
+    bridge-vids 188 189 388 389
+    clag-id 40
+    mtu 9216
+
+# PO to - ILOCZ21010KKK - Two Interfaces per SW in MLAG
+auto bond-cz21010kkk
+iface bond-cz21010kkk
+    bond-slaves swp11s2 swp11s3
+    bridge-vids 188 189 388 389
+    clag-id 41
+    mtu 9216
+
+# PO to - ILOCZ21010N3V - Two Interfaces per SW in MLAG
+auto bond-cz21010n3v
+iface bond-cz21010n3v
+    bond-slaves swp12s0 swp12s1
+    bridge-vids 188 189 388 389
+    clag-id 42
+    mtu 9216
+
+# PO to - ILOCZ21010KK8 - Two Interfaces per SW in MLAG
+auto bond-cz21010kk8
+iface bond-cz21010kk8
+    bond-slaves swp12s2 swp12s3
+    bridge-vids 188 189 388 389
+    clag-id 43
+    mtu 9216
+
+# PO to - ILOCZ21010N33 - Two Interfaces per SW in MLAG
+auto bond-cz21010n33
+iface bond-cz21010n33
+    bond-slaves swp13s0 swp13s1
+    bridge-vids 188 189 388 389
+    clag-id 44
+    mtu 9216
+
+# PO to - ILOCZ21010KL3 - Two Interfaces per SW in MLAG
+auto bond-cz21010kl3
+iface bond-cz21010kl3
+    bond-slaves swp13s2 swp13s3
+    bridge-vids 188 189 388 389
+    clag-id 45
+    mtu 9216
+
+# PO to - ILOCZ21010N3X - Two Interfaces per SW in MLAG
+auto bond-cz21010n3x
+iface bond-cz21010n3x
+    bond-slaves swp14s0 swp14s1
+    bridge-vids 188 189 388 389
+    clag-id 46
+    mtu 9216
+
+# PO to - ILOCZ21010KJD - Two Interfaces per SW in MLAG
+auto bond-cz21010kjd
+iface bond-cz21010kjd
+    bond-slaves swp14s2 swp14s3
+    bridge-vids 188 189 388 389
+    clag-id 47
+    mtu 9216
+
+# PO to - ILOCZ21010KJM - Two Interfaces per SW in MLAG
+auto bond-cz21010kjm
+iface bond-cz21010kjm
+    bond-slaves swp15s0 swp15s1
+    bridge-vids 188 189 388 389
+    clag-id 48
+    mtu 9216
+
+# PO to - ILOCZ21010N41 - Two Interfaces per SW in MLAG
+auto bond-cz21010n41
+iface bond-cz21010n41
+    bond-slaves swp15s2 swp15s3
+    bridge-vids 188 189 388 389
+    clag-id 49
+    mtu 9216
+
+# PO to - ILOCZ21010N3Z - Two Interfaces per SW in MLAG
+auto bond-cz21010n3z
+iface bond-cz21010n3z
+    bond-slaves swp16s0 swp16s1
+    bridge-vids 188 189 388 389
+    clag-id 50
+    mtu 9216
+
+# PO to - ILOCZ21010KKQ - Two Interfaces per SW in MLAG
+auto bond-cz21010kkq
+iface bond-cz21010kkq
+    bond-slaves swp16s2 swp16s3
+    bridge-vids 188 189 388 389
+    clag-id 51
+    mtu 9216
+
+# PO to - ILOCZ21010N3R - Two Interfaces per SW in MLAG
+auto bond-cz21010n3r
+iface bond-cz21010n3r
+    bond-slaves swp17s0 swp17s1
+    bridge-vids 188 189 388 389
+    clag-id 52
+    mtu 9216
+
+# PO to - ILOCZ21010KJQ - Two Interfaces per SW in MLAG
+auto bond-cz21010kjq
+iface bond-cz21010kjq
+    bond-slaves swp17s2 swp17s3
+    bridge-vids 188 189 388 389
+    clag-id 53
+    mtu 9216
+
+# PO to - ILOCZ21010KJ8 - Two Interfaces per SW in MLAG
+auto bond-cz21010kj8
+iface bond-cz21010kj8
+    bond-slaves swp18s0 swp18s1
+    bridge-vids 188 189 388 389
+    clag-id 54
+    mtu 9216
+
+# PO to - ILOCZ21010N3W - Two Interfaces per SW in MLAG
+auto bond-cz21010n3w
+iface bond-cz21010n3w
+    bond-slaves swp18s2 swp18s3
+    bridge-vids 188 189 388 389
+    clag-id 55
+    mtu 9216
+
+# PO to - ILOCZ21010N2X - Two Interfaces per SW in MLAG
+auto bond-cz21010n2x
+iface bond-cz21010n2x
+    bond-slaves swp19s0 swp19s1
+    bridge-vids 188 189 388 389
+    clag-id 56
+    mtu 9216
+
+# PO to - ILOCZ21010KJN - Two Interfaces per SW in MLAG
+auto bond-cz21010kjn
+iface bond-cz21010kjn
+    bond-slaves swp19s2 swp19s3
+    bridge-vids 188 189 388 389
+    clag-id 57
+    mtu 9216
+
 #Brigde interface (All L2 Interfaces)
 auto bridge
 iface bridge
-    bridge-ports peerlink bond-hp-m0-dev bond-hp-m1-dev bond-hp-m1-prod bond-hp-m2-dev bond-hp-m3-dev bond-mer-mer swp5 swp6 swp9 swp10 swp28 swp29
+    bridge-ports peerlink bond-hp-m0-dev bond-hp-m1-dev bond-hp-m1-prod bond-hp-m2-dev bond-hp-m3-dev bond-mer-mer swp5 swp6 swp9 swp10 swp28 swp29 bond-cz21010kjh bond-cz21010kkk bond-cz21010n3v bond-cz21010kk8 bond-cz21010n33 bond-cz21010kl3 bond-cz21010n3x bond-cz21010kjd bond-cz21010kjm bond-cz21010n41 bond-cz21010n3z bond-cz21010kkq bond-cz21010n3r bond-cz21010kjq bond-cz21010kj8 bond-cz21010n3w bond-cz21010n2x bond-cz21010kjn
     bridge-vids 2 88 89 188 189 288 289 388 389 1000 2000
     bridge-vlan-aware yes
     mstpctl-treeprio 32768
