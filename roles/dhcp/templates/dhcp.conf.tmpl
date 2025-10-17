@@ -44,6 +44,7 @@ host cfssl-pve {
 {% endif %}
 
 ## Etcd
+{% if etcd is defined %}
 {% for e in etcd %}
 {% set etcd_count = loop.index-1 %}
 {% for mac_address in e.mac_addresses %}
@@ -63,6 +64,7 @@ host etcd-{{ etcd_count }}-{{ loop.index }} {
 }
 {% endfor %}
 {% endfor %}
+{% endif %}
 
 ## ETCD PVE
 ## Hostnames should also be calculated the same way on terraform under
@@ -71,7 +73,7 @@ host etcd-{{ etcd_count }}-{{ loop.index }} {
 {% for e in etcd_pve if etcd_pve %}
 {% set etcd_count = loop.index-1 %}
 host etcd-pve-{{ etcd_count }} {
-  option host-name "etcd-{{ e.mac_address | hash('sha256') | truncate(6, True, '') }}.{{ domain_name }}";
+  option host-name "etcd-{{ etcd_count }}.{{ domain_name }}";
   hardware ethernet {{ e.mac_address }};
   fixed-address {{ e.ip_address }};
   filename "{{ dhcp_matchbox }}";
