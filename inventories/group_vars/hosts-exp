@@ -1,11 +1,12 @@
 env: exp
 
-cfssl:
-  - ip_address: 10.87.0.8
-    mac_addresses:
-      - 94:18:82:70:da:72
-      - 94:18:82:70:da:73
-    ipxe_binary: ipxe.efi
+# MAC Addresses generated via:
+# printf $IP|sha256sum|sd '(..)(..)(..)(..)(..).*' '02:$1:$2:$3:$4:$5'
+# where the 02 first octet sets the "locally assigned" bit and ensure a unicast
+# address: https://serverfault.com/a/299563
+cfssl_pve:
+  ip_address: 10.87.0.8
+  mac_address: 02:bc:e9:2e:10:62
 
 etcd:
   - ip_address: 10.87.0.32
