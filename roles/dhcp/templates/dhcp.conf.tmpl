@@ -36,7 +36,7 @@ host cfssl-{{ loop.index }} {
 ## Cfssl PVE
 {% if cfssl_pve is defined %}
 host cfssl-pve {
-  option host-name "cfssl_pve.{{ domain_name }}";
+  option host-name "cfssl.{{ domain_name }}";
   hardware ethernet {{ cfssl_pve.mac_address }};
   fixed-address {{ cfssl_pve.ip_address }};
   filename "{{ dhcp_matchbox }}";
