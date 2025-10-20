@@ -20,19 +20,18 @@ etcd_pve:
   - ip_address: 10.87.0.34
     mac_address: 02:6c:6b:08:00:a4
 
-masters_exp:
-  - ip_address: 10.87.0.64
-    mac_addresses:
-      - 94:18:82:70:5c:52
-      - 94:18:82:70:5c:53
-    ipxe_binary: ipxe.efi
-  - ip_address: 10.87.0.65
-    mac_addresses:
-      - 94:18:82:70:4c:42
-      - 94:18:82:70:4c:43
-    ipxe_binary: ipxe.efi
-
 # PVE master node subnet 10.87.3.0/24
+# MAC Addresses generated via:
+# printf $IP|sha256sum|sd '(..)(..)(..)(..)(..).*' '02:$1:$2:$3:$4:$5'
+# where the 02 first octet sets the "locally assigned" bit and ensure a unicast
+# address: https://serverfault.com/a/299563
+masters_pve_exp:
+  - ip_address: 10.87.3.1
+    mac_address: 02:28:d0:fe:85:5d
+  - ip_address: 10.87.3.2
+    mac_address: 02:25:4e:8d:d6:a7
+  - ip_address: 10.87.3.3
+    mac_address: 02:16:29:71:76:d2
 
 # PVE worker node subnet 10.87.4.0/24
 # MAC Addresses generated via:
