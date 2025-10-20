@@ -103,6 +103,7 @@ host master-{{ master_count }}-{{ loop.index }} {
 {% endfor %}
 
 ## Workers
+{% if vars["workers_" + env] is defined %}
 {% for w in vars["workers_" + env] %}
 {% set worker_count = loop.index-1 %}
 {% for mac_address in w.mac_addresses %}
@@ -122,6 +123,7 @@ host worker-{{ worker_count }}-{{ loop.index }} {
 }
 {% endfor %}
 {% endfor %}
+{% endif %}
 
 ## Workers PVE
 ## Hostnames should also be calculated the same way on terraform under
