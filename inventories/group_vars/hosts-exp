@@ -32,38 +32,6 @@ masters_exp:
       - 94:18:82:70:4c:43
     ipxe_binary: ipxe.efi
 
-workers_exp:
-  - ip_address: 10.87.0.128
-    mac_addresses:
-      - 94:18:82:70:6a:a2
-      - 94:18:82:70:6a:a3
-    ipxe_binary: ipxe.efi
-  - ip_address: 10.87.0.129
-    mac_addresses:
-      - ec:eb:b8:a5:14:d2
-      - ec:eb:b8:a5:14:d3
-    ipxe_binary: ipxe.efi
-  - ip_address: 10.87.0.130
-    mac_addresses:
-      - ec:eb:b8:a4:3d:d2
-      - ec:eb:b8:a4:3d:d3
-    ipxe_binary: ipxe.efi
-  - ip_address: 10.87.0.131
-    mac_addresses:
-      - 94:18:82:70:6c:e2
-      - 94:18:82:70:6c:e3
-    ipxe_binary: ipxe.efi
-  - ip_address: 10.87.0.132
-    mac_addresses:
-      - 14:02:ec:07:3c:62
-      - 14:02:ec:07:3c:63
-    ipxe_binary: ipxe.efi
-  - ip_address: 10.87.0.133
-    mac_addresses:
-      - ec:eb:b8:a5:a3:62
-      - ec:eb:b8:a5:a3:63
-    ipxe_binary: ipxe.efi
-
 # PVE master node subnet 10.87.3.0/24
 
 # PVE worker node subnet 10.87.4.0/24
@@ -80,6 +48,16 @@ workers_pve_exp:
     mac_address: 02:85:ce:54:1c:38
   - ip_address: 10.87.4.4
     mac_address: 02:3d:fc:f6:48:19
+  - ip_address: 10.87.4.5
+    mac_address: 02:11:d5:dc:27:dd
+  - ip_address: 10.87.4.6
+    mac_address: 02:87:f8:ea:60:26
+  - ip_address: 10.87.4.7
+    mac_address: 02:a3:53:81:34:64
+  - ip_address: 10.87.4.8
+    mac_address: 02:45:bc:41:d3:0b
+  - ip_address: 10.87.4.9
+    mac_address: 02:06:f8:39:8c:2a
 
 nat_exp:
   - ip_address: 10.87.0.250
