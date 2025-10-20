@@ -82,6 +82,7 @@ host etcd-pve-{{ etcd_count }} {
 {% endif %}
 
 ## Masters
+{% if vars["masters_" + env] is defined %}
 {% for m in vars["masters_" + env] %}
 {% set master_count = loop.index-1 %}
 {% for mac_address in m.mac_addresses %}
@@ -101,6 +102,22 @@ host master-{{ master_count }}-{{ loop.index }} {
 }
 {% endfor %}
 {% endfor %}
+{% endif %}
+
+## Masters PVE
+## Hostnames should also be calculated the same way on terraform under
+## https://github.com/utilitywarehouse/tf_kube_pve/blob/main/variables.tf
+{% if vars["masters_pve_" + env] is defined %}
+{% for m in vars["masters_pve_" + env] %}
+{% set master_count = loop.index-1 %}
+host master-pve-{{ master_count }} {
+  option host-name "master-{{ m.mac_address | hash('sha256') | truncate(6, True, '') }}.{{ domain_name }}";
+  hardware ethernet {{ m.mac_address }};
+  fixed-address {{ m.ip_address }};
+  filename "{{ dhcp_matchbox }}";
+}
+{% endfor %}
+{% endif %}
 
 ## Workers
 {% if vars["workers_" + env] is defined %}
