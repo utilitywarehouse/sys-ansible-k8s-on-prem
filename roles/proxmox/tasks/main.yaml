@@ -79,3 +79,11 @@
   notify:
     - reload network interfaces
   tags: network
+
+- name: Copy sysctl.conf configuration
+  copy:
+    src: files/sysctl.conf
+    dest: "/etc/sysctl.conf"
+  notify:
+    - update sysctl
+  tags: network
