@@ -7,6 +7,11 @@
     cmd: "ifreload -a"
   become: yes
 
+- name: update sysctl
+  command:
+    cmd: "sysctl -p"
+  become: yes
+
 - name: restart node-exporter
   service:
     name: node-exporter.service
