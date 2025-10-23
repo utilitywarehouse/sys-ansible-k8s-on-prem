@@ -1,0 +1,32 @@
+- name: daemon-reload
+  systemd:
+    daemon_reload: yes
+
+- name: reload network interfaces
+  command:
+    cmd: "ifreload -a"
+  become: yes
+
+- name: restart node-exporter
+  service:
+    name: node-exporter.service
+    state: restarted
+  become: yes
+
+- name: restart sshd
+  service:
+    name: sshd.service
+    state: restarted
+  become: yes
+
+- name: restart ssh-key-agent
+  service:
+    name: ssh-key-agent.service
+    state: restarted
+  become: yes
+
+- name: restart promtail
+  service:
+    name: promtail@mgmt.service
+    state: restarted
+  become: yes

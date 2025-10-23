@@ -92,3 +92,13 @@ cumulus-exp
 
 [netapp-ld7-kube]
 10.71.5.21
+
+[proxmox-exp:children]
+proxmox-1-exp
+proxmox-2-exp
+
+[proxmox-1-exp]
+10.87.0.96
+
+[proxmox-2-exp]
+10.87.0.97
