@@ -1,77 +1,37 @@
 env: exp
 
-cfssl:
-  - ip_address: 10.87.0.8
-    mac_addresses:
-      - 94:18:82:70:da:72
-      - 94:18:82:70:da:73
-    ipxe_binary: ipxe.efi
-
-etcd:
-  - ip_address: 10.87.0.32
-    mac_addresses:
-      - 94:18:82:70:fa:d2
-      - 94:18:82:70:fa:d3
-    ipxe_binary: ipxe.efi
-  - ip_address: 10.87.0.33
-    mac_addresses:
-      - ec:eb:b8:a5:62:92
-      - ec:eb:b8:a5:62:93
-    ipxe_binary: ipxe.efi
+# MAC Addresses generated via:
+# printf $IP|sha256sum|sd '(..)(..)(..)(..)(..).*' '02:$1:$2:$3:$4:$5'
+# where the 02 first octet sets the "locally assigned" bit and ensure a unicast
+# address: https://serverfault.com/a/299563
+cfssl_pve:
+  ip_address: 10.87.0.8
+  mac_address: 02:bc:e9:2e:10:62
 
 # MAC Addresses generated via:
 # printf $IP|sha256sum|sd '(..)(..)(..)(..)(..).*' '02:$1:$2:$3:$4:$5'
 # where the 02 first octet sets the "locally assigned" bit and ensure a unicast
 # address: https://serverfault.com/a/299563
 etcd_pve:
+  - ip_address: 10.87.0.32
+    mac_address: 02:9a:2a:72:6f:05
+  - ip_address: 10.87.0.33
+    mac_address: 02:75:dc:c0:34:c5
   - ip_address: 10.87.0.34
     mac_address: 02:6c:6b:08:00:a4
 
-masters_exp:
-  - ip_address: 10.87.0.64
-    mac_addresses:
-      - 94:18:82:70:5c:52
-      - 94:18:82:70:5c:53
-    ipxe_binary: ipxe.efi
-  - ip_address: 10.87.0.65
-    mac_addresses:
-      - 94:18:82:70:4c:42
-      - 94:18:82:70:4c:43
-    ipxe_binary: ipxe.efi
-
-workers_exp:
-  - ip_address: 10.87.0.128
-    mac_addresses:
-      - 94:18:82:70:6a:a2
-      - 94:18:82:70:6a:a3
-    ipxe_binary: ipxe.efi
-  - ip_address: 10.87.0.129
-    mac_addresses:
-      - ec:eb:b8:a5:14:d2
-      - ec:eb:b8:a5:14:d3
-    ipxe_binary: ipxe.efi
-  - ip_address: 10.87.0.130
-    mac_addresses:
-      - ec:eb:b8:a4:3d:d2
-      - ec:eb:b8:a4:3d:d3
-    ipxe_binary: ipxe.efi
-  - ip_address: 10.87.0.131
-    mac_addresses:
-      - 94:18:82:70:6c:e2
-      - 94:18:82:70:6c:e3
-    ipxe_binary: ipxe.efi
-  - ip_address: 10.87.0.132
-    mac_addresses:
-      - 14:02:ec:07:3c:62
-      - 14:02:ec:07:3c:63
-    ipxe_binary: ipxe.efi
-  - ip_address: 10.87.0.133
-    mac_addresses:
-      - ec:eb:b8:a5:a3:62
-      - ec:eb:b8:a5:a3:63
-    ipxe_binary: ipxe.efi
-
 # PVE master node subnet 10.87.3.0/24
+# MAC Addresses generated via:
+# printf $IP|sha256sum|sd '(..)(..)(..)(..)(..).*' '02:$1:$2:$3:$4:$5'
+# where the 02 first octet sets the "locally assigned" bit and ensure a unicast
+# address: https://serverfault.com/a/299563
+masters_pve_exp:
+  - ip_address: 10.87.0.64
+    mac_address: 02:a2:95:3e:71:19
+  - ip_address: 10.87.0.65
+    mac_address: 02:5d:61:72:7e:cc
+  - ip_address: 10.87.0.66
+    mac_address: 02:1d:e0:22:ab:85
 
 # PVE worker node subnet 10.87.4.0/24
 # MAC Addresses generated via:
@@ -79,14 +39,24 @@ workers_exp:
 # where the 02 first octet sets the "locally assigned" bit and ensure a unicast
 # address: https://serverfault.com/a/299563
 workers_pve_exp:
-  - ip_address: 10.87.4.1
-    mac_address: 02:55:dd:72:de:15
-  - ip_address: 10.87.4.2
-    mac_address: 02:e4:c5:31:55:15
-  - ip_address: 10.87.4.3
-    mac_address: 02:85:ce:54:1c:38
-  - ip_address: 10.87.4.4
-    mac_address: 02:3d:fc:f6:48:19
+  - ip_address: 10.87.0.128
+    mac_address: 02:90:aa:89:0d:08
+  - ip_address: 10.87.0.129
+    mac_address: 02:4e:7e:8c:77:7e
+  - ip_address: 10.87.0.130
+    mac_address: 02:67:e7:a9:c7:4d
+  - ip_address: 10.87.0.131
+    mac_address: 02:1b:21:62:67:10
+  - ip_address: 10.87.0.132
+    mac_address: 02:20:72:37:82:98
+  - ip_address: 10.87.0.133
+    mac_address: 02:fe:04:72:74:e2
+  - ip_address: 10.87.0.134
+    mac_address: 02:dc:bf:a3:19:43
+  - ip_address: 10.87.0.135
+    mac_address: 02:46:6e:b1:6b:7f
+  - ip_address: 10.87.0.136
+    mac_address: 02:7b:bd:1d:00:e8
 
 nat_exp:
   - ip_address: 10.87.0.250

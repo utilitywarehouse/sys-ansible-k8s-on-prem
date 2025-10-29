@@ -1,0 +1,18 @@
+[Unit]
+Description=ssh-key-agent
+After=network-online.target
+Wants=network-online.target
+[Service]
+Restart=on-failure
+RestartSec=10
+ExecStartPre=-/usr/bin/mkdir -p /root/.ssh
+ExecStartPre=-/usr/bin/touch /root/.ssh/authorized_keys_infra
+ExecStartPre=-/usr/bin/chmod 700 /root/.ssh
+ExecStartPre=-/usr/bin/chmod 644 /root/.ssh/authorized_keys_infra
+Environment="SKA_KEY_URI={{ssh_key_agent_ska_key_uri}}"
+Environment="SKA_GROUPS={{ssh_key_agent_ska_groups}}"
+Environment="SKA_AKF_LOC=/root/.ssh/authorized_keys_infra"
+Environment="SKA_INTERVAL=60"
+ExecStart=/opt/bin/ssh-key-agent
+[Install]
+WantedBy=multi-user.target

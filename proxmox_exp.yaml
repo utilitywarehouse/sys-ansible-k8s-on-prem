@@ -1,0 +1,10 @@
+- hosts: proxmox-exp
+  user: root
+  connection: ssh
+  roles:
+    - proxmox
+  vars:
+    network_templates: exp
+  vars_files:
+    - inventories/group_vars/proxmox
+  become: yes

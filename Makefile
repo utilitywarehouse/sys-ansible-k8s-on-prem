@@ -86,3 +86,9 @@ netapp-ld7-kube-prod-execute:
 
 netapp-collections-install:
 	ansible-galaxy collection install --upgrade netapp.ontap
+
+proxmox-exp:
+	ansible-playbook -i inventories/hosts proxmox_exp.yaml --diff --check $(ARGS)
+
+proxmox-exp-execute:
+	ansible-playbook -i inventories/hosts proxmox_exp.yaml --diff $(ARGS)

@@ -18,11 +18,8 @@ interface vlan387 vrf exp
 router-id {{ router_id }}
 !
 router bgp 64513 vrf exp
-{% for m in masters_exp %}
+{% for m in masters_pve_exp %}
  neighbor {{ m.ip_address }} remote-as 64514
-{% endfor %}
-{% for w in workers_exp %}
- neighbor {{ w.ip_address }} remote-as 64514
 {% endfor %}
 {% for w in workers_pve_exp %}
  neighbor {{ w.ip_address }} remote-as 64514

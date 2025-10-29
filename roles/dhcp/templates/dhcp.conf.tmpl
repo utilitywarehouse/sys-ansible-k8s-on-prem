@@ -12,6 +12,7 @@ subnet {{ subnet }} netmask {{ netmask }} {
 }
 
 ## Cfssl
+{% if cfssl is defined %}
 {% for c in cfssl %}
 {% for mac_address in c.mac_addresses %}
 host cfssl-{{ loop.index }} {
@@ -30,8 +31,20 @@ host cfssl-{{ loop.index }} {
 }
 {% endfor %}
 {% endfor %}
+{% endif %}
+
+## Cfssl PVE
+{% if cfssl_pve is defined %}
+host cfssl-pve {
+  option host-name "cfssl.{{ domain_name }}";
+  hardware ethernet {{ cfssl_pve.mac_address }};
+  fixed-address {{ cfssl_pve.ip_address }};
+  filename "{{ dhcp_matchbox }}";
+}
+{% endif %}
 
 ## Etcd
+{% if etcd is defined %}
 {% for e in etcd %}
 {% set etcd_count = loop.index-1 %}
 {% for mac_address in e.mac_addresses %}
@@ -51,6 +64,7 @@ host etcd-{{ etcd_count }}-{{ loop.index }} {
 }
 {% endfor %}
 {% endfor %}
+{% endif %}
 
 ## ETCD PVE
 ## Hostnames should also be calculated the same way on terraform under
@@ -59,7 +73,7 @@ host etcd-{{ etcd_count }}-{{ loop.index }} {
 {% for e in etcd_pve if etcd_pve %}
 {% set etcd_count = loop.index-1 %}
 host etcd-pve-{{ etcd_count }} {
-  option host-name "etcd-{{ e.mac_address | hash('sha256') | truncate(6, True, '') }}.{{ domain_name }}";
+  option host-name "etcd-{{ etcd_count }}.{{ domain_name }}";
   hardware ethernet {{ e.mac_address }};
   fixed-address {{ e.ip_address }};
   filename "{{ dhcp_matchbox }}";
@@ -68,6 +82,7 @@ host etcd-pve-{{ etcd_count }} {
 {% endif %}
 
 ## Masters
+{% if vars["masters_" + env] is defined %}
 {% for m in vars["masters_" + env] %}
 {% set master_count = loop.index-1 %}
 {% for mac_address in m.mac_addresses %}
@@ -87,8 +102,25 @@ host master-{{ master_count }}-{{ loop.index }} {
 }
 {% endfor %}
 {% endfor %}
+{% endif %}
+
+## Masters PVE
+## Hostnames should also be calculated the same way on terraform under
+## https://github.com/utilitywarehouse/tf_kube_pve/blob/main/variables.tf
+{% if vars["masters_pve_" + env] is defined %}
+{% for m in vars["masters_pve_" + env] %}
+{% set master_count = loop.index-1 %}
+host master-pve-{{ master_count }} {
+  option host-name "master-{{ m.mac_address | hash('sha256') | truncate(6, True, '') }}.{{ domain_name }}";
+  hardware ethernet {{ m.mac_address }};
+  fixed-address {{ m.ip_address }};
+  filename "{{ dhcp_matchbox }}";
+}
+{% endfor %}
+{% endif %}
 
 ## Workers
+{% if vars["workers_" + env] is defined %}
 {% for w in vars["workers_" + env] %}
 {% set worker_count = loop.index-1 %}
 {% for mac_address in w.mac_addresses %}
@@ -108,6 +140,7 @@ host worker-{{ worker_count }}-{{ loop.index }} {
 }
 {% endfor %}
 {% endfor %}
+{% endif %}
 
 ## Workers PVE
 ## Hostnames should also be calculated the same way on terraform under
