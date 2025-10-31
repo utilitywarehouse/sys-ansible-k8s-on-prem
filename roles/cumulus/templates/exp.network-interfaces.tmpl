@@ -94,7 +94,9 @@ iface bond-edc-edc
 auto bond-hp-mnt2
 iface bond-hp-mnt2
     bond-slaves swp30
+    bridge-pvid 187
     bridge-vids 187 387
+    bridge-vlan-aware yes
     clag-id 30
     mtu 9216
 
@@ -102,7 +104,9 @@ iface bond-hp-mnt2
 auto bond-hp-mnt1
 iface bond-hp-mnt1
     bond-slaves swp31
+    bridge-pvid 187
     bridge-vids 187 387
+    bridge-vlan-aware yes
     clag-id 31
     mtu 9216
 
@@ -159,6 +163,16 @@ auto vlan187
 iface vlan187
     address {{ vlan_187_address }}
     address-virtual 00:00:5E:00:01:01 10.87.0.1/16
+    vlan-id 187
+    vlan-raw-device bridge
+    vrf exp
+    mtu 9216
+
+#EXP Internal VLAN for Proxmox subnet - where the pve host and VMs live
+auto vlan187-pve
+iface vlan187-pve
+    address {{ vlan_187_pve_address }}
+    address-virtual 00:00:5E:00:01:05 10.87.4.1/22
     vlan-id 187
     vlan-raw-device bridge
     vrf exp
