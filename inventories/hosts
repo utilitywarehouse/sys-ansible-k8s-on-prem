@@ -98,7 +98,7 @@ proxmox-1-exp
 proxmox-2-exp
 
 [proxmox-1-exp]
-10.87.0.96
+10.87.4.96
 
 [proxmox-2-exp]
-10.87.0.97
+10.87.4.97
