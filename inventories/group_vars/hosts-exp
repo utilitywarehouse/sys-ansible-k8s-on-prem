@@ -5,20 +5,20 @@ env: exp
 # where the 02 first octet sets the "locally assigned" bit and ensure a unicast
 # address: https://serverfault.com/a/299563
 cfssl_pve:
-  ip_address: 10.87.0.8
-  mac_address: 02:bc:e9:2e:10:62
+  ip_address: 10.87.4.8
+  mac_address: 02:45:bc:41:d3:0b
 
 # MAC Addresses generated via:
 # printf $IP|sha256sum|sd '(..)(..)(..)(..)(..).*' '02:$1:$2:$3:$4:$5'
 # where the 02 first octet sets the "locally assigned" bit and ensure a unicast
 # address: https://serverfault.com/a/299563
 etcd_pve:
-  - ip_address: 10.87.0.32
-    mac_address: 02:9a:2a:72:6f:05
-  - ip_address: 10.87.0.33
-    mac_address: 02:75:dc:c0:34:c5
-  - ip_address: 10.87.0.34
-    mac_address: 02:6c:6b:08:00:a4
+  - ip_address: 10.87.4.32
+    mac_address: 02:b7:c6:e9:bc:b0
+  - ip_address: 10.87.4.33
+    mac_address: 02:10:0c:b3:03:8f
+  - ip_address: 10.87.4.34
+    mac_address: 02:b1:d6:64:cd:98
 
 # PVE master node subnet 10.87.3.0/24
 # MAC Addresses generated via:
@@ -26,12 +26,12 @@ etcd_pve:
 # where the 02 first octet sets the "locally assigned" bit and ensure a unicast
 # address: https://serverfault.com/a/299563
 masters_pve_exp:
-  - ip_address: 10.87.0.64
-    mac_address: 02:a2:95:3e:71:19
-  - ip_address: 10.87.0.65
-    mac_address: 02:5d:61:72:7e:cc
-  - ip_address: 10.87.0.66
-    mac_address: 02:1d:e0:22:ab:85
+  - ip_address: 10.87.4.64
+    mac_address: 02:3c:63:d9:f7:d5
+  - ip_address: 10.87.4.65
+    mac_address: 02:ce:1c:4e:99:ee
+  - ip_address: 10.87.4.66
+    mac_address: 02:ce:fb:48:9b:c5
 
 # PVE worker node subnet 10.87.4.0/24
 # MAC Addresses generated via:
@@ -39,24 +39,24 @@ masters_pve_exp:
 # where the 02 first octet sets the "locally assigned" bit and ensure a unicast
 # address: https://serverfault.com/a/299563
 workers_pve_exp:
-  - ip_address: 10.87.0.128
-    mac_address: 02:90:aa:89:0d:08
-  - ip_address: 10.87.0.129
-    mac_address: 02:4e:7e:8c:77:7e
-  - ip_address: 10.87.0.130
-    mac_address: 02:67:e7:a9:c7:4d
-  - ip_address: 10.87.0.131
-    mac_address: 02:1b:21:62:67:10
-  - ip_address: 10.87.0.132
-    mac_address: 02:20:72:37:82:98
-  - ip_address: 10.87.0.133
-    mac_address: 02:fe:04:72:74:e2
-  - ip_address: 10.87.0.134
-    mac_address: 02:dc:bf:a3:19:43
-  - ip_address: 10.87.0.135
-    mac_address: 02:46:6e:b1:6b:7f
-  - ip_address: 10.87.0.136
-    mac_address: 02:7b:bd:1d:00:e8
+  - ip_address: 10.87.5.1
+    mac_address: 02:ba:21:4e:7b:e7
+  - ip_address: 10.87.5.2
+    mac_address: 02:5b:f1:ad:e4:09
+  - ip_address: 10.87.5.3
+    mac_address: 02:13:54:af:4f:32
+  - ip_address: 10.87.5.4
+    mac_address: 02:7c:bf:91:41:5b
+  - ip_address: 10.87.5.5
+    mac_address: 02:5a:f7:c1:07:f7
+  - ip_address: 10.87.5.6
+    mac_address: 02:a2:74:7f:63:f7
+  - ip_address: 10.87.5.7
+    mac_address: 02:94:c0:f0:42:65
+  - ip_address: 10.87.5.8
+    mac_address: 02:8b:71:05:ab:17
+  - ip_address: 10.87.5.9
+    mac_address: 02:64:7d:f7:fb:8b
 
 nat_exp:
   - ip_address: 10.87.0.250

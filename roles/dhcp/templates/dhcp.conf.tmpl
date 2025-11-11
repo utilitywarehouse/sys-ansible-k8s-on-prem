@@ -5,10 +5,16 @@ option domain-name-servers {{ dns }};
 allow booting;
 allow bootp;
 
-subnet {{ subnet }} netmask {{ netmask }} {
+
+shared-network net {
   deny unknown-clients;
-  option routers {{ router }};
   option domain-name "{{ domain_name }}";
+  subnet {{ subnet }} netmask {{ netmask }} {
+    option routers {{ router }};
+  }
+  subnet {{ subnet_pve }} netmask {{ netmask_pve }} {
+    option routers {{ router_pve }};
+  }
 }
 
 ## Cfssl

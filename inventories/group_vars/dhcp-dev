@@ -6,6 +6,9 @@ dhcp_role_name: dev
 subnet: 10.88.0.0
 netmask: 255.255.255.0
 router: 10.88.0.1
+subnet_pve: 10.88.4.0
+netmask_pve: 255.255.252.0
+router_pve: 10.88.4.1
 domain_name: dev.merit.uw.systems
 dns: 1.1.1.1,1.0.0.1,8.8.8.8
 

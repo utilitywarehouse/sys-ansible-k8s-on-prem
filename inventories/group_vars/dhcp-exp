@@ -6,6 +6,9 @@ dhcp_role_name: exp
 subnet: 10.87.0.0
 netmask: 255.255.255.0
 router: 10.87.0.1
+subnet_pve: 10.87.4.0
+netmask_pve: 255.255.252.0
+router_pve: 10.87.4.1
 domain_name: exp-1.merit.uw.systems
 dns: 1.1.1.1,1.0.0.1,8.8.8.8
 

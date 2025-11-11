@@ -21,7 +21,7 @@ cfssl_lif_netmask: 255.255.255.0
 cfssl_data_lif_1_address: 10.30.50.144
 cfssl_data_lif_2_address: 10.30.50.145
 cfssl_igroup_initiator: "iqn.2005-03.org.open-iscsi:exp-cfssl"
-cfssl_initiator_ip: 10.87.0.8
+cfssl_initiator_ip: 10.87.4.8
 
 # kube
 kube_aggregate_list:
