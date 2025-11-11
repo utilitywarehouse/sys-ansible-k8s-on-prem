@@ -94,8 +94,8 @@ iface bond-edc-edc
 auto bond-hp-mnt2
 iface bond-hp-mnt2
     bond-slaves swp30
-    bridge-pvid 187
-    bridge-vids 187 387
+    bridge-pvid 487
+    bridge-vids 387 487
     clag-id 30
     mtu 9216
 
@@ -103,8 +103,8 @@ iface bond-hp-mnt2
 auto bond-hp-mnt1
 iface bond-hp-mnt1
     bond-slaves swp31
-    bridge-pvid 187
-    bridge-vids 187 387
+    bridge-pvid 487
+    bridge-vids 387 487
     clag-id 31
     mtu 9216
 
@@ -120,7 +120,7 @@ iface bond-hp-m4
 auto bridge
 iface bridge
     bridge-ports peerlink bond-hp-mnt1 bond-hp-mnt2 bond-hp-m4 bond-edc-edc swp6s0 swp6s1 swp6s3
-    bridge-vids 2 87 187 287 387 3000
+    bridge-vids 2 87 187 287 387 487 3000
     bridge-vlan-aware yes
     mstpctl-treeprio 32768
     bridge-bridgeprio 32768
@@ -156,14 +156,11 @@ iface vlan87
     vrf exp
     mtu 9216
 
-#EXP Internal VLAN - where the nodes live
-# 10.87.0.1 - Default Subnet Gateway
-# 10.87.4.1 = Gateway for Proxmox Hosts and VMs
+#EXP Internal VLAN - where the nodes live - legacy
 auto vlan187
 iface vlan187
     address {{ vlan_187_address }}
     address-virtual 00:00:5E:00:01:01 10.87.0.1/24
-    address-virtual 00:00:5E:00:01:05 10.87.4.1/22
     vlan-id 187
     vlan-raw-device bridge
     vrf exp
@@ -184,6 +181,15 @@ iface vlan387
     address {{ vlan_387_address }}
     address-virtual 00:00:5E:00:01:02 85.91.54.254/28
     vlan-id 387
+    vlan-raw-device bridge
+    vrf exp
+    mtu 9216
+
+# EXP VLAN to deploy Proxmox instances and VMs
+iface vlan487
+    address {{ vlan_487_address }}
+    address-virtual 00:00:5E:00:01:05 10.87.4.1/22
+    vlan-id 487
     vlan-raw-device bridge
     vrf exp
     mtu 9216
