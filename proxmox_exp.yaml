@@ -6,5 +6,5 @@
   vars:
     network_templates: exp
   vars_files:
-    - inventories/group_vars/proxmox
+    - inventories/group_vars/proxmox-exp
   become: yes
