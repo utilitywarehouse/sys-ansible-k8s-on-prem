@@ -101,6 +101,12 @@ proxmox-2-exp
 
 [proxmox-1-exp]
 10.87.4.96
+[proxmox-1-exp:vars]
+eth_iface_1=ens4f0np0
+eth_iface_2=ens6f0np0
 
 [proxmox-2-exp]
 10.87.4.97
+[proxmox-2-exp:vars]
+eth_iface_1=ens4f0np0
+eth_iface_2=ens5f0np0

@@ -1,5 +1,5 @@
 # interfaces
-dhcp_listen_interface: vlan189
+dhcp_listen_interfaces: 'vlan189'
 dhcp_vrf_name: prod
 dhcp_role_name: prod
 

@@ -4,10 +4,10 @@
     state: directory
   tags: ssh-key-agent,node-exporter
 
-- name: copy ssh config file
+- name: copy ssh config patch for infra keys
   copy:
-    src: files/sshd_config
-    dest: /etc/ssh/sshd_config
+    src: files/99-custom-authkeys.conf
+    dest: /etc/ssh/sshd_config.d/99-custom-authkeys.conf
   notify:
     - restart sshd
   tags: ssh-key-agent
@@ -15,6 +15,15 @@
 - name: Download ssh-key-agent {{ ssh_key_agent_vesion }} binary
   get_url:
     url: "https://github.com/utilitywarehouse/ssh-key-agent/releases/download/{{ ssh_key_agent_vesion }}/ssh-key-agent_{{ ssh_key_agent_vesion }}_linux_amd64"
+    dest: /tmp/ssh-key-agent
+    mode: '0755'
+  delegate_to: localhost
+  become: no
+  tags: ssh-key-agent
+
+- name: Copy ssh-key-agent binary to target
+  ansible.builtin.copy:
+    src: /tmp/ssh-key-agent
     dest: /opt/bin/ssh-key-agent
     mode: '0755'
   tags: ssh-key-agent
@@ -38,8 +47,17 @@
 - name: Download, extract and copy node-exporter binary
   unarchive:
     src: "https://github.com/prometheus/node_exporter/releases/download/v{{node_exporter_version}}/node_exporter-{{node_exporter_version}}.linux-amd64.tar.gz"
-    dest: /opt/bin
+    dest: /tmp
     remote_src: yes
+  delegate_to: localhost
+  become: no
+  tags: node-exporter
+
+- name: Copy ssh-key-agent binary to target
+  ansible.builtin.copy:
+    src: /tmp/node_exporter-{{node_exporter_version}}.linux-amd64/node_exporter
+    dest: /opt/bin/node_exporter
+    mode: '0755'
   tags: node-exporter
 
 - name: Ensure prometheus text collectors directory exists
