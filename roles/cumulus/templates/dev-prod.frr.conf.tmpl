@@ -26,6 +26,8 @@ interface vlan188 vrf dev
  pbr-policy pbr-dev
 interface vlan388 vrf dev
  pbr-policy pbr-dev
+interface vlan488 vrf dev
+ pbr-policy pbr-dev
 interface vlan1188 vrf dev
  pbr-policy pbr-dev
 !
@@ -33,16 +35,32 @@ interface vlan189 vrf prod
  pbr-policy pbr-prod
 interface vlan389 vrf prod
  pbr-policy pbr-prod
+interface vlan489 vrf prod
+ pbr-policy pbr-prod
 !
 router-id {{ router_id }}
 !
 router bgp 64512 vrf dev
+{% if masters_dev is defined %}
 {% for m in masters_dev %}
  neighbor {{ m.ip_address }} remote-as 64512
 {% endfor %}
+{% endif %}
+{% if masters_pve_dev is defined %}
+{% for m in masters_pve_dev %}
+ neighbor {{ m.ip_address }} remote-as 64512
+{% endfor %}
+{% endif %}
+{% if workers_dev is defined %}
 {% for w in workers_dev %}
  neighbor {{ w.ip_address }} remote-as 64512
 {% endfor %}
+{% endif %}
+{% if workers_pve_dev is defined %}
+{% for w in workers_pve_dev %}
+ neighbor {{ w.ip_address }} remote-as 64512
+{% endfor %}
+{% endif %}
 {% for m in matchbox_dev %}
  neighbor {{ m.ip_address }} remote-as 64512
 {% endfor %}
@@ -71,12 +89,26 @@ router bgp 64512 vrf dev
  exit-address-family
 !
 router bgp 64512 vrf prod
+{% if masters_prod is defined %}
 {% for m in masters_prod %}
  neighbor {{ m.ip_address }} remote-as 64512
 {% endfor %}
+{% endif %}
+{% if masters_pve_prod is defined %}
+{% for m in masters_pve_prod %}
+ neighbor {{ m.ip_address }} remote-as 64512
+{% endfor %}
+{% endif %}
+{% if workers_prod is defined %}
 {% for w in workers_prod %}
  neighbor {{ w.ip_address }} remote-as 64512
 {% endfor %}
+{% endif %}
+{% if workers_pve_prod is defined %}
+{% for w in workers_pve_prod %}
+ neighbor {{ w.ip_address }} remote-as 64512
+{% endfor %}
+{% endif %}
 {% for m in matchbox_prod %}
  neighbor {{ m.ip_address }} remote-as 64512
 {% endfor %}
